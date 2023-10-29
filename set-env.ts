@@ -17,7 +17,7 @@ const envConfigFile = `export const environment = {
       authorizationParams: {
           redirect_uri: '${process.env['AUTH0_CALLBACK_URL']}',
           audience: '${process.env['AUTH0_AUDIENCE']}',
-          // scope: '${process.env['AUTH0_SCOPE']}',
+          scope: '${process.env['AUTH0_SCOPE']}',
       },
   
       

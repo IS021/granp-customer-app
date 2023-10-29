@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'ionic.app.base',
-  appName: 'ionic-app-base',
+  appId: 'granp.app.customer',
+  appName: 'granp-customer-app',
   webDir: 'www',
   server: {
     androidScheme: 'https'

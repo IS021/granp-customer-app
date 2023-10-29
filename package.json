@@ -1,8 +1,7 @@
 {
-  "name": "ionic-app-base",
-  "version": "0.0.0",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+    "name": "granp-customer-app",
+    "version": "0.0.0",
+    "author": "IS021",
   "scripts": {
     "ng": "ng",
     "env": "ts-node set-env.ts",
