@@ -24,7 +24,7 @@ const envConfigFile = `export const environment = {
       httpInterceptor: {
           allowedList: [
               {
-                  uri: '${process.env['API_SERVER_URL']}/api/messages/*',
+                  uri: '${process.env['API_SERVER_URL']}/*',
                   // tokenOptions: {
                       // authorizationParams: {
                           // audience: '${process.env['AUTH0_AUDIENCE']}/api/v2/',
@@ -37,6 +37,7 @@ const envConfigFile = `export const environment = {
     },
     granp: {
       apiServerUrl: '${process.env['API_SERVER_URL']}',
+      logoutRedirectUri: '${process.env['AUTH0_CALLBACK_URL']}',
     },
   };
   `;
