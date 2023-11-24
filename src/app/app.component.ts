@@ -21,11 +21,21 @@ export class AppComponent {
     ngZone = inject(NgZone);
     router = inject(Router);
 
+    loggedIn$ = this.auth.isAuthenticated$;
+
     // handle this manually as the loader should be displayed immediately once the app
     // is opened via the auth0 redirect uri
     isAuth0Loading$ = new BehaviorSubject<boolean>(false);
 
     ngOnInit(): void {
+
+        // If not logged in redirect to login page
+        this.loggedIn$.subscribe((loggedIn) => {
+            if (!loggedIn) {
+                // this.router.navigate(['/login']);
+            }
+        });
+
         // Use Capacitor's App plugin to subscribe to the `appUrlOpen` event
         App.addListener('appUrlOpen', ({ url }) => {
             // Must run inside an NgZone for Angular to pick up the changes
@@ -57,7 +67,7 @@ export class AppComponent {
                                 // wait for next tick
                                 asyncScheduler.schedule(() => {
                                     // redirect to profile when logging in              // TODO
-                                    // this.router.navigate(['/profile']);
+                                    this.router.navigate(['/']);
                                     this.isAuth0Loading$.next(false);
                                 })
                             });
@@ -70,7 +80,7 @@ export class AppComponent {
                             })
                         }
                         // redirect to home when logging out
-                        this.router.navigate(['/']);
+                        this.router.navigate(['/']);                                    // TODO
                         this.isAuth0Loading$.next(false);
                     }
                 } else {
