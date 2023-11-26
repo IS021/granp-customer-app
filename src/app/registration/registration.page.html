@@ -1,15 +1,173 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="false">
   <ion-toolbar>
-    <ion-title>registration</ion-title>
+    <ion-title>Registrazione</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="'true'">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">registration</ion-title>
-
-      <ion-input placeholder="Enter your name" [(ngModel)]="data.name" ></ion-input>
+      <ion-title size="large">
+        <div class="ion-text-wrap">
+          <h1 class="centered-title">
+            Completa la tua registrazione
+          </h1>
+        </div>
+      </ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-grid>
+
+
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-content id="field1">
+            <ion-input fill="outline" shape="round" label="Nome" label-placement="floating"
+              [(ngModel)]="customer.firstName"></ion-input>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-content id="field2">
+            <ion-input fill="outline" shape="round" label="Cognome" label-placement="floating" type="text"
+              [(ngModel)]="customer.lastName"></ion-input>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card id="open-modal">
+          <ion-card-content>
+          <ion-input  fill="outline" shape="round" label="Data di nascita" label-placement="floating" type="text"
+          [(ngModel)]="customer.birthDate"> </ion-input>
+        </ion-card-content>
+        </ion-card>
+
+        <ion-modal trigger="open-modal">
+          <ng-template>
+
+              <ion-datetime locale="it-IT" [presentation]="'date'" 
+                (ionChange)="setCustomerBirthdate($event)"
+                showDefaultButtons="true"
+                (ionCancel)="showPicker=false;"></ion-datetime>
+
+          </ng-template>
+        </ion-modal>
+      </ion-col>
+    </ion-row>
+    
+            
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-content id="field4">
+            <ion-input fill="outline" shape="round" label="Indirizzo" label-placement="floating" type="text"
+              [(ngModel)]="customer.address"></ion-input>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-content id="field5">
+            <ion-input fill="outline" shape="round" label="Cellulare" label-placement="floating" type="text"
+              [(ngModel)]="customer.phoneNumber"></ion-input>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-content id="field6">
+            <ion-textarea fill="outline" shape="round" label="Descrizione" label-placement="floating"
+              placeholder="Inserisci necessità particolari" type="text"
+              [(ngModel)]="customer.elderDescription"></ion-textarea>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-toggle [style.margin-left]="'1rem'" [style.margin-top]="'1rem'" labelPlacement="end"
+      [(ngModel)]="isNotElder">Non sono l'assistito</ion-toggle>
+    <h2 *ngIf="isNotElder" [style.align-items]="'flex-start'" [style.font-weight]="'bold'">
+      <p [style.text-align]="'center'">Inserisci i dati dell'assistito</p>
+
+      <ion-row>
+        <ion-col>
+          <ion-card>
+            <ion-card-content [style.font-weight]="'normal'" id="field7">
+              <ion-input fill="outline" shape="round" label="Nome" label-placement="floating" type="text"
+                [(ngModel)]="customer.elderFirstName"></ion-input>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-card>
+            <ion-card-content [style.font-weight]="'normal'" id="field8">
+              <ion-input fill="outline" shape="round" label="Cognome" label-placement="floating" type="text"
+                [(ngModel)]="customer.elderLastName"></ion-input>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-card id="open-modal-elder">
+            <ion-card-content [style.font-weight]="'normal'">
+            <ion-input  fill="outline" shape="round" label="Data di nascita" label-placement="floating" type="text"
+            [(ngModel)]="customer.elderBirthDate"> </ion-input>
+          </ion-card-content>
+          </ion-card>
+  
+          <ion-modal trigger="open-modal-elder">
+            <ng-template>
+  
+                <ion-datetime locale="it-IT" [presentation]="'date'"
+                  (ionChange)="setElderBirthdate($event)"
+                  showDefaultButtons="true"
+                  (ionCancel)="showPicker=false;"></ion-datetime>
+  
+            </ng-template>
+          </ion-modal>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-card>
+            <ion-card-content [style.font-weight]="'normal'" id="field10">
+              <ion-input fill="outline" shape="round" label="Indirizzo" label-placement="floating" type="text"
+                [(ngModel)]="customer.elderAddress"></ion-input>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-card>
+            <ion-card-content [style.font-weight]="'normal'" id="field11">
+              <ion-input fill="outline" shape="round" label="Cellulare" label-placement="floating" type="text"
+                [(ngModel)]="customer.elderTelephoneNumber"></ion-input>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </h2>
+  </ion-grid>
 </ion-content>
