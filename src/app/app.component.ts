@@ -68,6 +68,8 @@ export class AppComponent {
                                 // wait for next tick
                                 asyncScheduler.schedule(() => {
                                     // redirect to profile when logging in              // TODO
+                                    // Check if the user registration is complete
+                                    // If not redirect to registration page
                                     this.router.navigate(['/']);
                                     this.isAuth0Loading$.next(false);
                                 })
