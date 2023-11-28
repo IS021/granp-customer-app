@@ -1,10 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ChangeDetectorRef } from '@angular/core';
 
-import { ModalController } from '@ionic/angular/standalone';
-
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonInput, IonModal, IonDatetime, IonToggle, IonButton } from '@ionic/angular/standalone';
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonList,
+  IonItem,
+  IonInput,
+  IonModal,
+  IonDatetime,
+  IonToggle,
+  IonButton,
+  IonFabButton
+} from '@ionic/angular/standalone';
 
 import { MaskitoOptions, MaskitoElementPredicateAsync } from '@maskito/core';
 import { MaskitoModule } from '@maskito/angular';
@@ -13,69 +25,122 @@ import { Customer } from '../../models/customer.model';
 
 import { ChangeDetectionStrategy } from '@angular/core';
 
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { format, parseISO } from 'date-fns';
-import { from } from 'rxjs';
+
+import {
+  Camera,
+  CameraResultType,
+  CameraSource,
+  Photo,
+} from '@capacitor/camera';
+
+
 
 
 @Component({
-    selector: 'app-registration',
-    templateUrl: './registration.page.html',
-    styleUrls: ['./registration.page.scss'],
-    standalone: true,
-    imports: [
-         CommonModule, 
-        FormsModule, ReactiveFormsModule, MaskitoModule,
-        IonHeader, IonToolbar, IonTitle, IonContent,
-        IonList, IonItem, IonInput, IonModal, IonDatetime, IonToggle, IonButton],
-    
-    changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-registration',
+  templateUrl: './registration.page.html',
+  styleUrls: ['./registration.page.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    MaskitoModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonList,
+    IonItem,
+    IonInput,
+    IonModal,
+    IonDatetime,
+    IonToggle,
+    IonButton,
+    IonFabButton
+  ],
+
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistrationPage implements OnInit {
+  //customer!: Customer
+  customer: Customer = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    birthDate: '',
+    address: '',
+    phoneNumber: '',
+    elderDescription: '',
+    elderFirstName: '',
+    elderLastName: '',
+    elderBirthDate: '',
+    elderAddress: '',
+    elderTelephoneNumber: '',
+    profilePicture: '',
+    isNotElder: false,
+  };
 
-    [x: string]: any;
-    //customer!: Customer;
-    customer: Customer = {
-        firstName: '',
-        lastName: '',
-        birthDate: '',
-        address: '',
-        phoneNumber: '',
-        elderDescription: '',
-        elderFirstName: '',
-        elderLastName: '',
-        elderBirthDate: '',
-        elderAddress: '',
-        elderTelephoneNumber: '',
-    };
-
-
-    public isNotElder: boolean = false;
-
-    showPicker = false;
-
-    setCustomerBirthdate(event: CustomEvent) {
-        this.customer.birthDate = format(parseISO(event.detail.value), 'dd/MM/yyyy');
-        this.showPicker = false;
-    };
-
-    setElderBirthdate(event: CustomEvent) {
-        this.customer.elderBirthDate = format(parseISO(event.detail.value), 'dd/MM/yyyy');
-        this.showPicker = false;
-    };
-
-    readonly phoneMask: MaskitoOptions = {
-        mask: [ '+', '3', '9', ' ', /\b[1-9]\b/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, ' ', /\d/, /\d/, ' ', /\d/, /\d/ ]
-    };
-
-    readonly maskPredicate: MaskitoElementPredicateAsync = async (el) => (el as HTMLIonInputElement).getInputElement();
-
-
+  
+  showPicker = false;
+  imageSelected = false;
     
-    constructor() {
-       
-    }
 
-    ngOnInit() { }
+  setCustomerBirthdate(event: CustomEvent) {
+    this.customer.birthDate = format(
+      parseISO(event.detail.value),
+      'dd/MM/yyyy'
+    );
+    this.showPicker = false;
+  }
+
+  setElderBirthdate(event: CustomEvent) {
+    this.customer.elderBirthDate = format(
+      parseISO(event.detail.value),
+      'dd/MM/yyyy'
+    );
+    this.showPicker = false;
+  }
+
+  readonly phoneMask: MaskitoOptions = {
+    mask: [
+      '+',
+      '3',
+      '9',
+      ' ',
+      /\b[1-9]\b/,
+      /\d/,
+      /\d/,
+      ' ',
+      /\d/,
+      /\d/,
+      /\d/,
+      ' ',
+      /\d/,
+      /\d/,
+      ' ',
+      /\d/,
+      /\d/,
+    ],
+  };
+
+  readonly maskPredicate: MaskitoElementPredicateAsync = async (el) =>
+    (el as HTMLIonInputElement).getInputElement();
+
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  public async takePicture() {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Prompt,
+    });
+    this.customer.profilePicture= 'data:image/jpeg;base64,' + image.base64String;
+    this.imageSelected = true;
+    this.cdr.detectChanges();
+
+  }
+
+  ngOnInit() {}
 }
-

@@ -10,6 +10,7 @@ h1 {
   text-align: center;
 }
 
+
 ion-modal {
   --width: fit-content;
   --min-width: 250px;
@@ -33,4 +34,16 @@ ion-modal::part(backdrop) {
   padding: 1.5rem;
 }
 
+/* ion-input.ng-valid::part(floating-label) {
+  caret-color: medium;
+  color: var(--ion-color-primary);
+}
 
+ */
+
+ .imageContainer {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+ } 
