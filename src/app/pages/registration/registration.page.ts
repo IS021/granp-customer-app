@@ -16,6 +16,7 @@ import {
   IonToggle,
   IonButton,
   IonFabButton,
+  IonTextarea,
 } from '@ionic/angular/standalone';
 
 import { MaskitoOptions, MaskitoElementPredicateAsync } from '@maskito/core';
@@ -37,10 +38,6 @@ import {
 } from '@capacitor/camera';
 import { CameraService } from 'src/app/services/camera.service';
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 63af9f3fa3c8a976d235b09a8c42b059743c50d0
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.page.html',
@@ -57,6 +54,7 @@ import { CameraService } from 'src/app/services/camera.service';
     IonList,
     IonItem,
     IonInput,
+    IonTextarea,
     IonModal,
     IonDatetime,
     IonToggle,

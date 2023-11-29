@@ -1,22 +1,12 @@
-<ion-header [translucent]="false">
-  <ion-toolbar>
-    <ion-title>Registrazione</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="'true'">
 
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">
-        <div class="ion-text-wrap">
-          <h1>
-            Completa la tua registrazione
-          </h1>
-        </div>
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+    
+    <h1>
+    Completa la tua registrazione
+    </h1>
+
+          
 
   <ion-list [inset]="true">
  
@@ -57,15 +47,15 @@
       </ng-template>
     </ion-modal>
 
-    <ion-item id="open-modal">
+    <ion-item>
       <ion-input label="Cellulare" [maskito]="phoneMask" [maskitoElement]="maskPredicate"
         placeholder="+39 xxx xxx xx xx" label-placement="floating" [(ngModel)]="customer.phoneNumber"
         required></ion-input>
     </ion-item>
 
-    <ion-item id="open-modal">
+    <ion-item>
       <ion-textarea label="Descrizione" label-placement="floating" placeholder="Inserisci necessità particolari"
-        type="text" [(ngModel)]="customer.elderDescription"></ion-textarea>
+        type="text" [rows]="1" [autoGrow]="true" [(ngModel)]="customer.elderDescription"></ion-textarea>
     </ion-item>
 
     <ion-item>
@@ -74,8 +64,8 @@
         l'assistito</ion-toggle>
     </ion-item>
 
-    <h2 *ngIf="customer.isNotElder; else isElder">
-      <p [style.text-align]="'center'" [style.font-weight]="'bold'">Inserisci i dati dell'assistito</p>
+    <div *ngIf="customer.isNotElder; else isElder">
+      <h2 [style.text-align]="'center'" [style.font-weight]="'bold'">Inserisci i dati dell'assistito</h2>
 
       <ion-item>
         <ion-input label="Nome" label-placement="floating" type="text" [(ngModel)]="customer.elderFirstName"
@@ -116,13 +106,12 @@
       <div class="buttonContainer">
         <ion-button expand="block" size="large">Completa</ion-button>
       </div>
-    </h2>
+    </div>
     <ng-template #isElder>
       <div class="buttonContainer">
         <ion-button expand="block" size="large">Completa</ion-button>
       </div>
     </ng-template>
-    
 
   </ion-list>
 
