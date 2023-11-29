@@ -6,10 +6,10 @@
 }
 
 h1 {
+  font-size: 2.2rem;
   font-weight: bold;
   text-align: center;
 }
-
 
 ion-modal {
   --width: fit-content;
@@ -41,9 +41,9 @@ ion-modal::part(backdrop) {
 
  */
 
- .imageContainer {
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
- } 
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

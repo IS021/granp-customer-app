@@ -70,7 +70,7 @@ export class AppComponent {
                                     // redirect to profile when logging in              // TODO
                                     // Check if the user registration is complete
                                     // If not redirect to registration page
-                                    this.router.navigate(['/']);
+                                    this.router.navigate(['/tabs']);
                                     this.isAuth0Loading$.next(false);
                                 })
                             });

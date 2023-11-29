@@ -19,9 +19,9 @@
   </ion-header>
 
   <ion-list [inset]="true">
-
+ 
     <div *ngIf="!imageSelected; else showImage;" class="imageContainer">
-      <ion-button size="medium" (click)="takePicture()" [(ngModel)]="imageSelected">Inserisci una tua foto</ion-button>
+      <ion-button size="medium" (click)="takePicture()">Inserisci una tua foto</ion-button>
     </div>
     <ng-template #showImage>
       <div class="imageContainer">
@@ -30,9 +30,6 @@
         </ion-button>
       </div>
     </ng-template>
-
-
-
 
     <ion-item>
       <ion-input label="Nome" label-placement="floating" type="text" [(ngModel)]="customer.firstName"
@@ -126,9 +123,8 @@
         <ion-button expand="block" size="large">Completa</ion-button>
       </div>
     </ng-template>
+    
 
   </ion-list>
-
-
 
 </ion-content>

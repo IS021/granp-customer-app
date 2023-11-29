@@ -39,8 +39,6 @@ import {
 import { CameraService } from 'src/app/services/camera.service';
 
 
-
-
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.page.html',
