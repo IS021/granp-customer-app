@@ -15,7 +15,7 @@ import {
   IonDatetime,
   IonToggle,
   IonButton,
-  IonFabButton
+  IonFabButton,
 } from '@ionic/angular/standalone';
 
 import { MaskitoOptions, MaskitoElementPredicateAsync } from '@maskito/core';
@@ -24,7 +24,6 @@ import { MaskitoModule } from '@maskito/angular';
 import { Customer } from '../../models/customer.model';
 import { Address } from '../../models/Address';
 import { GeoLocation } from '../../models/Location';
-
 
 import { ChangeDetectionStrategy } from '@angular/core';
 
@@ -38,7 +37,10 @@ import {
 } from '@capacitor/camera';
 import { CameraService } from 'src/app/services/camera.service';
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 63af9f3fa3c8a976d235b09a8c42b059743c50d0
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.page.html',
@@ -59,7 +61,7 @@ import { CameraService } from 'src/app/services/camera.service';
     IonDatetime,
     IonToggle,
     IonButton,
-    IonFabButton
+    IonFabButton,
   ],
 
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -71,7 +73,7 @@ export class RegistrationPage implements OnInit {
     lastName: '',
     email: '',
     birthDate: '',
-    address: new Address('','','', '', new GeoLocation(0,0)),
+    address: new Address('', '', '', '', new GeoLocation(0, 0)),
     phoneNumber: '',
     elderDescription: '',
     elderFirstName: '',
@@ -83,11 +85,8 @@ export class RegistrationPage implements OnInit {
     isNotElder: false,
   };
 
-  
   showPicker = false;
   imageSelected = false;
-
-    
 
   setCustomerBirthdate(event: CustomEvent) {
     this.customer.birthDate = format(
@@ -130,10 +129,13 @@ export class RegistrationPage implements OnInit {
   readonly maskPredicate: MaskitoElementPredicateAsync = async (el) =>
     (el as HTMLIonInputElement).getInputElement();
 
-  constructor(private cameraService: CameraService, private cdr: ChangeDetectorRef ) {}
+  constructor(
+    private cameraService: CameraService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   takePicture() {
-    this.cameraService.takePicture().then(profilePicture => {
+    this.cameraService.takePicture().then((profilePicture) => {
       this.customer.profilePicture = profilePicture;
       this.imageSelected = true;
       this.cdr.detectChanges();
