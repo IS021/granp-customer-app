@@ -1,4 +1,6 @@
-class Address {
+import { GeoLocation } from "./Location";
+
+export class Address {
     // Properties
     Street: string;
     StreetNumber: string;

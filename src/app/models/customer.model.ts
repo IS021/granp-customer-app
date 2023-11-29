@@ -1,9 +1,11 @@
+import { Address } from "./Address";
+
 export interface Customer {
     firstName: string;
     lastName: string;
     email: string;
     birthDate: string;
-    address: string;
+    address: Address;
     phoneNumber: string;
 
     profilePicture: string;

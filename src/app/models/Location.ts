@@ -1,4 +1,4 @@
-class GeoLocation {
+export class GeoLocation {
     // Properties
     Latitude: number;
     Longitude: number;

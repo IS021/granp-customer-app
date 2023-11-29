@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
@@ -22,6 +22,9 @@ import { MaskitoOptions, MaskitoElementPredicateAsync } from '@maskito/core';
 import { MaskitoModule } from '@maskito/angular';
 
 import { Customer } from '../../models/customer.model';
+import { Address } from '../../models/Address';
+import { GeoLocation } from '../../models/Location';
+
 
 import { ChangeDetectionStrategy } from '@angular/core';
 
@@ -33,6 +36,7 @@ import {
   CameraSource,
   Photo,
 } from '@capacitor/camera';
+import { CameraService } from 'src/app/services/camera.service';
 
 
 
@@ -69,7 +73,7 @@ export class RegistrationPage implements OnInit {
     lastName: '',
     email: '',
     birthDate: '',
-    address: '',
+    address: new Address('','','', '', new GeoLocation(0,0)),
     phoneNumber: '',
     elderDescription: '',
     elderFirstName: '',
@@ -84,6 +88,7 @@ export class RegistrationPage implements OnInit {
   
   showPicker = false;
   imageSelected = false;
+
     
 
   setCustomerBirthdate(event: CustomEvent) {
@@ -127,19 +132,14 @@ export class RegistrationPage implements OnInit {
   readonly maskPredicate: MaskitoElementPredicateAsync = async (el) =>
     (el as HTMLIonInputElement).getInputElement();
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cameraService: CameraService, private cdr: ChangeDetectorRef ) {}
 
-  public async takePicture() {
-    const image = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: false,
-      resultType: CameraResultType.Base64,
-      source: CameraSource.Prompt,
+  takePicture() {
+    this.cameraService.takePicture().then(profilePicture => {
+      this.customer.profilePicture = profilePicture;
+      this.imageSelected = true;
+      this.cdr.detectChanges();
     });
-    this.customer.profilePicture= 'data:image/jpeg;base64,' + image.base64String;
-    this.imageSelected = true;
-    this.cdr.detectChanges();
-
   }
 
   ngOnInit() {}
