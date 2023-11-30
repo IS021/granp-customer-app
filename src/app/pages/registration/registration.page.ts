@@ -17,6 +17,11 @@ import {
   IonButton,
   IonFabButton,
   IonTextarea,
+  IonLabel,
+  IonButtons,
+  ModalController,
+  IonCheckbox,
+  IonText
 } from '@ionic/angular/standalone';
 
 import { MaskitoOptions, MaskitoElementPredicateAsync } from '@maskito/core';
@@ -37,6 +42,7 @@ import {
   Photo,
 } from '@capacitor/camera';
 import { CameraService } from 'src/app/services/camera.service';
+import { th } from 'date-fns/locale';
 
 @Component({
   selector: 'app-registration',
@@ -60,6 +66,10 @@ import { CameraService } from 'src/app/services/camera.service';
     IonToggle,
     IonButton,
     IonFabButton,
+    IonLabel,
+    IonButtons,
+    IonCheckbox,
+    IonText
   ],
 
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -77,7 +87,7 @@ export class RegistrationPage implements OnInit {
     elderFirstName: '',
     elderLastName: '',
     elderBirthDate: '',
-    elderAddress: '',
+    elderAddress: new Address('', '', '', '', new GeoLocation(0, 0)),
     elderTelephoneNumber: '',
     profilePicture: '',
     isNotElder: false,
@@ -85,6 +95,11 @@ export class RegistrationPage implements OnInit {
 
   showPicker = false;
   imageSelected = false;
+  addressString : string = '';
+  differentAddress: boolean = false;
+  elderAddressString : string = '';
+
+  
 
   setCustomerBirthdate(event: CustomEvent) {
     this.customer.birthDate = format(
@@ -129,7 +144,8 @@ export class RegistrationPage implements OnInit {
 
   constructor(
     private cameraService: CameraService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private modalController: ModalController
   ) {}
 
   takePicture() {
@@ -139,6 +155,33 @@ export class RegistrationPage implements OnInit {
       this.cdr.detectChanges();
     });
   }
+
+  submitCustomerAddress() {
+  
+   this.addressString = `${this.customer.address.Street}, ${this.customer.address.StreetNumber}, ${this.customer.address.City}, ${this.customer.address.ZipCode}`;
+   this.customer.address.setFullAddress(this.addressString);
+   
+   // Dismiss the modal and pass addressString
+  this.modalController.dismiss({
+    'addressString': this.addressString
+  });
+  }
+
+  submitElderAddress() {
+  
+    this.elderAddressString = `${this.customer.elderAddress.Street}, ${this.customer.elderAddress.StreetNumber}, ${this.customer.elderAddress.City}, ${this.customer.elderAddress.ZipCode}`;
+    this.customer.elderAddress.setFullAddress(this.elderAddressString);
+    
+    // Dismiss the modal and pass addressString
+   this.modalController.dismiss({
+     'elderAddressString': this.elderAddressString
+   });
+  }
+
+  checkboxChanged(event: any) {
+    this.differentAddress = event.detail.checked;
+  }
+
 
   ngOnInit() {}
 }

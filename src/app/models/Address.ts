@@ -24,4 +24,16 @@ export class Address {
 
     this.Location = Location;
   }
+
+  getFullAddress(): string {
+    return `${this.Street}, ${this.StreetNumber}, ${this.City}, ${this.ZipCode}`;
+  }
+
+  setFullAddress(fullAddress: string) {
+    const addressArray = fullAddress.split(', ');
+    this.Street = addressArray[0];
+    this.StreetNumber = addressArray[1];
+    this.City = addressArray[2];
+    this.ZipCode = addressArray[3];
+  }
 }
