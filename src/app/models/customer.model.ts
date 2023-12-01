@@ -14,7 +14,7 @@ export interface Customer {
     elderFirstName: string;
     elderLastName: string;
     elderBirthDate: string;
-    elderAddress: string;
+    elderAddress: Address;
     elderTelephoneNumber: string;
 
     isNotElder: boolean;

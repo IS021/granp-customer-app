@@ -33,7 +33,9 @@ export class AppComponent {
         // If not logged in redirect to login page
         this.loggedIn$.subscribe((loggedIn) => {
             if (!loggedIn) {
-                // this.router.navigate(['/login']);
+                /* this.router.navigate(['/login']); */
+            } else {
+                this.router.navigate(['/tabs']);
             }
         });
 
@@ -83,7 +85,7 @@ export class AppComponent {
                             })
                         }
                         // redirect to home when logging out
-                        this.router.navigate(['/']);                                    // TODO
+                        this.router.navigate(['/login']);                                    // TODO
                         this.isAuth0Loading$.next(false);
                     }
                 } else {

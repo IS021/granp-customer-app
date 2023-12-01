@@ -1,0 +1,89 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>customer-details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">customer-details</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-content> -->
+<ion-content>
+  <ion-list [inset]="true">
+    <div class="ion-text-wrap">
+      <ion-item class="description-item">
+        <ion-avatar class="bigger-avatar">
+          <!-- Use ngIf to conditionally show the image or the default avatar -->
+          <ng-container *ngIf="customerLogged.profilePicture; else showDefaultAvatar">
+            <img [src]="customerLogged.profilePicture" alt="User's profile picture" [style.border-radius]="'100%'" [style.max-width]="'100%'"/>
+          </ng-container>
+          <ng-template #showDefaultAvatar>
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ng-template>
+        </ion-avatar>
+      </ion-item>
+    </div>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col>
+        <ion-label class="title-label">
+          <h2>Info Tutore</h2>
+        </ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-item>
+      <ion-label>
+        {{customerLogged.firstName}} {{customerLogged.lastName}}
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        {{customerLogged.email}}
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        {{ '+39 ' + customerLogged.phoneNumber.slice(0, 3) + ' ' + customerLogged.phoneNumber.slice(3, 6) + ' ' + customerLogged.phoneNumber.slice(6, 10) }}
+      </ion-label>
+    </ion-item>
+    <ion-item class="description-item" [ngClass]="{'with-margin': customerLogged.isNotElder}">
+      <p>
+        {{customerLogged.elderDescription}}
+      </p>
+  </ion-item>
+
+
+    <div *ngIf="customerLogged.isNotElder;">
+      <ion-row class="ion-align-items-center ion-justify-content-center">
+        <ion-col>
+          <ion-label class="title-label">
+            <h2>Info Assistito</h2>
+          </ion-label>
+        </ion-col>
+      </ion-row>
+    <ion-item>
+      <ion-label>
+        {{customerLogged.elderFirstName}} {{customerLogged.elderLastName}}
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        {{ '+39 ' + customerLogged.elderTelephoneNumber.slice(0, 3) + ' ' + customerLogged.elderTelephoneNumber.slice(3, 6) + ' ' + customerLogged.elderTelephoneNumber.slice(6, 10) }}
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        {{customerLogged.elderAddress.Street}}, {{customerLogged.elderAddress.StreetNumber}}
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        {{customerLogged.elderAddress.City}}, {{customerLogged.elderAddress.ZipCode}}
+      </ion-label>
+    </ion-item>
+  </div>
+  </ion-list>
+</ion-content>
+<ion-item>

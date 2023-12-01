@@ -6,11 +6,16 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/registration/registration.page').then(m => m.RegistrationPage),
     },
     {
-        path: 'login',
-        loadComponent: () => import('granp-lib').then((m) => m.LoginPage),
+        path: '',
+        loadChildren: () => import('./pages/tabs/tabs.routes').then((m) => m.routes),
     },
     {
         path: '',
-        loadChildren: () => import('./pages/tabs/tabs.routes').then((m) => m.routes),
-    }
+        loadChildren: () => import('granp-lib').then((m) => m.granpRoutes),
+    },
+
+    {
+        path: 'details',
+        loadComponent: () => import('./pages/customer-details/customer-details.page').then(m => m.CustomerDetailsPage),
+    },
 ];
