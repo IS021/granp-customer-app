@@ -90,7 +90,7 @@ export class RegistrationPage implements OnInit {
     elderAddress: new Address('', '', '', '', new GeoLocation(0, 0)),
     elderTelephoneNumber: '',
     profilePicture: '',
-    isNotElder: false,
+    isElder: false,
   };
 
   showPicker = false;

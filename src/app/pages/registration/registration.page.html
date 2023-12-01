@@ -96,12 +96,12 @@
     </ion-item>
 
     <ion-item>
-      <ion-toggle justify="start" labelPlacement="end" [style.margin-top]="'1rem'" [(ngModel)]="customer.isNotElder">Non
-        sono
+      <ion-toggle justify="start" labelPlacement="end" [style.margin-top]="'1rem'" [(ngModel)]="customer.isElder">
+        Sono
         l'assistito</ion-toggle>
     </ion-item>
 
-    <div *ngIf="customer.isNotElder; else isElder">
+    <div *ngIf="!customer.isElder">
       <h2 [style.text-align]="'center'" [style.font-weight]="'bold'">Inserisci i dati dell'assistito</h2>
 
       <ion-item>
@@ -128,7 +128,7 @@
         </ion-checkbox>
       </ion-item>
 
-      <div *ngIf="differentAddress ">
+      <div *ngIf="differentAddress">
         <ion-item id="open-elder-address-settings">
           <ion-input label="Indirizzo" label-placement="floating" [(ngModel)]="elderAddressString" required></ion-input>
         </ion-item>
@@ -183,15 +183,12 @@
       </ion-modal>
       
 
-      <div class="buttonContainer">
-        <ion-button expand="block" size="large">Completa</ion-button>
-      </div>
+
     </div>
-    <ng-template #isElder>
-      <div class="buttonContainer">
-        <ion-button expand="block" size="large">Completa</ion-button>
-      </div>
-    </ng-template>
+    <div class="buttonContainer">
+      <ion-button expand="block" size="large">Completa</ion-button>
+    </div>
+
 
   </ion-list>
 

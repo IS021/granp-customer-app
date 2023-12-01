@@ -39,7 +39,7 @@ export class CustomerDetailsPage implements OnInit {
     elderAddress: new Address('Via delle Stalle', '17/A', 'Betlemme', '20090', new GeoLocation(0, 0)),
     elderTelephoneNumber: '6666660000',
     profilePicture: 'https://www.inchiestaonline.it/wp-content/uploads/2021/05/Battiato.jpg',
-    isNotElder: false,
+    isElder: false,
   };
 
   constructor() {

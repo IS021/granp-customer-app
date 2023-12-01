@@ -16,7 +16,7 @@ export class Tab2Page {
     constructor() { }
 
     openPage() {
-        this.navCtrl.navigateForward('/chat/1');
+        this.navCtrl.navigateForward('/registration');
     }
 
 }

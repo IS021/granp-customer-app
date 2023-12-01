@@ -48,14 +48,14 @@
         {{ '+39 ' + customerLogged.phoneNumber.slice(0, 3) + ' ' + customerLogged.phoneNumber.slice(3, 6) + ' ' + customerLogged.phoneNumber.slice(6, 10) }}
       </ion-label>
     </ion-item>
-    <ion-item class="description-item" [ngClass]="{'with-margin': customerLogged.isNotElder}">
+    <ion-item class="description-item" [ngClass]="{'with-margin': customerLogged.isElder}">
       <p>
         {{customerLogged.elderDescription}}
       </p>
   </ion-item>
 
 
-    <div *ngIf="customerLogged.isNotElder;">
+    <div *ngIf="customerLogged.isElder;">
       <ion-row class="ion-align-items-center ion-justify-content-center">
         <ion-col>
           <ion-label class="title-label">
