@@ -13,7 +13,6 @@ export const routes: Routes = [
         path: '',
         loadChildren: () => import('granp-lib').then((m) => m.granpRoutes),
     },
-
     {
         path: 'details',
         loadComponent: () => import('./pages/customer-details/customer-details.page').then(m => m.CustomerDetailsPage),
