@@ -15,8 +15,8 @@ export class Tab2Page {
 
     constructor() { }
 
-    openPage() {
-        this.navCtrl.navigateForward('/registration');
+    openPage(route: string) {
+        this.navCtrl.navigateForward(route);
     }
 
 }

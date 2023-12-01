@@ -81,7 +81,6 @@ export class RegistrationPage implements OnInit {
     lastName: '',
     email: '',
     birthDate: '',
-    address: new Address('', '', '', '', new GeoLocation(0, 0)),
     phoneNumber: '',
     elderDescription: '',
     elderFirstName: '',
@@ -157,9 +156,6 @@ export class RegistrationPage implements OnInit {
   }
 
   submitCustomerAddress() {
-  
-   this.addressString = `${this.customer.address.Street}, ${this.customer.address.StreetNumber}, ${this.customer.address.City}, ${this.customer.address.ZipCode}`;
-   this.customer.address.setFullAddress(this.addressString);
    
    // Dismiss the modal and pass addressString
   this.modalController.dismiss({

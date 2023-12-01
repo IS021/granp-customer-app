@@ -57,24 +57,6 @@
             <ion-button color="primary" fill="clear" (click)="submitCustomerAddress()">Salva</ion-button>
           </ion-buttons>
         </ion-toolbar>
-        <ion-list>
-          <ion-item>
-            <ion-input label="Via/Viale" label-placement="floating" type="text" [(ngModel)]="customer.address.Street"
-              required></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input label="Numero civico" label-placement="floating" type="text"
-              [(ngModel)]="customer.address.StreetNumber" required></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input label="Città" label-placement="floating" type="text" [(ngModel)]="customer.address.City"
-              required></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input label="CAP" label-placement="floating" [(ngModel)]="customer.address.ZipCode"
-              required></ion-input>
-          </ion-item>
-        </ion-list>
       </ng-template>
     </ion-modal>
 
@@ -145,24 +127,6 @@
                 <ion-button color="primary" fill="clear" (click)="submitElderAddress()">Salva</ion-button>
               </ion-buttons>
             </ion-toolbar>
-            <ion-list>
-              <ion-item>
-                <ion-input label="Via/Viale" label-placement="floating" type="text"
-                  [(ngModel)]="customer.address.Street" required></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-input label="Numero civico" label-placement="floating" type="text"
-                  [(ngModel)]="customer.address.StreetNumber" required></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-input label="Città" label-placement="floating" type="text" [(ngModel)]="customer.address.City"
-                  required></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-input label="CAP" label-placement="floating" [(ngModel)]="customer.address.ZipCode"
-                  required></ion-input>
-              </ion-item>
-            </ion-list>
           </ng-template>
         </ion-modal>
       </div>

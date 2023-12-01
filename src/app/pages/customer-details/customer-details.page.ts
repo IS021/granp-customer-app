@@ -10,18 +10,43 @@ import {
   IonContent,
   IonText,
   IonRow, 
-  IonCol
+  IonCol,
+  IonIcon,
+  IonHeader,
+  IonToolbar,
+  IonBackButton,
+  IonButtons,
+  IonTitle
   } 
 from '@ionic/angular/standalone'
+
 import { Address } from 'src/app/models/Address';
 import { GeoLocation } from 'src/app/models/Location';
+import { addIcons } from 'ionicons';
+import { call, home, personCircleOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-customer-details',
   templateUrl: './customer-details.page.html',
   styleUrls: ['./customer-details.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, IonItem, IonLabel, IonList, IonAvatar, IonContent, IonText, IonRow, IonCol]
+  imports: [CommonModule, 
+    FormsModule, 
+    IonItem, 
+    IonLabel, 
+    IonList, 
+    IonAvatar, 
+    IonContent, 
+    IonText, 
+    IonRow, 
+    IonCol, 
+    IonIcon,
+    IonHeader,
+    IonToolbar,
+    IonBackButton,
+    IonButtons,
+    IonTitle
+  ]
 })
 export class CustomerDetailsPage implements OnInit {
 
@@ -30,7 +55,6 @@ export class CustomerDetailsPage implements OnInit {
     lastName: 'Battiato',
     email: 'pinuccio_battiato@granpmail.com',
     birthDate: '01/01/1978',
-    address: new Address('Via dei Cavalli', '14/B', 'Monopoli', '70170', new GeoLocation(0, 0)),
     phoneNumber: '3939992222',
     elderDescription: 'Mio padre soffre di reumatismi a causa della sua ossessione per i cantineri che lo porta a passare intere giornate inpiedi al freddo a guardare gli operai',
     elderFirstName: 'Franco',
@@ -43,6 +67,7 @@ export class CustomerDetailsPage implements OnInit {
   };
 
   constructor() {
+    addIcons({call, home, personCircleOutline});
   }
 
   ngOnInit() {

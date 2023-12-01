@@ -5,7 +5,6 @@ export interface Customer {
     lastName: string;
     email: string;
     birthDate: string;
-    address: Address;
     phoneNumber: string;
 
     profilePicture: string;
