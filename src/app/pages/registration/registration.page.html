@@ -1,12 +1,14 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>Registrazione</ion-title>
+    </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="'true'">
-
-
 
   <h1>
     Completa la tua registrazione
   </h1>
-
-
 
   <ion-list [inset]="true">
 
@@ -16,7 +18,7 @@
     <ng-template #showImage>
       <div class="imageContainer">
         <ion-button fill="none" (click)="takePicture()">
-          <img [style.border-radius]="'100%'" [style.max-width]="'50%'" src="{{ customer.profilePicture }}">
+          <img [style.border-radius]="'100%'" [style.height]="'10em'" [style.width]="'10em'" [style.object-fit]="'cover'" [src]="customer.profilePicture">
         </ion-button>
       </div>
     </ng-template>
@@ -47,18 +49,36 @@
     </ion-item>
 
     <ion-modal #modal trigger="open-address-settings">
-      <ng-template>
-        <ion-toolbar>
-          <ion-buttons slot="end">
-            <ion-button (click)="modal.dismiss()">Chiudi</ion-button>
-          </ion-buttons>
-          <ion-title [style.align-items]="'center'">Indirizzo</ion-title>
-          <ion-buttons slot="start">
-            <ion-button color="primary" fill="clear" (click)="submitCustomerAddress()">Salva</ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ng-template>
-    </ion-modal>
+        <ng-template>
+          <ion-toolbar>
+            <ion-buttons slot="end">
+              <ion-button (click)="modal.dismiss()">Chiudi</ion-button>
+            </ion-buttons>
+            <ion-title [style.align-items]="'center'">Indirizzo</ion-title>
+            <ion-buttons slot="start">
+              <ion-button color="primary" fill="clear" (click)="submitCustomerAddress()">Salva</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+          <ion-list>
+            <ion-item>
+              <ion-input label="Via/Viale" label-placement="floating" type="text" [(ngModel)]="customer.elderAddress.Street"
+                required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input label="Numero civico" label-placement="floating" type="text"
+                [(ngModel)]="customer.elderAddress.StreetNumber" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input label="Città" label-placement="floating" type="text" [(ngModel)]="customer.elderAddress.City"
+                required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input label="CAP" label-placement="floating" [(ngModel)]="customer.elderAddress.ZipCode"
+                required></ion-input>
+            </ion-item>
+          </ion-list>
+        </ng-template>
+      </ion-modal>
 
     <ion-item id="open-modal">
       <ion-input label="Data di nascita" label-placement="floating" [(ngModel)]="customer.birthDate"
@@ -78,9 +98,9 @@
     </ion-item>
 
     <ion-item>
-      <ion-toggle justify="start" labelPlacement="end" [style.margin-top]="'1rem'" [(ngModel)]="customer.isElder">
-        Sono
-        l'assistito</ion-toggle>
+        <ion-toggle justify="start" labelPlacement="end" [style.margin-top]="'1rem'" [ngModel]="!customer.isElder" (ngModelChange)="customer.isElder = !$event">
+            Non sono l'assistito
+        </ion-toggle>
     </ion-item>
 
     <div *ngIf="!customer.isElder">
@@ -102,34 +122,6 @@
           required></ion-input>
       </ion-item>
 
-
-      <!-- Checking elder address: if differentAddress == false >> customer.address = customer.elderAddress -->
-      <ion-item>
-        <ion-checkbox labelPlacement="start" (ionChange)="checkboxChanged($event)"> 
-         <ion-text>Indirizzo diverso dal precedente</ion-text>
-        </ion-checkbox>
-      </ion-item>
-
-      <div *ngIf="differentAddress">
-        <ion-item id="open-elder-address-settings">
-          <ion-input label="Indirizzo" label-placement="floating" [(ngModel)]="elderAddressString" required></ion-input>
-        </ion-item>
-
-        <ion-modal #modal trigger="open-elder-address-settings"
-          [canDismiss]="differentAddress">
-          <ng-template>
-            <ion-toolbar>
-              <ion-buttons slot="end">
-                <ion-button (click)="modal.dismiss()">Chiudi</ion-button>
-              </ion-buttons>
-              <ion-title>Indirizzo</ion-title>
-              <ion-buttons slot="start">
-                <ion-button color="primary" fill="clear" (click)="submitElderAddress()">Salva</ion-button>
-              </ion-buttons>
-            </ion-toolbar>
-          </ng-template>
-        </ion-modal>
-      </div>
 
       <ion-item id="open-modal-elder">
         <ion-input label="Data di nascita" label-placement="floating" type="text" [(ngModel)]="customer.elderBirthDate"
