@@ -17,3 +17,8 @@
   .description-item.with-margin {
     margin-bottom: 10px; /* Adjust the margin as needed */
   }
+
+  .scroll-text {
+    text-overflow: unset; 
+    overflow-x: scroll;
+}

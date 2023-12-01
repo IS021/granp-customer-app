@@ -16,9 +16,5 @@ export interface Customer {
     elderAddress: Address;
     elderTelephoneNumber: string;
 
-    isElder: boolean;
-    
-
-
-    
+    isElder: boolean; 
 }
