@@ -33,7 +33,9 @@ export class AppComponent {
         // If not logged in redirect to login page
         this.loggedIn$.subscribe((loggedIn) => {
             if (!loggedIn) {
-                // this.router.navigate(['/login']);
+                this.router.navigate(['/login']);
+            } else {
+                this.router.navigate(['/tabs']);
             }
         });
 
