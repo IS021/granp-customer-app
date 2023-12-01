@@ -83,7 +83,7 @@ export class AppComponent {
                             })
                         }
                         // redirect to home when logging out
-                        this.router.navigate(['/']);                                    // TODO
+                        this.router.navigate(['/login']);                                    // TODO
                         this.isAuth0Loading$.next(false);
                     }
                 } else {
