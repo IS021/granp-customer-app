@@ -22,3 +22,21 @@
         text-overflow: unset; 
         overflow-x: scroll;
     }
+
+    .ion-true {
+      position: absolute;
+      top: 90%;
+      left: 80%;
+      transform: translate(-50%, -50%);
+      font-size: 30px;
+      color: #d280ff;
+    }
+
+    .ion-false {
+      position: absolute;
+      top: 90%;
+      left: 80%;
+      transform: translate(-50%, -50%);
+      font-size: 30px;
+      color: red;
+    }

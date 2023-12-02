@@ -16,15 +16,16 @@ import {
   IonToolbar,
   IonBackButton,
   IonButtons,
-  IonTitle
+  IonTitle,
+  IonGrid,
+  IonButton,
+  IonToast
   } 
 from '@ionic/angular/standalone'
 
-import { Address } from 'src/app/models/Address';
-import { GeoLocation } from 'src/app/models/Location';
 import { addIcons } from 'ionicons';
-import { call, home, personCircleOutline, mailOpenOutline } from 'ionicons/icons';
-import { Profession } from 'src/app/models/Profession';
+import { call, home, personCircleOutline, mailOpenOutline, calendarOutline, medicalOutline, locationOutline, walletOutline, checkmarkOutline, closeOutline, checkmarkDoneCircle, alertCircle } from 'ionicons/icons';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-professional-details',
@@ -46,34 +47,54 @@ import { Profession } from 'src/app/models/Profession';
     IonToolbar,
     IonBackButton,
     IonButtons,
-    IonTitle
+    IonTitle,
+    IonGrid,
+    IonButton,
+    IonToast
   ]
 })
 export class ProfessionalDetailsPage implements OnInit {
 
   professionalSelected: Professional={
-    profilePicture: 'https://i.ytimg.com/vi/7_XURiVa-5M/hqdefault.jpg',
+    profilePicture: 'https://res.cloudinary.com/teepublic/image/private/s--FIor6wdk--/c_fit,g_north_west,h_840,w_840/co_c62b29,e_outline:40/co_c62b29,e_outline:inner_fill:1/co_ffffff,e_outline:40/co_ffffff,e_outline:inner_fill:1/co_bbbbbb,e_outline:3:1000/c_mpad,g_center,h_1260,w_1260/b_rgb:eeeeee/c_limit,f_jpg,h_630,q_90,w_630/v1608275710/production/designs/17539365_0.jpg',
     firstName: 'Johnny',
     lastName: 'Sins',
+    birthDate: '31/12/1978',
+    age: 44,
     email: 'jhonny_tuttofare_sins@granpmail.com',
-    birthDate: '01/01/1978',
-    phoneNumber: '3939992222',
+    phoneNumber: '6909006990',
 
-    description: 'Mio padre soffre di reumatismi a causa della sua ossessione per i cantineri che lo porta a passare intere giornate inpiedi al freddo a guardare gli operai',
-    
-    profession: Profession.Other,
-    address: new Address('','','','', new GeoLocation(0,0)),
-    age: 18,
-    isVerified: false,
+    description: 'Tutto fare, devoto ai clienti e pronto a soddisfarli al meglio, se mi cercate online troverete registrazioini fatte dai miei clienti soddisfatti del lavoro.',
 
-    hourlyRate: 2,
-    longTimeJoob: false,
-    shortTimeJob: false,
-    
+    profession: 'Tutto fare',
+    address: 'Via dei Brazzers, 69, Mellitto, 70124',
+    isVerified: true,
+    hourlyRate: 20,
+    longTimeJob: false,
+    shortTimeJob: true,
+
   };
 
-  constructor() {
-    addIcons({call, home, personCircleOutline, mailOpenOutline});
+  constructor(private toastController: ToastController) {
+    addIcons({ call, home, personCircleOutline, mailOpenOutline, calendarOutline, medicalOutline, locationOutline, walletOutline, checkmarkOutline, closeOutline, checkmarkDoneCircle, alertCircle });
+  }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      position: 'bottom',
+    });
+    toast.present();
+  }
+
+  async presentToastFalse(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      position: 'bottom',
+    });
+    toast.present();
   }
   ngOnInit() {
   }

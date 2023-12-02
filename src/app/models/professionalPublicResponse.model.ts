@@ -1,22 +1,22 @@
-import { Address } from "./Address";
-import { Profession } from "./Profession";
 
 export interface Professional {
+
     profilePicture: string;
     firstName: string;
     lastName: string;
-    email: string;
     birthDate: string;
+    age: number;
+    email: string;
     phoneNumber: string;
 
     description: string;
-    profession: Profession;
-    address: Address;
-    age: number;
-    isVerified: boolean;
 
+    profession: string;
+    address: string;
+    isVerified: boolean;
     hourlyRate: number;
-    longTimeJoob: boolean;
+    longTimeJob: boolean;
     shortTimeJob: boolean;
 
 }
+
