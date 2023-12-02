@@ -23,23 +23,25 @@
       </div>
     </ng-template>
 
+    <h2 [style.text-align]="'center'" [style.font-weight]="'bold'">Inserisci i dati dell'assistito</h2>
+
     <ion-item>
-      <ion-input label="Nome" label-placement="floating" type="text" [(ngModel)]="customer.firstName"
+      <ion-input label="Nome" label-placement="floating" type="text" [(ngModel)]="customer.elderFirstName"
         required></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input label="Cognome" label-placement="floating" type="text" [(ngModel)]="customer.lastName"
+      <ion-input label="Cognome" label-placement="floating" type="text" [(ngModel)]="customer.elderLastName"
         required></ion-input>
     </ion-item>
 
-    <ion-item>
+    <!-- <ion-item>
       <ion-input label="Email" label-placement="floating" [(ngModel)]="customer.email" required email></ion-input>
-    </ion-item>
+    </ion-item> -->
 
     <ion-item>
       <ion-input label="Cellulare" [maskito]="phoneMask" [maskitoElement]="maskPredicate"
-        placeholder="+39 xxx xxx xx xx" label-placement="floating" [(ngModel)]="customer.phoneNumber"
+        placeholder="+39 xxx xxx xx xx" label-placement="floating" [(ngModel)]="customer.elderTelephoneNumber"
         required></ion-input>
     </ion-item>
 
@@ -56,7 +58,7 @@
             </ion-buttons>
             <ion-title [style.align-items]="'center'">Indirizzo</ion-title>
             <ion-buttons slot="start">
-              <ion-button color="primary" fill="clear" (click)="submitCustomerAddress()">Salva</ion-button>
+              <ion-button color="primary" fill="clear" (click)="submitElderAddress()">Salva</ion-button>
             </ion-buttons>
           </ion-toolbar>
           <ion-list>
@@ -81,13 +83,13 @@
       </ion-modal>
 
     <ion-item id="open-modal">
-      <ion-input label="Data di nascita" label-placement="floating" [(ngModel)]="customer.birthDate"
+      <ion-input label="Data di nascita" label-placement="floating" [(ngModel)]="customer.elderBirthDate"
         required></ion-input>
     </ion-item>
 
     <ion-modal trigger="open-modal">
       <ng-template>
-        <ion-datetime locale="it-IT" [presentation]="'date'" (ionChange)="setCustomerBirthdate($event)"
+        <ion-datetime locale="it-IT" [presentation]="'date'" (ionChange)="setElderBirthdate($event)"
           showDefaultButtons="true" (ionCancel)="showPicker=false;"></ion-datetime>
       </ng-template>
     </ion-modal>
@@ -104,41 +106,23 @@
     </ion-item>
 
     <div *ngIf="!customer.isElder">
-      <h2 [style.text-align]="'center'" [style.font-weight]="'bold'">Inserisci i dati dell'assistito</h2>
+      <h2 [style.text-align]="'center'" [style.font-weight]="'bold'">Inserisci i dati del tutore</h2>
 
       <ion-item>
-        <ion-input label="Nome" label-placement="floating" type="text" [(ngModel)]="customer.elderFirstName"
+        <ion-input label="Nome" label-placement="floating" type="text" [(ngModel)]="customer.firstName"
           required></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-input label="Cognome" label-placement="floating" type="text" [(ngModel)]="customer.elderLastName"
+        <ion-input label="Cognome" label-placement="floating" type="text" [(ngModel)]="customer.lastName"
           required></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-input label="Cellulare" [maskito]="phoneMask" [maskitoElement]="maskPredicate"
-          placeholder="+39 xxx xxx xx xx" label-placement="floating" [(ngModel)]="customer.elderTelephoneNumber"
+          placeholder="+39 xxx xxx xx xx" label-placement="floating" [(ngModel)]="customer.phoneNumber"
           required></ion-input>
-      </ion-item>
-
-
-      <ion-item id="open-modal-elder">
-        <ion-input label="Data di nascita" label-placement="floating" type="text" [(ngModel)]="customer.elderBirthDate"
-          required>
-        </ion-input>
-      </ion-item>
-
-      <ion-modal trigger="open-modal-elder">
-        <ng-template>
-
-          <ion-datetime locale="it-IT" [presentation]="'date'" (ionChange)="setElderBirthdate($event)"
-            showDefaultButtons="true" (ionCancel)="showPicker=false;"></ion-datetime>
-
-        </ng-template>
-      </ion-modal>
-      
-
+      </ion-item>     
 
     </div>
     <div class="buttonContainer">

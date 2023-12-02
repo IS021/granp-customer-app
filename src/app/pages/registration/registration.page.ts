@@ -79,34 +79,25 @@ export class RegistrationPage implements OnInit {
   customer: Customer = {
     firstName: '',
     lastName: '',
-    email: '',
-    birthDate: '',
+    /* email: '', */
     phoneNumber: '',
     elderDescription: '',
     elderFirstName: '',
     elderLastName: '',
     elderBirthDate: '',
+    elderAge: 0,
     elderAddress: new Address('', '', '', '', new GeoLocation(0, 0)),
     elderTelephoneNumber: '',
     profilePicture: '',
-    isElder: false,
+    isElder: true,
   };
 
   showPicker = false;
   imageSelected = false;
   addressString : string = '';
-  differentAddress: boolean = false;
   elderAddressString : string = '';
 
   
-
-  setCustomerBirthdate(event: CustomEvent) {
-    this.customer.birthDate = format(
-      parseISO(event.detail.value),
-      'dd/MM/yyyy'
-    );
-    this.showPicker = false;
-  }
 
   setElderBirthdate(event: CustomEvent) {
     this.customer.elderBirthDate = format(
@@ -155,14 +146,6 @@ export class RegistrationPage implements OnInit {
     });
   }
 
-  submitCustomerAddress() {
-   
-   // Dismiss the modal and pass addressString
-  this.modalController.dismiss({
-    'addressString': this.addressString
-  });
-  }
-
   submitElderAddress() {
   
     this.elderAddressString = `${this.customer.elderAddress.Street}, ${this.customer.elderAddress.StreetNumber}, ${this.customer.elderAddress.City}, ${this.customer.elderAddress.ZipCode}`;
@@ -173,11 +156,6 @@ export class RegistrationPage implements OnInit {
      'elderAddressString': this.elderAddressString
    });
   }
-
-  checkboxChanged(event: any) {
-    this.differentAddress = event.detail.checked;
-  }
-
 
   ngOnInit() {}
 }
