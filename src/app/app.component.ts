@@ -10,6 +10,8 @@ import { Capacitor } from '@capacitor/core';
 import { asyncScheduler, BehaviorSubject } from 'rxjs';
 import { NgIf, AsyncPipe } from '@angular/common';
 
+import { ChatService } from 'granp-lib';
+
 
 @Component({
     selector: 'app-root',
@@ -21,6 +23,7 @@ export class AppComponent {
     auth = inject(AuthService);
     ngZone = inject(NgZone);
     router = inject(Router);
+    chatService = inject(ChatService);
 
     loggedIn$ = this.auth.isAuthenticated$;
 
@@ -33,9 +36,10 @@ export class AppComponent {
         // If not logged in redirect to login page
         this.loggedIn$.subscribe((loggedIn) => {
             if (!loggedIn) {
-                /* this.router.navigate(['/login']); */
+                this.router.navigate(['/login']);
             } else {
                 this.router.navigate(['/tabs']);
+                this.chatService.connect();
             }
         });
 
