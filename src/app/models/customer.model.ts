@@ -3,8 +3,8 @@ import { Address } from "./Address";
 export interface Customer {
     firstName: string;
     lastName: string;
-    email: string;
-    birthDate: string;
+    /* email: string; */
+
     phoneNumber: string;
 
     profilePicture: string;
@@ -13,6 +13,7 @@ export interface Customer {
     elderFirstName: string;
     elderLastName: string;
     elderBirthDate: string;
+    elderAge: number;
     elderAddress: Address;
     elderTelephoneNumber: string;
 
