@@ -21,7 +21,8 @@ import {
     IonButtons,
     ModalController,
     IonCheckbox,
-    IonText
+    IonText,
+    IonAvatar
 } from '@ionic/angular/standalone';
 
 import { MaskitoOptions, MaskitoElementPredicateAsync } from '@maskito/core';
@@ -69,7 +70,8 @@ import { th } from 'date-fns/locale';
         IonLabel,
         IonButtons,
         IonCheckbox,
-        IonText
+        IonText,
+        IonAvatar
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
