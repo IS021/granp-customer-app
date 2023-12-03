@@ -13,13 +13,13 @@ export const environment = {
       httpInterceptor: {
           allowedList: [
               {
-                  uri: 'http://localhost:5255/*',
+                  uri: 'http://bigweldnas.direct.quickconnect.to:35255/*',
               },
           ],
       },
     },
     granp: {
-      apiServerUrl: 'http://localhost:5255',
+      apiServerUrl: 'http://bigweldnas.direct.quickconnect.to:35255',
       logoutRedirectUri: 'http://localhost:4200',
       role: 'customer',
     },

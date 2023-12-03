@@ -13,13 +13,13 @@ export const environment = {
       httpInterceptor: {
           allowedList: [
               {
-                  uri: 'http://localhost:5255/*',
+                  uri: 'http://bigweldnas.direct.quickconnect.to:35255/*',
               },
           ],
       },
     },
     granp: {
-      apiServerUrl: 'http://localhost:5255',
+      apiServerUrl: 'http://bigweldnas.direct.quickconnect.to:35255',
       logoutRedirectUri: 'granp.app.customer://antopio.eu.auth0.com/capacitor/granp.app.customer/callback',
       role: 'customer',
     },
