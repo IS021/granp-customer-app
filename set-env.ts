@@ -25,12 +25,6 @@ const prodEnvConfigFile = `export const environment = {
           allowedList: [
               {
                   uri: '${process.env['API_SERVER_URL']}/*',
-                  // tokenOptions: {
-                      // authorizationParams: {
-                          // audience: '${process.env['AUTH0_AUDIENCE']}/api/v2/',
-                          // scope: '${process.env['AUTH0_SCOPE']}',
-                      // },
-                  // },
               },
           ],
       },
@@ -38,6 +32,7 @@ const prodEnvConfigFile = `export const environment = {
     granp: {
       apiServerUrl: '${process.env['API_SERVER_URL']}',
       logoutRedirectUri: '${process.env['AUTH0_CALLBACK_URL']}',
+      role: '${process.env['ROLE']}',
     },
   };
   `;
@@ -58,12 +53,6 @@ const prodEnvConfigFile = `export const environment = {
           allowedList: [
               {
                   uri: '${process.env['API_SERVER_URL']}/*',
-                  // tokenOptions: {
-                      // authorizationParams: {
-                          // audience: '${process.env['AUTH0_AUDIENCE']}/api/v2/',
-                          // scope: '${process.env['AUTH0_SCOPE']}',
-                      // },
-                  // },
               },
           ],
       },
@@ -71,6 +60,7 @@ const prodEnvConfigFile = `export const environment = {
     granp: {
       apiServerUrl: '${process.env['API_SERVER_URL']}',
       logoutRedirectUri: '${process.env['AUTH0_DEV_CALLBACK_URL']}',
+      role: '${process.env['ROLE']}',
     },
   };
   `;

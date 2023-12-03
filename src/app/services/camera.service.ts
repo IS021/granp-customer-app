@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Customer } from '../models/customer.model';
 
-import { ChangeDetectorRef } from '@angular/core';
 import {
   Camera,
   CameraResultType,

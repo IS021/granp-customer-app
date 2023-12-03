@@ -41,12 +41,12 @@
 
     <ion-item>
       <ion-input label="Cellulare" [maskito]="phoneMask" [maskitoElement]="maskPredicate"
-        placeholder="+39 xxx xxx xx xx" label-placement="floating" [(ngModel)]="customer.elderTelephoneNumber"
+        placeholder="+39 xxx xxx xx xx" label-placement="floating" [(ngModel)]="customer.elderPhoneNumber"
         required></ion-input>
     </ion-item>
 
     <ion-item id="open-address-settings" [button]="true">
-      <ion-input label="Indirizzo" label-placement="floating" type="text" [(ngModel)]="addressString"
+      <ion-input label="Indirizzo" label-placement="floating" type="text" [ngModel]="elderAddressString"
         required></ion-input>
     </ion-item>
 

@@ -10,7 +10,7 @@ import { Capacitor } from '@capacitor/core';
 import { asyncScheduler, BehaviorSubject } from 'rxjs';
 import { NgIf, AsyncPipe } from '@angular/common';
 
-import { ChatService } from 'granp-lib';
+import { ChatService, ProfileService } from 'granp-lib';
 
 
 @Component({
@@ -24,6 +24,7 @@ export class AppComponent {
     ngZone = inject(NgZone);
     router = inject(Router);
     chatService = inject(ChatService);
+    profileService = inject(ProfileService);
 
     loggedIn$ = this.auth.isAuthenticated$;
 
@@ -38,8 +39,14 @@ export class AppComponent {
             if (!loggedIn) {
                 this.router.navigate(['/login']);
             } else {
-                this.router.navigate(['/tabs']);
-                this.chatService.connect();
+                this.profileService.isComplete().then((isComplete) => {
+                    if (!isComplete) {
+                        this.router.navigate(['/registration']);
+                    } else {
+                        this.router.navigate(['/tabs']);
+                        this.chatService.connect();
+                    }
+                });
             }
         });
 
@@ -76,7 +83,7 @@ export class AppComponent {
                                     // redirect to profile when logging in              // TODO
                                     // Check if the user registration is complete
                                     // If not redirect to registration page
-                                    this.router.navigate(['/tabs']);
+                                    // this.router.navigate(['/tabs']);
                                     this.isAuth0Loading$.next(false);
                                 })
                             });
