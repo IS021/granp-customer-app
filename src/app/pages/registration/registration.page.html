@@ -13,7 +13,9 @@
   <ion-list [inset]="true">
 
     <div *ngIf="!imageSelected; else showImage;" class="imageContainer">
-      <ion-button size="medium" (click)="takePicture()">Inserisci una tua foto</ion-button>
+      <ion-avatar class="bigger-avatar" (click)="takePicture()">
+        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg"/>
+      </ion-avatar>
     </div>
     <ng-template #showImage>
       <div class="imageContainer">
