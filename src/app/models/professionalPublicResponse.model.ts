@@ -1,3 +1,4 @@
+import { Gender } from "./Gender";
 
 export interface Professional {
 
@@ -6,6 +7,7 @@ export interface Professional {
     lastName: string;
     birthDate: string;
     age: number;
+    gender: Gender;
     email: string;
     phoneNumber: string;
 

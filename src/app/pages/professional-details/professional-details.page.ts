@@ -24,8 +24,9 @@ import {
 from '@ionic/angular/standalone'
 
 import { addIcons } from 'ionicons';
-import { call, home, personCircleOutline, mailOpenOutline, calendarOutline, medicalOutline, locationOutline, walletOutline, checkmarkOutline, closeOutline, checkmarkDoneCircle, alertCircle } from 'ionicons/icons';
+import { call, home, personCircleOutline, mailOpenOutline, calendarOutline, medicalOutline, locationOutline, walletOutline, checkmarkOutline, closeOutline, checkmarkDoneCircle, alertCircle, maleOutline, femaleOutline, helpOutline } from 'ionicons/icons';
 import { ToastController } from '@ionic/angular';
+import { Gender } from 'src/app/models/Gender';
 
 @Component({
   selector: 'app-professional-details',
@@ -61,6 +62,7 @@ export class ProfessionalDetailsPage implements OnInit {
     lastName: 'Sins',
     birthDate: '31/12/1978',
     age: 44,
+    gender: Gender.Male,
     email: 'jhonny_tuttofare_sins@granpmail.com',
     phoneNumber: '6909006990',
 
@@ -76,7 +78,7 @@ export class ProfessionalDetailsPage implements OnInit {
   };
 
   constructor(private toastController: ToastController) {
-    addIcons({ call, home, personCircleOutline, mailOpenOutline, calendarOutline, medicalOutline, locationOutline, walletOutline, checkmarkOutline, closeOutline, checkmarkDoneCircle, alertCircle });
+    addIcons({ call, home, personCircleOutline, mailOpenOutline, calendarOutline, medicalOutline, locationOutline, walletOutline, checkmarkOutline, closeOutline, checkmarkDoneCircle, alertCircle,  maleOutline, femaleOutline, helpOutline });
   }
 
   async presentToast(message: string) {
@@ -96,6 +98,29 @@ export class ProfessionalDetailsPage implements OnInit {
     });
     toast.present();
   }
+
+  checkGender(): string {
+    switch (this.professionalSelected.gender) {
+      case Gender.Male:
+        return 'Uomo';
+      case Gender.Female:
+        return 'Donna';
+      default:
+        return 'Non definito';
+    }
+  }
+
+  checkGenderIcon(): string {
+    switch (this.professionalSelected.gender) {
+      case Gender.Male:
+        return 'male-outline';
+      case Gender.Female:
+        return 'female-outline';
+      default:
+        return 'help-outline';
+    }
+  }
+
   ngOnInit() {
   }
 
