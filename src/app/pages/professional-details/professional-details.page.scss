@@ -19,9 +19,12 @@
     }
 
     .scroll-text {
-        text-overflow: unset; 
-        overflow-x: scroll;
-    }
+      text-overflow: ellipsis; /* Display an ellipsis (...) when text overflows */
+      overflow-x: scroll; /* Enable horizontal scrolling */
+      white-space: nowrap; /* Prevent text from wrapping */
+      scrollbar-width: thin; /* Specify a thin scrollbar on supporting browsers (Firefox) */
+      scrollbar-color: transparent transparent; /* Set the scrollbar color to transparent */
+  }
 
     .ion-true {
       position: absolute;
