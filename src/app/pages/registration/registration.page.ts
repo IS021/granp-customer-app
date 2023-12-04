@@ -4,25 +4,26 @@ import { FormsModule } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
 
 import {
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonList,
-    IonItem,
-    IonInput,
-    IonModal,
-    IonDatetime,
-    IonToggle,
-    IonButton,
-    IonFabButton,
-    IonTextarea,
-    IonLabel,
-    IonButtons,
-    ModalController,
-    IonCheckbox,
-    IonText,
-    IonAvatar
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonList,
+  IonItem,
+  IonInput,
+  IonModal,
+  IonDatetime,
+  IonToggle,
+  IonButton,
+  IonFabButton,
+  IonTextarea,
+  IonLabel,
+  IonButtons,
+  ModalController,
+  IonCheckbox,
+  IonText,
+  IonAvatar,
+  AlertController,
 } from '@ionic/angular/standalone';
 
 import { MaskitoOptions, MaskitoElementPredicateAsync } from '@maskito/core';
@@ -38,99 +39,133 @@ import { format, parseISO } from 'date-fns';
 
 import { CameraService } from 'src/app/services/camera.service';
 
+import { GeocodingService } from 'granp-lib';
+
 @Component({
-    selector: 'app-registration',
-    templateUrl: './registration.page.html',
-    styleUrls: ['./registration.page.scss'],
-    standalone: true,
-    imports: [
-        CommonModule,
-        FormsModule,
-        MaskitoModule,
-        IonHeader,
-        IonToolbar,
-        IonTitle,
-        IonContent,
-        IonList,
-        IonItem,
-        IonInput,
-        IonTextarea,
-        IonModal,
-        IonDatetime,
-        IonToggle,
-        IonButton,
-        IonFabButton,
-        IonLabel,
-        IonButtons,
-        IonCheckbox,
-        IonText,
-        IonAvatar
-    ],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-registration',
+  templateUrl: './registration.page.html',
+  styleUrls: ['./registration.page.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    MaskitoModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonList,
+    IonItem,
+    IonInput,
+    IonTextarea,
+    IonModal,
+    IonDatetime,
+    IonToggle,
+    IonButton,
+    IonFabButton,
+    IonLabel,
+    IonButtons,
+    IonCheckbox,
+    IonText,
+    IonAvatar,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistrationPage implements OnInit {
+  customer: CustomerProfileRequest = new CustomerProfileRequest();
 
-    customer: CustomerProfileRequest = new CustomerProfileRequest();
+  geocodingService = inject(GeocodingService);
 
-    showPicker = false;
-    imageSelected = false;
-    elderAddressString: string = '';
+  showPicker = false;
+  imageSelected = false;
+  elderAddressString: string = '';
 
-    setElderBirthdate(event: CustomEvent) {
-        this.customer.elderBirthDate = format(
-            parseISO(event.detail.value),
-            'dd/MM/yyyy'
-        );
-        this.showPicker = false;
-    }
+  setElderBirthdate(event: CustomEvent) {
+    this.customer.elderBirthDate = format(
+      parseISO(event.detail.value),
+      'dd/MM/yyyy'
+    );
+    this.showPicker = false;
+  }
 
-    readonly phoneMask: MaskitoOptions = {
-        mask: [
-            '+',
-            '3',
-            '9',
-            ' ',
-            /\b[1-9]\b/,
-            /\d/,
-            /\d/,
-            ' ',
-            /\d/,
-            /\d/,
-            /\d/,
-            ' ',
-            /\d/,
-            /\d/,
-            /\d/,
-            /\d/,
-        ],
-    };
+  readonly phoneMask: MaskitoOptions = {
+    mask: [
+      '+',
+      '3',
+      '9',
+      ' ',
+      /\b[1-9]\b/,
+      /\d/,
+      /\d/,
+      ' ',
+      /\d/,
+      /\d/,
+      /\d/,
+      ' ',
+      /\d/,
+      /\d/,
+      /\d/,
+      /\d/,
+    ],
+  };
 
-    readonly maskPredicate: MaskitoElementPredicateAsync = async (el) =>
-        (el as HTMLIonInputElement).getInputElement();
+  readonly maskPredicate: MaskitoElementPredicateAsync = async (el) =>
+    (el as HTMLIonInputElement).getInputElement();
 
-    constructor(
-        private cameraService: CameraService,
-        private cdr: ChangeDetectorRef,
-        private modalController: ModalController
-    ) { }
+  constructor(
+    private cameraService: CameraService,
+    private cdr: ChangeDetectorRef,
+    private modalController: ModalController,
+    private alertController: AlertController
+  ) {}
 
-    takePicture() {
-        this.cameraService.takePicture().then((profilePicture) => {
-            this.customer.profilePicture = profilePicture;
-            this.imageSelected = true;
-            this.cdr.detectChanges();
+  takePicture() {
+    this.cameraService.takePicture().then((profilePicture) => {
+      this.customer.profilePicture = profilePicture;
+      this.imageSelected = true;
+      this.cdr.detectChanges();
+    });
+  }
+
+  submitElderAddress() {
+    this.elderAddressString = `${this.customer.elderAddress.Street}, ${this.customer.elderAddress.StreetNumber}, ${this.customer.elderAddress.City}, ${this.customer.elderAddress.ZipCode}`;
+    this.convertAddressToCoordinates(this.elderAddressString);
+
+    this.customer.elderAddress = this.geocodingService
+      .getReverseGeocoding(
+        this.customer.elderAddress.Location!.Latitude,
+        this.customer.elderAddress.Location!.Longitude
+      )
+      .subscribe((reverseData: any) => {
+        if (reverseData.features && reverseData.features.length > 0) {
+          const addressArray =
+            reverseData.features[0].properties.address.split(', ');
+          this.customer.elderAddress.Street = addressArray[0];
+          this.customer.elderAddress.StreetNumber = addressArray[1];
+          this.customer.elderAddress.City = addressArray[2];
+          this.customer.elderAddress.ZipCode = addressArray[3];
+        }
+      });
+    // Dismiss the modal and pass addressString
+    this.modalController.dismiss();
+  }
+
+  convertAddressToCoordinates(address: string) {
+    this.geocodingService.getAddressLocation(address).subscribe((data: any) => {
+      if (data.features && data.features.length > 0) {
+        const coordinates = data.features[0].geometry.coordinates;
+        this.customer.elderAddress.Location!.Latitude = coordinates[1];
+        this.customer.elderAddress.Location!.Longitude = coordinates[0];
+        console.log(this.customer.elderAddress.Location);
+      } else {
+        this.alertController.create({
+          header: 'Errore',
+          message: 'Indirizzo non valido',
+          buttons: ['OK'],
         });
-    }
+      }
+    });
+  }
 
-    submitElderAddress() {
-        this.elderAddressString = `${this.customer.elderAddress.Street}, ${this.customer.elderAddress.StreetNumber}, ${this.customer.elderAddress.City}, ${this.customer.elderAddress.ZipCode}`;
-        this.customer.elderAddress.setFullAddress(this.elderAddressString);
-
-        // Dismiss the modal and pass addressString
-        this.modalController.dismiss();
-
-        this.elderAddressString = this.customer.elderAddress.getFullAddress();
-    }
-
-    ngOnInit() { }
+  ngOnInit() {}
 }
