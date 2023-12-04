@@ -40,12 +40,14 @@ export class AppComponent {
                 this.router.navigate(['/login']);
             } else {
                 this.profileService.isComplete().then((isComplete) => {
-                    if (!isComplete) {
+                    /*if (!isComplete) {
                         this.router.navigate(['/registration']);
                     } else {
                         this.router.navigate(['/tabs']);
                         this.chatService.connect();
-                    }
+                    }*/
+                    this.router.navigate(['/tabs']);
+                    this.chatService.connect();
                 });
             }
         });

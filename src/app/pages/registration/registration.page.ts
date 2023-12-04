@@ -36,14 +36,7 @@ import { ChangeDetectionStrategy } from '@angular/core';
 
 import { format, parseISO } from 'date-fns';
 
-import {
-    Camera,
-    CameraResultType,
-    CameraSource,
-    Photo,
-} from '@capacitor/camera';
 import { CameraService } from 'src/app/services/camera.service';
-import { th } from 'date-fns/locale';
 
 @Component({
     selector: 'app-registration',
