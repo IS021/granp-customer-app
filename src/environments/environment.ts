@@ -22,6 +22,7 @@ export const environment = {
       apiServerUrl: 'http://bigweldnas.direct.quickconnect.to:35255',
       logoutRedirectUri: 'http://localhost:4200',
       role: 'customer',
+      mapboxAccessToken: 'pk.eyJ1IjoiYW50b3BpbzI2IiwiYSI6ImNscHI2YXJrMDA3NGwyaW41NzZubXcwamQifQ.y93LdBmsaZAYGLeveWMNIg',
     },
   };
   
