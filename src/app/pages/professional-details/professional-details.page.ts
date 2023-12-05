@@ -27,6 +27,7 @@ import { addIcons } from 'ionicons';
 import { call, home, personCircleOutline, mailOpenOutline, calendarOutline, medicalOutline, locationOutline, walletOutline, checkmarkOutline, closeOutline, checkmarkDoneCircle, alertCircle, maleOutline, femaleOutline, helpOutline } from 'ionicons/icons';
 import { ToastController } from '@ionic/angular';
 import { Gender } from 'src/app/models/Gender';
+import { Profession } from 'src/app/models/Profession';
 
 @Component({
   selector: 'app-professional-details',
@@ -68,7 +69,7 @@ export class ProfessionalDetailsPage implements OnInit {
 
     description: 'Tutto fare, devoto ai clienti e pronto a soddisfarli al meglio, se mi cercate online troverete registrazioini fatte dai miei clienti soddisfatti del lavoro.',
 
-    profession: 'Tutto fare',
+    profession: Profession.Doctor,
     address: 'Via dei Brazzers, 69, Mellitto, 70124',
     isVerified: true,
     hourlyRate: 20,

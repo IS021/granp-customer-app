@@ -7,7 +7,7 @@ export class Address {
     City: string;
     ZipCode: string;
 
-    Location?: GeoLocation;
+    Location: GeoLocation;
 
     // Constructor
     constructor() {
@@ -15,6 +15,7 @@ export class Address {
         this.StreetNumber = '';
         this.City = '';
         this.ZipCode = '';
+        this.Location = new GeoLocation(0,0);
     }
 
     getFullAddress(): string {

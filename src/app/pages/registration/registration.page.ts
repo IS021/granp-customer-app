@@ -131,21 +131,10 @@ export class RegistrationPage implements OnInit {
     this.elderAddressString = `${this.customer.elderAddress.Street}, ${this.customer.elderAddress.StreetNumber}, ${this.customer.elderAddress.City}, ${this.customer.elderAddress.ZipCode}`;
     this.convertAddressToCoordinates(this.elderAddressString);
 
-    this.customer.elderAddress = this.geocodingService
-      .getReverseGeocoding(
-        this.customer.elderAddress.Location!.Latitude,
-        this.customer.elderAddress.Location!.Longitude
-      )
-      .subscribe((reverseData: any) => {
-        if (reverseData.features && reverseData.features.length > 0) {
-          const addressArray =
-            reverseData.features[0].properties.address.split(', ');
-          this.customer.elderAddress.Street = addressArray[0];
-          this.customer.elderAddress.StreetNumber = addressArray[1];
-          this.customer.elderAddress.City = addressArray[2];
-          this.customer.elderAddress.ZipCode = addressArray[3];
-        }
-      });
+    this.elderAddressString = `${this.customer.elderAddress.Street}, ${this.customer.elderAddress.StreetNumber}, ${this.customer.elderAddress.City}, ${this.customer.elderAddress.ZipCode}`;
+    this.customer.elderAddress.setFullAddress(this.elderAddressString);
+    //reverseGeocodeSubscription.unsubscribe();
+
     // Dismiss the modal and pass addressString
     this.modalController.dismiss();
   }
@@ -156,7 +145,24 @@ export class RegistrationPage implements OnInit {
         const coordinates = data.features[0].geometry.coordinates;
         this.customer.elderAddress.Location!.Latitude = coordinates[1];
         this.customer.elderAddress.Location!.Longitude = coordinates[0];
-        console.log(this.customer.elderAddress.Location);
+
+        this.geocodingService
+          .getReverseGeocodeLocation(
+            this.customer.elderAddress.Location!.Latitude,
+            this.customer.elderAddress.Location!.Longitude
+          )
+          .subscribe((reverseData: any) => {
+            if (reverseData.features && reverseData.features.length > 0) {
+              console.log(reverseData);
+              const addressArray = reverseData.features[0];
+              this.customer.elderAddress.ZipCode = addressArray.context[0].text;
+              this.customer.elderAddress.City = addressArray.context[1].text;
+              this.customer.elderAddress.StreetNumber = addressArray.address;
+              this.customer.elderAddress.Street = addressArray.properties.text;
+              console.log(this.customer.elderAddress);
+
+            }
+          });
       } else {
         this.alertController.create({
           header: 'Errore',
