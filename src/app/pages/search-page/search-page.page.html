@@ -5,3 +5,24 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
+
+<ion-content>
+  <ion-list [inset]="true">
+
+
+    <ion-item>
+      <div>
+        <ion-select label="Seleziona una professione" placement="floating" [(ngModel)]="desiredProfession" [multiple]="true">
+          <ion-select-option value="Medico">Medico</ion-select-option>
+          <ion-select-option value="Infermiere">Infermiere</ion-select-option>
+          <ion-select-option value="Fisioterapista">Fisioterapista</ion-select-option>
+          <ion-select-option value="Badante">Badante</ion-select-option>
+          <ion-select-option value="Altro">Altro</ion-select-option>
+        </ion-select>
+    </div>
+  </ion-item>
+
+  </ion-list>
+
+
+</ion-content>

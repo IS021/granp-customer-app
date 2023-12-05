@@ -1,0 +1,57 @@
+<ion-card>
+
+  <ion-card-content>
+    <ion-card-header class="header">
+      <ion-grid class="container">
+        <ion-row>
+          <ion-col size="3" class="container">
+            <div class="ion-text-wrap">
+              <ion-avatar class="bigger-avatar">
+                <!-- Use ngIf to conditionally show the image or the default avatar -->
+                <ng-container *ngIf="professionalSelected.profilePicture; else showDefaultAvatar">
+                  <img [src]="professionalSelected.profilePicture" alt="User's profile picture" [style.border-radius]="'100%'" [style.max-width]="'100%'"/>
+                  <ion-icon
+                name="checkmark-done-circle"
+                class="ion-true"
+                *ngIf="professionalSelected.isVerified === true"
+                (click)="presentToast('Utente verificato')"
+              ></ion-icon>
+      
+              <ion-icon
+                name="alert-circle"
+                class="ion-false"
+                *ngIf="professionalSelected.isVerified === false"
+                (click)="presentToastFalse('Utente non verificato')"
+              ></ion-icon>
+                </ng-container>
+                <ng-template #showDefaultAvatar>
+                  <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                  <ion-icon
+                name="checkmark-done-circle"
+                class="ion-true"
+                *ngIf="professionalSelected.isVerified === true"
+                (click)="presentToast('Utente verificato')"
+              ></ion-icon>
+      
+              <ion-icon
+                name="alert-circle"
+                class="ion-false"
+                *ngIf="professionalSelected.isVerified === false"
+                (click)="presentToastFalse('Utente non verificato')"
+              ></ion-icon>
+                </ng-template>
+                
+              </ion-avatar>
+          </div>
+          </ion-col>
+          <ion-col size="9">
+      <ion-card-title class="title">{{professionalSelected.firstName}} {{professionalSelected.lastName}}</ion-card-title>
+      <ion-card-subtitle class="subtitle">{{professionalSelected.profession}}</ion-card-subtitle>
+          </ion-col>
+          
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+          <div class="description">{{professionalSelected.description}}</div>
+  </ion-card-content>
+</ion-card>

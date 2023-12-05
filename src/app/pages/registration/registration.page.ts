@@ -42,6 +42,7 @@ import { CameraService } from 'src/app/services/camera.service';
 import { GeocodingService } from 'granp-lib';
 import { ProfileService } from 'granp-lib';
 import { Router } from '@angular/router';
+import { ConstantPool } from '@angular/compiler';
 
 @Component({
     selector: 'app-registration',
@@ -73,7 +74,7 @@ import { Router } from '@angular/router';
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegistrationPage implements OnInit {
+export class RegistrationPage {
     customer: CustomerProfileRequest = new CustomerProfileRequest();
 
     geocodingService = inject(GeocodingService);
@@ -130,40 +131,54 @@ export class RegistrationPage implements OnInit {
 
     submitElderAddress() {
         this.elderAddressString = `${this.customer.elderAddress.Street}, ${this.customer.elderAddress.StreetNumber}, ${this.customer.elderAddress.City}, ${this.customer.elderAddress.ZipCode}`;
-        /*this.convertAddressToCoordinates(this.elderAddressString);
-    
-        this.customer.elderAddress = this.geocodingService
-          .getReverseGeocoding(
-            this.customer.elderAddress.Location!.Latitude,
-            this.customer.elderAddress.Location!.Longitude
-          )
-          .subscribe((reverseData: any) => {
-            if (reverseData.features && reverseData.features.length > 0) {
-              const addressArray =
-                reverseData.features[0].properties.address.split(', ');
-              this.customer.elderAddress.Street = addressArray[0];
-              this.customer.elderAddress.StreetNumber = addressArray[1];
-              this.customer.elderAddress.City = addressArray[2];
-              this.customer.elderAddress.ZipCode = addressArray[3];
-            }
-          });*/
+        this.handleAddress(this.elderAddressString);
+
         // Dismiss the modal and pass addressString
         this.modalController.dismiss();
     }
 
-    convertAddressToCoordinates(address: string) {
+    handleAddress(address: string) {
+        console.log("Getting coordinates for address", address);
+
         this.geocodingService.getAddressLocation(address).subscribe((data: any) => {
+            console.log("Got coordinates", data);
+
             if (data.features && data.features.length > 0) {
                 const coordinates = data.features[0].geometry.coordinates;
                 this.customer.elderAddress.Location!.Latitude = coordinates[1];
                 this.customer.elderAddress.Location!.Longitude = coordinates[0];
-                console.log(this.customer.elderAddress.Location);
+
+                this.geocodingService.getReverseGeocodeLocation(
+                        this.customer.elderAddress.Location!.Latitude,
+                        this.customer.elderAddress.Location!.Longitude
+                    ).subscribe((reverseData: any) => {
+
+                        if (reverseData.features && reverseData.features.length > 0) {
+                            
+                            console.log(reverseData);
+                            
+                            const addressArray = reverseData.features[0];
+
+                            //this.customer.elderAddress.ZipCode = addressArray.context[0].text;
+                            //this.customer.elderAddress.City = addressArray.context[1].text;
+                            //this.customer.elderAddress.StreetNumber = addressArray.address;
+                            //this.customer.elderAddress.Street = addressArray.properties.text;
+
+                            this.cdr.markForCheck();
+                            
+                            console.log(this.customer.elderAddress);
+                        }
+
+                    });
+
             } else {
+
                 this.alertController.create({
                     header: 'Errore',
                     message: 'Indirizzo non valido',
                     buttons: ['OK'],
                 });
+
             }
         });
     }
@@ -174,5 +189,4 @@ export class RegistrationPage implements OnInit {
         });
     }
 
-    ngOnInit() { }
-}
+} 

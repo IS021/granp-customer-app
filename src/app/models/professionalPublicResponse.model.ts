@@ -1,4 +1,5 @@
 import { Gender } from "./Gender";
+import { Profession } from "./Profession";
 
 export interface Professional {
 
@@ -13,7 +14,7 @@ export interface Professional {
 
     description: string;
 
-    profession: string;
+    profession: Profession;
     address: string;
     isVerified: boolean;
     hourlyRate: number;

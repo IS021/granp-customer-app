@@ -27,6 +27,7 @@ import { addIcons } from 'ionicons';
 import { call, home, personCircleOutline, mailOpenOutline, calendarOutline, medicalOutline, locationOutline, walletOutline, checkmarkOutline, closeOutline, checkmarkDoneCircle, alertCircle, maleOutline, femaleOutline, helpOutline } from 'ionicons/icons';
 import { ToastController } from '@ionic/angular';
 import { Gender } from 'src/app/models/Gender';
+import { Profession } from 'src/app/models/Profession';
 
 @Component({
   selector: 'app-professional-details',
@@ -57,21 +58,21 @@ import { Gender } from 'src/app/models/Gender';
 export class ProfessionalDetailsPage implements OnInit {
 
   professionalSelected: Professional={
-    profilePicture: 'https://res.cloudinary.com/teepublic/image/private/s--FIor6wdk--/c_fit,g_north_west,h_840,w_840/co_c62b29,e_outline:40/co_c62b29,e_outline:inner_fill:1/co_ffffff,e_outline:40/co_ffffff,e_outline:inner_fill:1/co_bbbbbb,e_outline:3:1000/c_mpad,g_center,h_1260,w_1260/b_rgb:eeeeee/c_limit,f_jpg,h_630,q_90,w_630/v1608275710/production/designs/17539365_0.jpg',
-    firstName: 'Johnny',
-    lastName: 'Sins',
-    birthDate: '31/12/1978',
-    age: 44,
+    profilePicture: 'https://media.licdn.com/dms/image/D4D03AQGYkhM5dJaOzA/profile-displayphoto-shrink_200_200/0/1701771914667?e=2147483647&v=beta&t=fOKz1A9gbM5KRAgdgXhv8ElwW16R8hJ8buXEXEdIGn0',
+    firstName: 'Alessandro',
+    lastName: 'Perna',
+    birthDate: '03/02/2000',
+    age: 23,
     gender: Gender.Male,
-    email: 'jhonny_tuttofare_sins@granpmail.com',
-    phoneNumber: '6909006990',
+    email: 'pernalex@hotmail.it',
+    phoneNumber: '3342666590',
 
-    description: 'Tutto fare, devoto ai clienti e pronto a soddisfarli al meglio, se mi cercate online troverete registrazioini fatte dai miei clienti soddisfatti del lavoro.',
+    description: "Studente ingegneria fuoricorso, podcaster e appassionato di sushi, psicologia e d'i femmn",
 
-    profession: 'Tutto fare',
-    address: 'Via dei Brazzers, 69, Mellitto, 70124',
+    profession: Profession.Other,
+    address: 'Via delle Vie, 69, Sannicandro, 70028',
     isVerified: true,
-    hourlyRate: 20,
+    hourlyRate: 200,
     longTimeJob: false,
     shortTimeJob: true,
 

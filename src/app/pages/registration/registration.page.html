@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
-    <ion-toolbar>
-        <ion-title>Registrazione</ion-title>
-    </ion-toolbar>
+  <ion-toolbar>
+    <ion-title>Registrazione</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="'true'">
@@ -14,13 +14,14 @@
 
     <div *ngIf="!imageSelected; else showImage;" class="imageContainer">
       <ion-avatar class="bigger-avatar" (click)="takePicture()">
-        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg"/>
+        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
       </ion-avatar>
     </div>
     <ng-template #showImage>
       <div class="imageContainer">
         <ion-button fill="none" (click)="takePicture()">
-          <img [style.border-radius]="'100%'" [style.height]="'10em'" [style.width]="'10em'" [style.object-fit]="'cover'" [src]="customer.profilePicture">
+          <img [style.border-radius]="'100%'" [style.height]="'10em'" [style.width]="'10em'"
+            [style.object-fit]="'cover'" [src]="customer.profilePicture">
         </ion-button>
       </div>
     </ng-template>
@@ -42,9 +43,8 @@
     </ion-item> -->
 
     <ion-item>
-      <ion-input label="Cellulare" [maskito]="phoneMask" [maskitoElement]="maskPredicate"
-        placeholder="+39 xxx xxx xxxx" label-placement="floating" [(ngModel)]="customer.elderPhoneNumber"
-        required></ion-input>
+      <ion-input label="Cellulare" [maskito]="phoneMask" [maskitoElement]="maskPredicate" placeholder="+39 xxx xxx xxxx"
+        label-placement="floating" [(ngModel)]="customer.elderPhoneNumber" required></ion-input>
     </ion-item>
 
     <ion-item id="open-address-settings" [button]="true">
@@ -53,36 +53,36 @@
     </ion-item>
 
     <ion-modal #modal trigger="open-address-settings">
-        <ng-template>
-          <ion-toolbar>
-            <ion-buttons slot="end">
-              <ion-button (click)="modal.dismiss()">Chiudi</ion-button>
-            </ion-buttons>
-            <ion-title [style.align-items]="'center'">Indirizzo</ion-title>
-            <ion-buttons slot="start">
-              <ion-button color="primary" fill="clear" (click)="submitElderAddress()">Salva</ion-button>
-            </ion-buttons>
-          </ion-toolbar>
-          <ion-list>
-            <ion-item>
-              <ion-input label="Via/Viale" label-placement="floating" type="text" [(ngModel)]="customer.elderAddress.Street"
-                required></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input label="Numero civico" label-placement="floating" type="text"
-                [(ngModel)]="customer.elderAddress.StreetNumber" required></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input label="Città" label-placement="floating" type="text" [(ngModel)]="customer.elderAddress.City"
-                required></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input label="CAP" label-placement="floating" [(ngModel)]="customer.elderAddress.ZipCode"
-                required></ion-input>
-            </ion-item>
-          </ion-list>
-        </ng-template>
-      </ion-modal>
+      <ng-template>
+        <ion-toolbar>
+          <ion-buttons slot="end">
+            <ion-button (click)="modal.dismiss()">Chiudi</ion-button>
+          </ion-buttons>
+          <ion-title [style.align-items]="'center'">Indirizzo</ion-title>
+          <ion-buttons slot="start">
+            <ion-button color="primary" fill="clear" (click)="submitElderAddress()">Salva</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+        <ion-list>
+          <ion-item>
+            <ion-input label="Via/Viale" label-placement="floating" type="text" [(ngModel)]="customer.elderAddress.Street"
+              required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Numero civico" label-placement="floating" type="text"
+              [(ngModel)]="customer.elderAddress.StreetNumber" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Città" label-placement="floating" type="text" [(ngModel)]="customer.elderAddress.City"
+              required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="CAP" label-placement="floating" [(ngModel)]="customer.elderAddress.ZipCode"
+              required></ion-input>
+          </ion-item>
+        </ion-list>
+      </ng-template>
+    </ion-modal>
 
     <ion-item id="open-modal">
       <ion-input label="Data di nascita" label-placement="floating" [(ngModel)]="customer.elderBirthDate"
@@ -102,9 +102,10 @@
     </ion-item>
 
     <ion-item>
-        <ion-toggle justify="start" labelPlacement="end" [style.margin-top]="'1rem'" [ngModel]="!customer.isElder" (ngModelChange)="customer.isElder = !$event">
-            Non sono l'assistito
-        </ion-toggle>
+      <ion-toggle justify="start" labelPlacement="end" [style.margin-top]="'1rem'" [ngModel]="!customer.isElder"
+        (ngModelChange)="customer.isElder = !$event">
+        Non sono l'assistito
+      </ion-toggle>
     </ion-item>
 
     <div *ngIf="!customer.isElder">
@@ -124,7 +125,7 @@
         <ion-input label="Cellulare" [maskito]="phoneMask" [maskitoElement]="maskPredicate"
           placeholder="+39 xxx xxx xx xx" label-placement="floating" [(ngModel)]="customer.phoneNumber"
           required></ion-input>
-      </ion-item>     
+      </ion-item>
 
     </div>
     <div class="buttonContainer">
