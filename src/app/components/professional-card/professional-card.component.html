@@ -4,12 +4,12 @@
     <ion-card-header class="header">
       <ion-grid class="container">
         <ion-row>
-          <ion-col size="3" class="container">
+          <ion-col size="2.5" class="container">
             <div class="ion-text-wrap">
               <ion-avatar class="bigger-avatar">
                 <!-- Use ngIf to conditionally show the image or the default avatar -->
                 <ng-container *ngIf="professionalSelected.profilePicture; else showDefaultAvatar">
-                  <img [src]="professionalSelected.profilePicture" alt="User's profile picture" [style.border-radius]="'100%'" [style.max-width]="'100%'"/>
+                  <img [src]="professionalSelected.profilePicture" alt="User's profile picture" [style.border-radius]="'100%'" [style.max-width]="'100%'" [style.object-fit]="'cover'"/>
                   <ion-icon
                 name="checkmark-done-circle"
                 class="ion-true"
@@ -44,7 +44,7 @@
               </ion-avatar>
           </div>
           </ion-col>
-          <ion-col size="9">
+          <ion-col size="9.5">
       <ion-card-title class="title">{{professionalSelected.firstName}} {{professionalSelected.lastName}}</ion-card-title>
       <ion-card-subtitle class="subtitle">{{professionalSelected.profession}}</ion-card-subtitle>
           </ion-col>
