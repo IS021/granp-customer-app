@@ -1,4 +1,5 @@
 import { Address } from "./Address";
+import { Gender } from "./Gender";
 
 
 export class CustomerProfileRequest {
@@ -14,6 +15,7 @@ export class CustomerProfileRequest {
     elderLastName: string;
     elderAddress: Address;
     elderBirthDate: string;
+    elderGender: Gender;
     elderPhoneNumber: string;
     elderDescription: string;
 
@@ -28,6 +30,7 @@ export class CustomerProfileRequest {
         this.elderLastName = '';
         this.elderAddress = new Address();
         this.elderBirthDate = '';
+        this.elderGender = Gender.Other;
         this.elderPhoneNumber = '';
         this.elderDescription = '';
     }
