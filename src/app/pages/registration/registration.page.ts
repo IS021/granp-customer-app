@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+/* import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
@@ -168,4 +168,4 @@ export class RegistrationPage implements OnInit {
   }
 
   ngOnInit() {}
-}
+} */

@@ -1,7 +1,35 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=" " defaultHref="/tabs/chats"></ion-back-button>
+    </ion-buttons>
     <ion-title>
       Ricerca Professionista
     </ion-title>
   </ion-toolbar>
 </ion-header>
+
+<ion-content> 
+  <ion-list [inset]="true">
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col>
+        <ion-label class="title-label">
+          <h2>Professione</h2>
+        </ion-label>
+      </ion-col>
+    </ion-row>
+
+    <ion-item> 
+      <ion-select [multiple]="false" label="Scegli Professione" labelPlacement="floating" [(ngModel)]="professionalSelected.profession" 
+        required> 
+        <ion-select-option value="Medico">Medico</ion-select-option> 
+        <ion-select-option value="Infermiere">Infermiere</ion-select-option> 
+        <ion-select-option value="Fisioterapista">Fisioterapista</ion-select-option>
+        <ion-select-option value="Badante">Badante</ion-select-option>
+        <ion-select-option value="Altro">Altro</ion-select-option> 
+      </ion-select> 
+    </ion-item>
+
+
+  </ion-list>
+</ion-content>
