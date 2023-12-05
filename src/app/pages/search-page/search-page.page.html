@@ -6,23 +6,69 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="light">
   <ion-list [inset]="true">
 
 
-    <ion-item>
-      <div>
-        <ion-select label="Seleziona una professione" placement="floating" [(ngModel)]="desiredProfession" [multiple]="true">
-          <ion-select-option value="Medico">Medico</ion-select-option>
-          <ion-select-option value="Infermiere">Infermiere</ion-select-option>
-          <ion-select-option value="Fisioterapista">Fisioterapista</ion-select-option>
-          <ion-select-option value="Badante">Badante</ion-select-option>
-          <ion-select-option value="Altro">Altro</ion-select-option>
-        </ion-select>
-    </div>
-  </ion-item>
-
+    <ion-item fill="outline" shape="round">
+      <ion-label position="floating">
+        <strong>Professione</strong><br>
+        <ion-text>Sleziona una professione</ion-text>
+      </ion-label>
+      <ion-select [(ngModel)]="desiredProfession">
+        <ion-select-option value="Medico">Medico</ion-select-option>
+        <ion-select-option value="Infermiere">Infermiere</ion-select-option>
+        <ion-select-option value="Fisioterapista">Fisioterapista</ion-select-option>
+        <ion-select-option value="Badante">Badante</ion-select-option>
+        <ion-select-option value="Altro">Altro</ion-select-option>
+      </ion-select>
+    </ion-item>
   </ion-list>
+
+  <ion-list [inset]="true">
+    <ion-item>
+      <ion-label>
+        <strong>Modalità di erogazione</strong>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox justify="space-between" (ionChange)="shortTimeJob">Saltuario</ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox justify="space-between" (ionChange)="longTimeJob">Lungo Termine</ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <ion-list [inset]="true">
+    <ion-item>
+      <ion-label>
+        <strong>Disponibilità</strong>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-datetime display="fixed" [style.width]="'100%'" locale="it-IT" [ngModel]="desiredDate"
+        [style.background-color]="'white'"></ion-datetime>
+    </ion-item>
+  </ion-list>
+
+  <ion-list [inset]="true">
+    <ion-item>
+      <ion-label>
+        <strong>Valutazione minima</strong>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="star-outline"></ion-icon>
+      <ion-icon name="star-outline"></ion-icon>
+      <ion-icon name="star-outline"></ion-icon>
+      <ion-icon name="star-outline"></ion-icon>
+      <ion-icon name="star-outline"></ion-icon>
+    </ion-item>
+  
+  </ion-list>
+
+  <ul class="list-inline rating-list">
+  </ul>
 
 
 </ion-content>

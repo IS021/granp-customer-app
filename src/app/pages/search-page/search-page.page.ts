@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -7,6 +7,9 @@ import { first, from } from 'rxjs';
 import { Profession } from 'src/app/models/Profession';
 import { Availability } from 'src/app/models/Availability';
 import { Gender } from 'src/app/models/Gender';
+
+import { addIcons } from 'ionicons';
+import { starOutline } from 'ionicons/icons';
 
 import {
   IonHeader,
@@ -25,8 +28,13 @@ import {
   IonItem,
   IonSelect,
   IonSelectOption,
-  IonLabel
+  IonLabel,
+  IonText,
+  IonCheckbox,
+  IonDatetime,
+  IonRange
 } from '@ionic/angular/standalone';
+
 
 @Component({
   selector: 'app-serach-page',
@@ -52,21 +60,55 @@ import {
     IonItem,
     IonSelect,
     IonSelectOption,
-    IonLabel
+    IonLabel,
+    IonText,
+    IonCheckbox,
+    IonDatetime,
+    IonRange
   ],
 })
 export class SerachPagePage implements OnInit {
   professionalList: Professional[] = [];
 
   desiredProfession!: Profession;
-  longTermJob!: boolean;
-  shortTermJob!: boolean;
+  longTimeJob: boolean = false;
+  shortTimeJob: boolean = false;
   desiredAvailability!: Availability;
   rate!: number;
   desiredGender!: Gender;
-  desiredAge!: number;
+  desiredAge!: number; 
+  desiredDate!: string; 
 
-  constructor() {}
+  stars: number[] = [1, 2, 3, 4, 5];
+  desiredRating: number = 0;
+  isMouseOver : boolean = true;
+
+  public data: any;
+
+  countStar(star: number) {
+    this.isMouseOver = false;
+    this.desiredRating = star;
+    this.data = this.desiredRating;
+    console.log('star rating is: ', this.data);
+  }
+
+  addClass(star: number) {
+    if (this.isMouseOver) {
+      this.desiredRating = star;
+      console.log('star rating is: ', this.desiredRating);
+    }
+  }
+
+  removeClass() {
+    if (this.isMouseOver) {
+      this.desiredRating = 0;
+      console.log('star rating is: ', this.desiredRating);
+    }
+  }
+
+  constructor() {
+    addIcons ({starOutline});
+  }
 
   ngOnInit() {}
 }
