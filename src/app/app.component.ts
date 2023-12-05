@@ -37,17 +37,15 @@ export class AppComponent {
         // If not logged in redirect to login page
         this.loggedIn$.subscribe((loggedIn) => {
             if (!loggedIn) {
-                /* this.router.navigate(['/login']); */
+                this.router.navigate(['/login']);
             } else {
                 this.profileService.isComplete().then((isComplete) => {
-                    /*if (!isComplete) {
+                    if (!isComplete) {
                         this.router.navigate(['/registration']);
                     } else {
                         this.router.navigate(['/tabs']);
                         this.chatService.connect();
-                    }*/
-                    this.router.navigate(['/tabs']);
-                    this.chatService.connect();
+                    }
                 });
             }
         });
