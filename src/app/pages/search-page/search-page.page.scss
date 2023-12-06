@@ -8,5 +8,57 @@ ion-checkbox::part(container) {
     border: 2px solid var(--ion-color-primary);
   }
 
-   
+.ion-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.rating-list {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-grow: 4;
+  padding: 0px 1.5rem 0px 1rem;
+}
+
+/* .md .rating-list {
+  display: inline-block;
+  list-style: none;
+  padding: 0px 1.5rem 0px 1rem;
+  flex-direction: column;
+  align-items: center;
+} */
+
+.rating-list li {
+  font-size: 20px;
+  color: var(--ion-color-primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+}
+
+.rating-list li:hover {
+  color: yellow;
+}
+
+.rating-list li:hover ~ li {
+  color: yellow;
+}
+
+.rating-list li.selected {
+  color: yellow;
+}
+  
+
+ion-modal {
+  --width: fit-content;
+  --min-width: 300px;
+  --height: fit-content;
+  --border-radius: 6px;
+  --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+}
 
