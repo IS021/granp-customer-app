@@ -1,45 +1,40 @@
-.bigger-avatar {
-    width: 150px; /* Adjust the width as needed */
-    height: 150px; /* Adjust the height as needed */
-  }
-  
-  .ion-text-wrap {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .title-label h2 {
-      font-size: 1.5em; /* Adjust the font size as needed */
-    }
-  
-    .description-item.with-margin {
-      margin-bottom: 10px; /* Adjust the margin as needed */
-    }
+.ion-text-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-    .scroll-text {
-      text-overflow: ellipsis; /* Display an ellipsis (...) when text overflows */
-      overflow-x: scroll; /* Enable horizontal scrolling */
-      white-space: nowrap; /* Prevent text from wrapping */
-      scrollbar-width: thin; /* Specify a thin scrollbar on supporting browsers (Firefox) */
-      scrollbar-color: transparent transparent; /* Set the scrollbar color to transparent */
-  }
+.title-label h2 {
+  font-size: 1.5em; /* Adjust the font size as needed */
+}
 
-    .ion-true {
-      position: absolute;
-      top: 90%;
-      left: 80%;
-      transform: translate(-50%, -50%);
-      font-size: 30px;
-      color: #d280ff;
-    }
+.description-item.with-margin {
+  margin-bottom: 10px; /* Adjust the margin as needed */
+}
 
-    .ion-false {
-      position: absolute;
-      top: 90%;
-      left: 80%;
-      transform: translate(-50%, -50%);
-      font-size: 30px;
-      color: red;
-    }
+.scroll-text {
+  text-overflow: ellipsis; /* Display an ellipsis (...) when text overflows */
+  overflow-x: scroll; /* Enable horizontal scrolling */
+  white-space: nowrap; /* Prevent text from wrapping */
+  scrollbar-width: thin; /* Specify a thin scrollbar on supporting browsers (Firefox) */
+  scrollbar-color: transparent transparent; /* Set the scrollbar color to transparent */
+}
+
+.ion-true {
+  position: absolute;
+  top: 90%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+  color: #d280ff;
+}
+
+.ion-false {
+  position: absolute;
+  top: 90%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+  color: red;
+}
