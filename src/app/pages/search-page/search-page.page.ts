@@ -2,15 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-<<<<<<< HEAD
 import { Gender, Profession, Availability, ProfessionalPublicResponse } from 'granp-lib';
-=======
-import { Professional } from 'src/app/models/professionalPublicResponse.model';
-import { first, from } from 'rxjs';
-import { Profession } from 'src/app/models/Profession';
-import { Availability } from 'src/app/models/Availability';
-import { Gender } from 'src/app/models/Gender';
->>>>>>> 6950c7b1c71a39cf12568b3c49cca70029612898
 
 import { addIcons } from 'ionicons';
 import { star } from 'ionicons/icons';
