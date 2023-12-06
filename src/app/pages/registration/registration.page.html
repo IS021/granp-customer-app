@@ -12,19 +12,8 @@
 
   <ion-list [inset]="true">
 
-    <div *ngIf="!imageSelected; else showImage;" class="imageContainer">
-      <ion-avatar class="bigger-avatar" (click)="takePicture()">
-        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-      </ion-avatar>
-    </div>
-    <ng-template #showImage>
-      <div class="imageContainer">
-        <ion-button fill="none" (click)="takePicture()">
-          <img [style.border-radius]="'100%'" [style.height]="'10em'" [style.width]="'10em'"
-            [style.object-fit]="'cover'" [src]="customer.profilePicture">
-        </ion-button>
-      </div>
-    </ng-template>
+    <!--Take Photo-->
+    <gp-image-selector (profilePicture)="customer.profilePicture = $event"></gp-image-selector>
 
     <h2 [style.text-align]="'center'" [style.font-weight]="'bold'">Inserisci i dati dell'assistito</h2>
 
@@ -47,54 +36,11 @@
         label-placement="floating" [(ngModel)]="customer.elderPhoneNumber" required></ion-input>
     </ion-item>
 
-    <ion-item id="open-address-settings" [button]="true">
-      <ion-input label="Indirizzo" label-placement="floating" type="text" [ngModel]="elderAddressString"
-        required></ion-input>
-    </ion-item>
+    <!--Select Address-->
+    <gp-address-selector [(address)]="customer.elderAddress"></gp-address-selector>
 
-    <ion-modal #modal trigger="open-address-settings">
-      <ng-template>
-        <ion-toolbar>
-          <ion-buttons slot="end">
-            <ion-button (click)="modal.dismiss()">Chiudi</ion-button>
-          </ion-buttons>
-          <ion-title [style.align-items]="'center'">Indirizzo</ion-title>
-          <ion-buttons slot="start">
-            <ion-button color="primary" fill="clear" (click)="submitElderAddress()">Salva</ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-        <ion-list>
-          <ion-item>
-            <ion-input label="Via/Viale" label-placement="floating" type="text" [(ngModel)]="customer.elderAddress.Street"
-              required></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input label="Numero civico" label-placement="floating" type="text"
-              [(ngModel)]="customer.elderAddress.StreetNumber" required></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input label="Città" label-placement="floating" type="text" [(ngModel)]="customer.elderAddress.City"
-              required></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input label="CAP" label-placement="floating" [(ngModel)]="customer.elderAddress.ZipCode"
-              required></ion-input>
-          </ion-item>
-        </ion-list>
-      </ng-template>
-    </ion-modal>
-
-    <ion-item id="open-modal">
-      <ion-input label="Data di nascita" label-placement="floating" [(ngModel)]="customer.elderBirthDate"
-        required></ion-input>
-    </ion-item>
-
-    <ion-modal trigger="open-modal">
-      <ng-template>
-        <ion-datetime locale="it-IT" [presentation]="'date'" (ionChange)="setElderBirthdate($event)"
-          showDefaultButtons="true" (ionCancel)="showPicker=false;"></ion-datetime>
-      </ng-template>
-    </ion-modal>
+    <!--Select Birthdate-->
+    <gp-birthdate-selector [(birthdate)]="customer.elderBirthDate"></gp-birthdate-selector>
 
     <ion-item>
       <ion-textarea label="Descrizione" label-placement="floating" placeholder="Inserisci necessità particolari"

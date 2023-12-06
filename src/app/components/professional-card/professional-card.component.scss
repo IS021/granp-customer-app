@@ -50,24 +50,6 @@ ion-grid {
   text-overflow: ellipsis;
 }
 
-.ion-true {
-  position: absolute;
-  top: 85%;
-  left: 85%;
-  transform: translate(-50%, -50%);
-  font-size: 20px;
-  color: #d280ff;
-}
-
-.ion-false {
-  position: absolute;
-  top: 85%;
-  left: 85%;
-  transform: translate(-50%, -50%);
-  font-size: 20px;
-  color: red;
-}
-
 .container {
   padding-left: 0;
   padding-right: 0;

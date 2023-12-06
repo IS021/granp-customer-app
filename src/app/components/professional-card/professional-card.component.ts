@@ -12,9 +12,8 @@ import {
   IonCol
   } 
 from '@ionic/angular/standalone'
-import { Gender } from 'src/app/models/Gender';
-import { Profession } from 'src/app/models/Profession';
-import { Professional } from 'src/app/models/professionalPublicResponse.model';
+
+import { Gender, Profession, ProfessionalPublicResponse } from 'granp-lib';
 
 import { AvatarComponent } from 'granp-lib';
 
@@ -38,7 +37,7 @@ import { AvatarComponent } from 'granp-lib';
 })
 export class ProfessionalCardComponent  implements OnInit {
 
-  professionalSelected: Professional={
+  professionalSelected: ProfessionalPublicResponse = {
     profilePicture: 'https://m.media-amazon.com/images/M/MV5BOTBhMTI1NDQtYmU4Mi00MjYyLTk5MjEtZjllMDkxOWY3ZGRhXkEyXkFqcGdeQXVyNzI1NzMxNzM@._V1_FMjpg_UX1000_.jpg',
     firstName: 'Alessandro',
     lastName: 'Perna',

@@ -1,12 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
-import { Professional } from 'src/app/models/professionalPublicResponse.model';
-import { first, from } from 'rxjs';
-import { Profession } from 'src/app/models/Profession';
-import { Availability } from 'src/app/models/Availability';
-import { Gender } from 'src/app/models/Gender';
+
+import { Gender, Profession, Availability, ProfessionalPublicResponse } from 'granp-lib';
 
 import { addIcons } from 'ionicons';
 import { starOutline } from 'ionicons/icons';
@@ -34,7 +30,6 @@ import {
   IonDatetime,
   IonRange
 } from '@ionic/angular/standalone';
-
 
 @Component({
   selector: 'app-serach-page',
@@ -68,7 +63,7 @@ import {
   ],
 })
 export class SerachPagePage implements OnInit {
-  professionalList: Professional[] = [];
+  professionalList: ProfessionalPublicResponse[] = [];
 
   desiredProfession!: Profession;
   longTimeJob: boolean = false;
