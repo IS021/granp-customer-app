@@ -2,10 +2,18 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+<<<<<<< HEAD
 import { Gender, Profession, Availability, ProfessionalPublicResponse } from 'granp-lib';
+=======
+import { Professional } from 'src/app/models/professionalPublicResponse.model';
+import { first, from } from 'rxjs';
+import { Profession } from 'src/app/models/Profession';
+import { Availability } from 'src/app/models/Availability';
+import { Gender } from 'src/app/models/Gender';
+>>>>>>> 6950c7b1c71a39cf12568b3c49cca70029612898
 
 import { addIcons } from 'ionicons';
-import { starOutline } from 'ionicons/icons';
+import { star } from 'ionicons/icons';
 
 import {
   IonHeader,
@@ -28,7 +36,9 @@ import {
   IonText,
   IonCheckbox,
   IonDatetime,
-  IonRange
+  IonRange,
+  IonModal,
+  IonDatetimeButton,
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -59,7 +69,9 @@ import {
     IonText,
     IonCheckbox,
     IonDatetime,
-    IonRange
+    IonRange,
+    IonDatetimeButton,
+    IonModal
   ],
 })
 export class SerachPagePage implements OnInit {
@@ -71,9 +83,23 @@ export class SerachPagePage implements OnInit {
   desiredAvailability!: Availability;
   rate!: number;
   desiredGender!: Gender;
-  desiredAge!: number; 
   desiredDate!: string; 
 
+  startHour!: string;
+  endHour!: string;
+
+  desiredAge = {lower: 21, upper: 65}  // [minAge, maxAge]
+
+  updateRange(event: any) {
+    if (event.detail.value.lower < 21) {
+      this.desiredAge.lower = 21;
+    }
+    if (event.detail.value.upper > 65) {
+      this.desiredAge.upper = 65;
+    }
+  }
+
+  /* Rating information */
   stars: number[] = [1, 2, 3, 4, 5];
   desiredRating: number = 0;
   isMouseOver : boolean = true;
@@ -90,20 +116,27 @@ export class SerachPagePage implements OnInit {
   addClass(star: number) {
     if (this.isMouseOver) {
       this.desiredRating = star;
-      console.log('star rating is: ', this.desiredRating);
     }
   }
 
   removeClass() {
     if (this.isMouseOver) {
       this.desiredRating = 0;
-      console.log('star rating is: ', this.desiredRating);
     }
   }
 
-  constructor() {
-    addIcons ({starOutline});
+  setStartHour(event: any) {
+    this.startHour = event.detail.value;
   }
+
+  setEndHour(event: any) {
+    this.endHour = event.detail.value;
+  }
+
+  constructor() {
+    addIcons ({star});
+  }
+
 
   ngOnInit() {}
 }
