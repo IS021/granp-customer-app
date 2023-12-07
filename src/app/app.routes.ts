@@ -25,8 +25,11 @@ export const routes: Routes = [
         path: 'modify-profile',
         loadComponent: () => import('./pages/modify-profile/modify-profile.page').then(m => m.ModifyProfilePage)
     },
+<<<<<<< HEAD
 
 
 
 
+=======
+>>>>>>> f98566f452ccaa8545542070f5f4806b640b2c92
 ];
