@@ -52,7 +52,7 @@ export class ProfessionalCardComponent  implements OnInit {
     email: 'jhonny_tuttofare_sins@granpmail.com',
     phoneNumber: '6909006990',
 
-    description: "Studente ingegneria fuoricorso, podcaster e appassionato di sushi, psicologia e d'i femmn",
+    description: "Studente ingegneria fuoricorso, podcaster e appassionato di sushi, psicologia e d'i femmn.",
 
     profession: Profession.Other,
     address: 'Via dei Brazzers, 69, Mellitto, 70124',

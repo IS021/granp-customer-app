@@ -24,7 +24,11 @@ export const routes: Routes = [
   {
     path: 'modify-profile',
     loadComponent: () => import('./pages/modify-profile/modify-profile.page').then( m => m.ModifyProfilePage)
+  },  {
+    path: 'info-reservation',
+    loadComponent: () => import('./pages/info-reservation/info-reservation.page').then( m => m.InfoReservationPage)
   },
+
 
 
 

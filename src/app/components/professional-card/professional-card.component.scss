@@ -17,6 +17,10 @@
 
 .title{
   padding-left: 10px;
+  /* Remove white-space: nowrap; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%; /* Set a maximum width to allow the title to adapt */
 }
 
 .subtitle{
@@ -37,15 +41,14 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  -webkit-line-clamp: 3; /* Numero di righe massime */
-  line-clamp: 3;
+  -webkit-line-clamp: 1; /* Numero di righe massime */
+  line-clamp: 1;
   text-overflow: ellipsis;
 }
 
 .bigger-avatar {
-  width: 100%;
-  height: auto;
-  max-width: 100%;
+  width: 79.5px;
+  height: 79.5px;
   border-radius: 50%;
   padding-left: 0;
   padding-right: 0;
@@ -53,8 +56,8 @@
 
 .ion-true {
   position: absolute;
-  top: 85%;
-  left: 85%;
+  top: 87%;
+  left: 87%;
   transform: translate(-50%, -50%);
   font-size: 20px;
   color: #d280ff;
@@ -62,8 +65,8 @@
 
 .ion-false {
   position: absolute;
-  top: 85%;
-  left: 85%;
+  top: 87%;
+  left: 87%;
   transform: translate(-50%, -50%);
   font-size: 20px;
   color: red;
