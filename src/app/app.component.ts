@@ -1,5 +1,5 @@
 import { Component, OnInit, NgZone, inject } from '@angular/core';
-import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+import { IonApp, IonContent, IonRouterOutlet, IonSpinner } from '@ionic/angular/standalone';
 import { AuthService } from '@auth0/auth0-angular';
 import { mergeMap } from 'rxjs/operators';
 import { Browser } from '@capacitor/browser';
@@ -16,8 +16,9 @@ import { ChatService, ProfileService } from 'granp-lib';
 @Component({
     selector: 'app-root',
     templateUrl: 'app.component.html',
+    styleUrls: ['app.component.scss'],
     standalone: true,
-    imports: [IonApp, IonRouterOutlet, NgIf, AsyncPipe],
+    imports: [IonApp, IonRouterOutlet, IonContent, IonSpinner, NgIf, AsyncPipe],
 })
 export class AppComponent {
     auth = inject(AuthService);
@@ -30,26 +31,27 @@ export class AppComponent {
 
     // handle this manually as the loader should be displayed immediately once the app
     // is opened via the auth0 redirect uri
-    isAuth0Loading$ = new BehaviorSubject<boolean>(false);
+    isLoading$ = new BehaviorSubject<boolean>(false);
 
     ngOnInit(): void {
 
         // If not logged in redirect to login page
         this.loggedIn$.subscribe((loggedIn) => {
-            if (!loggedIn) {
-                /* this.router.navigate(['/login']); */
+            /*if (!loggedIn) {
+                this.router.navigate(['/login']);
             } else {
+                this.isLoading$.next(true);
                 this.profileService.isComplete().then((isComplete) => {
-                    /*if (!isComplete) {
+                    if (!isComplete) {
                         this.router.navigate(['/registration']);
+                        this.isLoading$.next(false);
                     } else {
                         this.router.navigate(['/tabs']);
                         this.chatService.connect();
-                    }*/
-                    this.router.navigate(['/tabs']);
-                    this.chatService.connect();
+                        this.isLoading$.next(false);
+                    }
                 });
-            }
+            }*/
         });
 
         // Use Capacitor's App plugin to subscribe to the `appUrlOpen` event
@@ -58,7 +60,7 @@ export class AppComponent {
             // https://capacitorjs.com/docs/guides/angular
             this.ngZone.run(() => {
                 if (url?.startsWith(environment.auth0.authorizationParams.redirect_uri)) {
-                    this.isAuth0Loading$.next(true);
+                    this.isLoading$.next(true);
                     // If the URL is an authentication callback URL.
                     if (
                         url.includes('state=') &&
@@ -86,7 +88,7 @@ export class AppComponent {
                                     // Check if the user registration is complete
                                     // If not redirect to registration page
                                     // this.router.navigate(['/tabs']);
-                                    this.isAuth0Loading$.next(false);
+                                    this.isLoading$.next(false);
                                 })
                             });
                     } else {
@@ -99,10 +101,10 @@ export class AppComponent {
                         }
                         // redirect to home when logging out
                         this.router.navigate(['/login']);                                    // TODO
-                        this.isAuth0Loading$.next(false);
+                        this.isLoading$.next(false);
                     }
                 } else {
-                    this.isAuth0Loading$.next(false);
+                    this.isLoading$.next(false);
                 }
             });
         });

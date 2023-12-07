@@ -1,76 +1,134 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
+import { Gender, Profession, Availability, ProfessionalPublicResponse } from 'granp-lib';
+
+import { addIcons } from 'ionicons';
+import { star } from 'ionicons/icons';
+
 import {
-  IonItem,
   IonHeader,
   IonToolbar,
-  IonButtons,
-  IonBackButton,
   IonTitle,
-  IonRow,
-  IonCol,
-  IonLabel,
+  IonFooter,
+  IonTextarea,
+  IonButtons,
+  IonButton,
+  IonIcon,
   IonContent,
+  IonTabs,
+  IonTabBar,
+  IonTabButton,
   IonList,
+  IonItem,
   IonSelect,
-  IonSelectOption
-  } 
-from '@ionic/angular/standalone'
-import { Gender } from 'src/app/models/Gender';
-import { Professional } from 'src/app/models/professionalPublicResponse.model';
-import { Profession } from 'src/app/models/Profession';
-
+  IonSelectOption,
+  IonLabel,
+  IonText,
+  IonCheckbox,
+  IonDatetime,
+  IonRange,
+  IonModal,
+  IonDatetimeButton,
+} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-serach-page',
   templateUrl: './search-page.page.html',
   styleUrls: ['./search-page.page.scss'],
   standalone: true,
-  imports: [ 
-    CommonModule, 
+  imports: [
+    CommonModule,
     FormsModule,
-    IonItem,
     IonHeader,
     IonToolbar,
-    IonButtons,
-    IonBackButton,
     IonTitle,
-    IonRow,
-    IonCol,
-    IonLabel,
+    IonFooter,
+    IonTextarea,
+    IonButtons,
+    IonButton,
+    IonIcon,
     IonContent,
+    IonTabs,
+    IonTabBar, 
+    IonTabButton,
     IonList,
+    IonItem,
     IonSelect,
-    IonSelectOption
-  ]
+    IonSelectOption,
+    IonLabel,
+    IonText,
+    IonCheckbox,
+    IonDatetime,
+    IonRange,
+    IonDatetimeButton,
+    IonModal
+  ],
 })
 export class SerachPagePage implements OnInit {
+  professionalList: ProfessionalPublicResponse[] = [];
 
-  professionalSelected: Professional={
-    profilePicture: 'https://res.cloudinary.com/teepublic/image/private/s--FIor6wdk--/c_fit,g_north_west,h_840,w_840/co_c62b29,e_outline:40/co_c62b29,e_outline:inner_fill:1/co_ffffff,e_outline:40/co_ffffff,e_outline:inner_fill:1/co_bbbbbb,e_outline:3:1000/c_mpad,g_center,h_1260,w_1260/b_rgb:eeeeee/c_limit,f_jpg,h_630,q_90,w_630/v1608275710/production/designs/17539365_0.jpg',
-    firstName: 'Johnny',
-    lastName: 'Sins',
-    birthDate: '31/12/1978',
-    age: 44,
-    gender: Gender.Male,
-    email: 'jhonny_tuttofare_sins@granpmail.com',
-    phoneNumber: '6909006990',
+  desiredProfession!: Profession;
+  longTimeJob: boolean = false;
+  shortTimeJob: boolean = false;
+  desiredAvailability!: Availability;
+  rate!: number;
+  desiredGender!: Gender;
+  desiredDate!: string; 
 
-    description: 'Tutto fare, devoto ai clienti e pronto a soddisfarli al meglio, se mi cercate online troverete registrazioini fatte dai miei clienti soddisfatti del lavoro.',
+  startHour!: string;
+  endHour!: string;
 
-    profession: Profession.Nurse,
-    address: 'Via dei Brazzers, 69, Mellitto, 70124',
-    isVerified: true,
-    hourlyRate: 20,
-    longTimeJob: false,
-    shortTimeJob: true,
+  desiredAge = {lower: 21, upper: 65}  // [minAge, maxAge]
 
-  };
-
-  constructor() { }
-
-  ngOnInit() {
+  updateRange(event: any) {
+    if (event.detail.value.lower < 21) {
+      this.desiredAge.lower = 21;
+    }
+    if (event.detail.value.upper > 65) {
+      this.desiredAge.upper = 65;
+    }
   }
 
+  /* Rating information */
+  stars: number[] = [1, 2, 3, 4, 5];
+  desiredRating: number = 0;
+  isMouseOver : boolean = true;
+
+  public data: any;
+
+  countStar(star: number) {
+    this.isMouseOver = false;
+    this.desiredRating = star;
+    this.data = this.desiredRating;
+    console.log('star rating is: ', this.data);
+  }
+
+  addClass(star: number) {
+    if (this.isMouseOver) {
+      this.desiredRating = star;
+    }
+  }
+
+  removeClass() {
+    if (this.isMouseOver) {
+      this.desiredRating = 0;
+    }
+  }
+
+  setStartHour(event: any) {
+    this.startHour = event.detail.value;
+  }
+
+  setEndHour(event: any) {
+    this.endHour = event.detail.value;
+  }
+
+  constructor() {
+    addIcons ({star});
+  }
+
+
+  ngOnInit() {}
 }

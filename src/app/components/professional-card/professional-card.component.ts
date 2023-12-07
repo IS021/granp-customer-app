@@ -1,25 +1,21 @@
 import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { checkmarkDoneCircle, alertCircle } from 'ionicons/icons';
 import {
   IonCard,
   IonCardHeader,
   IonCardTitle,
   IonCardSubtitle,
   IonCardContent,
-  IonAvatar,
   IonItem,
   IonRow,
   IonGrid,
-  IonCol,
-  IonIcon
+  IonCol
   } 
 from '@ionic/angular/standalone'
-import { Gender } from 'src/app/models/Gender';
-import { Profession } from 'src/app/models/Profession';
-import { Professional } from 'src/app/models/professionalPublicResponse.model';
-import { addIcons } from 'ionicons';
-import { ToastController } from '@ionic/angular';
+
+import { Gender, Profession, ProfessionalPublicResponse } from 'granp-lib';
+
+import { AvatarComponent } from 'granp-lib';
 
 @Component({
   selector: 'app-professional-card',
@@ -31,18 +27,17 @@ import { ToastController } from '@ionic/angular';
     IonCardTitle,
     IonCardSubtitle,
     IonCardContent,
-    IonAvatar,
     IonItem,
     NgIf,
     IonRow,
     IonGrid,
     IonCol,
-    IonIcon
+    AvatarComponent
   ]
 })
 export class ProfessionalCardComponent  implements OnInit {
 
-  professionalSelected: Professional={
+  professionalSelected: ProfessionalPublicResponse = {
     profilePicture: 'https://m.media-amazon.com/images/M/MV5BOTBhMTI1NDQtYmU4Mi00MjYyLTk5MjEtZjllMDkxOWY3ZGRhXkEyXkFqcGdeQXVyNzI1NzMxNzM@._V1_FMjpg_UX1000_.jpg',
     firstName: 'Alessandro',
     lastName: 'Perna',
@@ -63,28 +58,6 @@ export class ProfessionalCardComponent  implements OnInit {
 
   };
   
-  constructor(private toastController: ToastController) { 
-    addIcons({ checkmarkDoneCircle, alertCircle })
-  }
-
-  async presentToast(message: string) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 2000,
-      position: 'bottom',
-    });
-    toast.present();
-  }
-
-  async presentToastFalse(message: string) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 2000,
-      position: 'bottom',
-    });
-    toast.present();
-  }
-
   ngOnInit() {}
 
 }

@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Professional } from 'src/app/models/professionalPublicResponse.model';
 import {
   IonItem,
   IonLabel,
   IonList,
-  IonAvatar,
   IonContent,
   IonText,
   IonRow, 
   IonCol,
-  IonIcon,
   IonHeader,
   IonToolbar,
   IonBackButton,
@@ -19,15 +16,16 @@ import {
   IonTitle,
   IonGrid,
   IonButton,
-  IonToast
+  IonIcon
   } 
 from '@ionic/angular/standalone'
 
 import { addIcons } from 'ionicons';
 import { call, home, personCircleOutline, mailOpenOutline, calendarOutline, medicalOutline, locationOutline, walletOutline, checkmarkOutline, closeOutline, checkmarkDoneCircle, alertCircle, maleOutline, femaleOutline, helpOutline } from 'ionicons/icons';
-import { ToastController } from '@ionic/angular';
-import { Gender } from 'src/app/models/Gender';
-import { Profession } from 'src/app/models/Profession';
+
+import { Gender, Profession, ProfessionalPublicResponse } from 'granp-lib';
+
+import { AvatarComponent } from 'granp-lib';
 
 @Component({
   selector: 'app-professional-details',
@@ -39,12 +37,10 @@ import { Profession } from 'src/app/models/Profession';
     IonItem, 
     IonLabel, 
     IonList, 
-    IonAvatar, 
     IonContent, 
     IonText, 
     IonRow, 
     IonCol, 
-    IonIcon,
     IonHeader,
     IonToolbar,
     IonBackButton,
@@ -52,13 +48,14 @@ import { Profession } from 'src/app/models/Profession';
     IonTitle,
     IonGrid,
     IonButton,
-    IonToast
+    IonIcon,
+    AvatarComponent
   ]
 })
 export class ProfessionalDetailsPage implements OnInit {
 
-  professionalSelected: Professional={
-    profilePicture: 'https://m.media-amazon.com/images/M/MV5BOTBhMTI1NDQtYmU4Mi00MjYyLTk5MjEtZjllMDkxOWY3ZGRhXkEyXkFqcGdeQXVyNzI1NzMxNzM@._V1_FMjpg_UX1000_.jpg',
+  professionalSelected: ProfessionalPublicResponse = {
+    profilePicture: 'https://www.facebook.com/FRASIACASOSUFOTOACASO/?locale=it_IT',
     firstName: 'Alessandro',
     lastName: 'Perna',
     birthDate: '03/02/2000',
@@ -78,26 +75,8 @@ export class ProfessionalDetailsPage implements OnInit {
 
   };
 
-  constructor(private toastController: ToastController) {
+  constructor() {
     addIcons({ call, home, personCircleOutline, mailOpenOutline, calendarOutline, medicalOutline, locationOutline, walletOutline, checkmarkOutline, closeOutline, checkmarkDoneCircle, alertCircle,  maleOutline, femaleOutline, helpOutline });
-  }
-
-  async presentToast(message: string) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 2000,
-      position: 'bottom',
-    });
-    toast.present();
-  }
-
-  async presentToastFalse(message: string) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 2000,
-      position: 'bottom',
-    });
-    toast.present();
   }
 
   checkGender(): string {

@@ -1,6 +1,9 @@
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
-  <ng-container *ngIf="isAuth0Loading$ | async">
-    <!--Loading Page-->
+  <ng-container *ngIf="isLoading$ | async">
+    <!--Loading Page with ion spinner-->
+    <ion-content [fullscreen]="true" [scrollX]="false" [scrollY]="false">
+        <ion-spinner class="center-spinner"></ion-spinner>
+    </ion-content>
   </ng-container>
 </ion-app>
