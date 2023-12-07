@@ -55,7 +55,7 @@ import { AvatarComponent } from 'granp-lib';
 export class ProfessionalDetailsPage implements OnInit {
 
   professionalSelected: ProfessionalPublicResponse = {
-    profilePicture: 'https://www.facebook.com/FRASIACASOSUFOTOACASO/?locale=it_IT',
+    profilePicture: '',
     firstName: 'Alessandro',
     lastName: 'Perna',
     birthDate: '03/02/2000',
