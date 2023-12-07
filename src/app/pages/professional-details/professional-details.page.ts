@@ -58,7 +58,7 @@ import { Profession } from 'src/app/models/Profession';
 export class ProfessionalDetailsPage implements OnInit {
 
   professionalSelected: Professional={
-    profilePicture: 'https://media.licdn.com/dms/image/D4D03AQGYkhM5dJaOzA/profile-displayphoto-shrink_200_200/0/1701771914667?e=2147483647&v=beta&t=fOKz1A9gbM5KRAgdgXhv8ElwW16R8hJ8buXEXEdIGn0',
+    profilePicture: 'https://m.media-amazon.com/images/M/MV5BOTBhMTI1NDQtYmU4Mi00MjYyLTk5MjEtZjllMDkxOWY3ZGRhXkEyXkFqcGdeQXVyNzI1NzMxNzM@._V1_FMjpg_UX1000_.jpg',
     firstName: 'Alessandro',
     lastName: 'Perna',
     birthDate: '03/02/2000',
