@@ -14,8 +14,7 @@ import {
   IonTitle, 
   IonToolbar, 
 } from '@ionic/angular/standalone';
-import { Reservation } from 'src/app/models/Reservation';
-import { Profession } from 'src/app/models/Profession';
+import { ReservationResponse, ProfessionalPublicResponse, Gender, Profession, CustomerPublicResponse, ReservationStatus } from 'granp-lib'
 
 @Component({
   selector: 'app-info-reservation',
@@ -40,15 +39,44 @@ import { Profession } from 'src/app/models/Profession';
 
 export class InfoReservationPage implements OnInit {
 
-  reservationSelected: Reservation={
-    firstName: 'Alessandro',
-    lastName: 'Perna',
-    profession: Profession.Physiotherapist,
-
-    isAtHome: true,
+  reservationResponse: ReservationResponse={
+    id: 'SignorPiomaggio',
+    professional: {
+      profilePicture: 'lollo',
+      firstName: 'Antonio',
+      lastName: 'Piomaggio',
+      birthDate: '01/01/0001',
+      age: 64,
+      gender: Gender.Other,
+      email: 'piomaggiotuttoattaccato@piomaggio.com',
+      phoneNumber: '3334445566',
+      description: 'Mi piacciono i droni',
+      profession: Profession.Other,
+      address: 'Via dei Droni, 3',
+      isVerified: true,
+      hourlyRate: 22,
+      longTimeJob: false,
+      shortTimeJob: true
+    },
+    customer: {
+      profilePicture: 'd',
+      elderFirstName: 'c',
+      elderLastName: 'df',
+      elderAddress: 'd',
+      elderBirthDate: 'sd',
+      elderAge: 23,
+      elderGender: Gender.Other,
+      elderTelephoneNumber: 'dv',
+      elderDescription: 'sd',
+      firstName: 'sdc',
+      lastName: 'sd',
+      phoneNumber: 'wd',
+      isElder: true 
+    },
     date: '07/12/2023',
-    startHour: '8:30',
-    endHour: '9:00'
+    start: '18:08',
+    end: '18:38',
+    status: ReservationStatus.Accepted
   }
 
   constructor() { }
