@@ -12,6 +12,11 @@ export const routes: Routes = [
                     import('granp-lib').then((m) => m.ChatListPage),
             },
             {
+                path: 'search',
+                loadComponent: () =>
+                    import('../search-page/search.page').then((m) => m.SearchPage),
+            },
+            {
                 path: 'tab2',
                 loadComponent: () =>
                     import('../tab2/tab2.page').then((m) => m.Tab2Page),
@@ -23,7 +28,7 @@ export const routes: Routes = [
             },
             {
                 path: '',
-                redirectTo: '/tabs/tab2',
+                redirectTo: '/tabs/search',
                 pathMatch: 'full',
             },
         ],
