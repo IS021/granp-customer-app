@@ -1,0 +1,83 @@
+ion-checkbox {
+  --size: 32px;
+  --checkbox-background-checked: var(--ion-color-primary);
+}
+
+ion-checkbox::part(container) {
+  border-radius: 6px;
+  border: 2px solid var(--ion-color-primary);
+}
+
+.ion-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.rating-list {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-grow: 4;
+  padding: 0px 1.5rem 0px 1rem;
+}
+
+/* .md .rating-list {
+  display: inline-block;
+  list-style: none;
+  padding: 0px 1.5rem 0px 1rem;
+  flex-direction: column;
+  align-items: center;
+} */
+
+.rating-list li {
+  font-size: 20px;
+  color: var(--ion-color-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+}
+
+.rating-list li:hover {
+  color: var(--ion-color-warning);
+}
+
+.rating-list li:hover ~ li {
+  color: var(--ion-color-warning);
+}
+
+.rating-list li.selected {
+  color: var(--ion-color-warning);
+}
+
+ion-modal {
+  --width: fit-content;
+  --min-width: 300px;
+  --height: fit-content;
+  --border-radius: 6px;
+  --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+}
+
+ion-item {
+  --padding-bottom: 8px;
+}
+
+ion-range::part(pin) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--ion-color-primary);
+
+  border-radius: 50%;
+  transform: scale(1.01);
+
+  top: -1em;
+
+  min-width: 28px;
+  height: 28px;
+  transition: transform 120ms ease, background 120ms ease;
+}

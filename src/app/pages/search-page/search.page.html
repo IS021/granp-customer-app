@@ -1,0 +1,118 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            Ricerca Professionista
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+    <ion-list [inset]="true">
+
+
+        <ion-item fill="outline" shape="round">
+            <p [style.margin-bottom]="'0px'"><strong>Professione</strong></p>
+            <ion-label position="floating" [style.margin-top]="'0px'">
+                <ion-text>Seleziona una professione</ion-text>
+            </ion-label>
+            <ion-select [(ngModel)]="desiredProfession">
+                <ion-select-option value="Medico">Medico</ion-select-option>
+                <ion-select-option value="Infermiere">Infermiere</ion-select-option>
+                <ion-select-option value="Fisioterapista">Fisioterapista</ion-select-option>
+                <ion-select-option value="Badante">Badante</ion-select-option>
+                <ion-select-option value="Altro">Altro</ion-select-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+
+    <ion-list [inset]="true">
+        <ion-item>
+            <ion-label>
+                <strong>Modalità di erogazione</strong>
+            </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-checkbox justify="space-between" (ionChange)="shortTimeJob">Saltuario</ion-checkbox>
+        </ion-item>
+        <ion-item>
+            <ion-checkbox justify="space-between" (ionChange)="longTimeJob">Lungo Termine</ion-checkbox>
+        </ion-item>
+    </ion-list>
+
+    <ion-list [inset]="true">
+        <ion-item>
+            <ion-label>
+                <strong>Disponibilità</strong>
+            </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-datetime display="fixed" presentation="date" [style.max-width]="'100%'" locale="it-IT"
+                [ngModel]="desiredDate" [style.background-color]="'transparent'"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Ora di inizio</ion-label>
+            <ion-datetime-button datetime="startHour" locale="it-IT"></ion-datetime-button>
+            <ion-modal [keepContentsMounted]="true">
+                <ng-template>
+                    <ion-datetime id="startHour" locale="it-IT" presentation="time" [showDefaultButtons]="true"
+                        [value]="startHour" (ionChange)="setStartHour($event)"></ion-datetime>
+                </ng-template>
+            </ion-modal>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Ora di fine</ion-label>
+            <ion-datetime-button datetime="endHour" locale="it-IT">Data di fine</ion-datetime-button>
+            <ion-modal [keepContentsMounted]="true">
+                <ng-template>
+                    <ion-datetime id="endHour" locale="it-IT" presentation="time" [showDefaultButtons]="true"
+                        [value]="endHour" (ionChange)="setEndHour($event)"></ion-datetime>
+                </ng-template>
+            </ion-modal>
+        </ion-item>
+    </ion-list>
+
+    <ion-list [inset]="true">
+        <ion-item>
+            <ion-label>
+                <strong>Valutazione minima</strong>
+            </ion-label>
+        </ion-item>
+        <ion-item [style.justify-items]="'cw'">
+            <ul class="list-inline rating-list" *ngFor="let star of stars; let i= index">
+                <li (click)="countStar(star)" [ngClass]="{'selected' : (star <= desiredRating)}"
+                    (mouseover)="addClass(star)" (mouseout)="removeClass()">
+                    <ion-icon name="star"></ion-icon>
+                </li>
+            </ul>
+        </ion-item>
+    </ion-list>
+
+    <ion-list [inset]="true">
+        <ion-item>
+            <ion-label>
+                <strong>Sesso</strong>
+            </ion-label>
+            <ion-select [multiple]="true" [(ngModel)]="desiredProfession">
+                <ion-select-option value="Uomo">Uomo</ion-select-option>
+                <ion-select-option value="Donna">Donna</ion-select-option>
+                <ion-select-option value="Altro">Altro</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>
+                <strong>Età</strong>
+            </ion-label>
+            <ion-range [dualKnobs]="true" [min]="20" [max]="90" [value]="desiredAge" [pin]="true"
+                (ionChange)="updateRange($event)" [ticks]="true"></ion-range>
+        </ion-item>
+    </ion-list>
+
+
+    <ion-button [style.display]="'flex'" [style.align-items]="'center'" [style.padding]="'1rem'"
+        color="primary">Cerca</ion-button>
+
+
+
+</ion-content>
