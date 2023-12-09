@@ -37,7 +37,7 @@ export class AppComponent {
 
         // If not logged in redirect to login page
         this.loggedIn$.subscribe((loggedIn) => {
-            /*if (!loggedIn) {
+            if (!loggedIn) {
                 this.router.navigate(['/login']);
             } else {
                 this.isLoading$.next(true);
@@ -51,7 +51,7 @@ export class AppComponent {
                         this.isLoading$.next(false);
                     }
                 });
-            }*/
+            }
         });
 
         // Use Capacitor's App plugin to subscribe to the `appUrlOpen` event
