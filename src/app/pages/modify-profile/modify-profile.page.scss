@@ -1,0 +1,38 @@
+.bigger-avatar {
+    width: 150px; /* Adjust the width as needed */
+    height: 150px; /* Adjust the height as needed */
+  }
+  
+.ion-text-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+    
+.md .title-label {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  
+.description-item.with-margin {
+    margin-bottom: 10px; /* Adjust the margin as needed */
+  }
+
+h1 {
+    font-size: 2.2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.scroll-text {
+    text-overflow: ellipsis; /* Display an ellipsis (...) when text overflows */
+    overflow-x: scroll; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent text from wrapping */
+    scrollbar-width: thin; /* Specify a thin scrollbar on supporting browsers (Firefox) */
+    scrollbar-color: transparent transparent; /* Set the scrollbar color to transparent */
+}
+
+.image-list-inset {
+    background-color: unset;
+}
