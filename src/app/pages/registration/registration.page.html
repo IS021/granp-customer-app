@@ -27,6 +27,15 @@
         required></ion-input>
     </ion-item>
 
+    <ion-item>
+      <ion-select label="Sesso" labelPlacement="floating" [(ngModel)]="customer.elderGender" required>
+        <ion-select-option value="Uomo">Uomo</ion-select-option>
+        <ion-select-option value="Donna">Donna</ion-select-option>
+        <ion-select-option value="Altro">Altro</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+
     <!-- <ion-item>
       <ion-input label="Email" label-placement="floating" [(ngModel)]="customer.email" required email></ion-input>
     </ion-item> -->

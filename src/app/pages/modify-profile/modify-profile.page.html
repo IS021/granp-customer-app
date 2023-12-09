@@ -1,13 +1,224 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>modify-profile</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div *ngIf="!editingProfile; then showDefault else showEditingSettings"></div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<!-- Default profile page -->
+<ng-template #showDefault>
+  <ion-header [translucent]="true">
     <ion-toolbar>
-      <ion-title size="large">modify-profile</ion-title>
+      <ion-title>Profilo</ion-title>
+      <ion-button slot="end" size="small" fill="none" (click)="toggleBoolean()">
+        <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
+      </ion-button>
     </ion-toolbar>
   </ion-header>
-</ion-content>
+
+  <ion-content>
+    <ion-list [inset]="true">
+      <div class="ion-text-wrap">
+        <ion-item class="description-item" [style.margin-bottom]="'1em'">
+          <ion-avatar class="bigger-avatar">
+            <!-- Use ngIf to conditionally show the image or the default avatar -->
+            <ng-container *ngIf="customerLogged.profilePicture; else showDefaultAvatar">
+              <img [src]="customerLogged.profilePicture" alt="User's profile picture" [style.border-radius]="'100%'"
+                [style.max-width]="'100%'" />
+            </ng-container>
+            <ng-template #showDefaultAvatar>
+              <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            </ng-template>
+          </ion-avatar>
+        </ion-item>
+      </div>
+
+      <ion-list-header>
+        <ion-label class="title-label">
+          Info Assistito
+        </ion-label>
+      </ion-list-header>
+
+      <ion-item>
+        <ion-icon aria-hidden="true" name="person-circle-outline" slot="start" color="primary"></ion-icon>
+        <ion-label class="scroll-text">
+          {{customerLogged.elderFirstName}} {{customerLogged.elderLastName}}
+        </ion-label>
+      </ion-item>
+
+      <ion-item *ngIf="customerLogged.elderGender !== undefined" [style.margin-bottom]="'1em'">
+        <ion-icon aria-hidden="true" name="{{checkGenderIcon()}}" slot="start" color="primary"></ion-icon>
+        <ion-label class="scroll-text">
+          {{ checkGender() }}
+        </ion-label>
+      </ion-item>
+
+      <!-- <ion-item>
+        <ion-icon aria-hidden="true" name="mail-outline" slot="start" color="primary"></ion-icon>
+        <ion-label class="scroll-text">
+          {{customerLogged.email}}
+        </ion-label>
+      </ion-item> -->
+
+      <ion-item>
+        <ion-icon aria-hidden="true" name="home" slot="start" color="primary"></ion-icon>
+        <ion-label class="scroll-text">
+          {{customerLogged.elderAddress.getFullAddress()}}
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon aria-hidden="true" name="calendar-outline" slot="start" color="primary"></ion-icon>
+        <ion-label class="scroll-text">
+          {{customerLogged.elderBirthDate}}
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon aria-hidden="true" name="call" slot="start" color="primary"></ion-icon>
+        <ion-label>
+          {{ customerLogged.elderPhoneNumber }}
+        </ion-label>
+      </ion-item>
+
+      <ion-list-header>
+        <ion-label class="title-label">
+          Descrizione Assistito
+        </ion-label>
+      </ion-list-header>
+
+      <ion-item lines="none" class="ion-text-wrap" [style.margin-top]="'1em'" [style.margin-bottom]="'1.5em'"
+        *ngIf="customerLogged.elderDescription !== ''">
+        {{customerLogged.elderDescription}}
+      </ion-item>
+
+
+      <ion-list-header *ngIf="!customerLogged.isElder">
+        <ion-label class="title-label">
+          Info Tutore
+        </ion-label>
+      </ion-list-header>
+
+      <ion-item *ngIf="!customerLogged.isElder">
+        <ion-icon aria-hidden="true" name="person-circle-outline" slot="start" color="primary"></ion-icon>
+        <ion-label class="scroll-text">
+          {{customerLogged.firstName}} {{customerLogged.lastName}}
+        </ion-label>
+      </ion-item>
+      <ion-item *ngIf="!customerLogged.isElder" lines="inset">
+        <ion-icon aria-hidden="true" name="call" slot="start" color="primary"></ion-icon>
+        <ion-label>
+          {{ customerLogged.phoneNumber }}
+        </ion-label>
+      </ion-item>
+
+
+    </ion-list>
+  </ion-content>
+</ng-template>
+
+
+<!-- Editable profile page -->
+<ng-template #showEditingSettings>
+
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-button slot="start" fill="none" href="/modify-profile">
+        <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button slot="end" fill="none" (click)="submitChanges()">
+        <ion-icon name="checkmark-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-title>Modifica profilo</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content color="light">
+
+    <ion-list [inset]="true" class="image-list-inset">
+      <!-- Modify Picture -->
+      <gp-image-selector [picture]="customerLogged.profilePicture" (profilePicture)="customerLogged.profilePicture = $event"></gp-image-selector>
+    </ion-list>
+
+
+    <ion-list [inset]="true">
+
+      <ion-list-header>
+        <ion-label class="title-label">
+          Info Assistito
+        </ion-label>
+      </ion-list-header>
+
+      <ion-item>
+        <ion-input label="Nome" label-placement="floating" type="text" [(ngModel)]="customerLogged.elderFirstName"
+          required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Cognome" label-placement="floating" type="text" [(ngModel)]="customerLogged.elderLastName"
+          required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-select label="Sesso" labelPlacement="floating" [(ngModel)]="customerLogged.elderGender" required>
+          <ion-select-option value="0">Uomo</ion-select-option>
+          <ion-select-option value="1">Donna</ion-select-option>
+          <ion-select-option value="2">Altro</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- <ion-item>
+        <ion-input label="Email" label-placement="floating" [(ngModel)]="customerLogged.email" required
+          email></ion-input>
+      </ion-item> -->
+
+      <!--Select Address-->
+      <gp-address-selector [(address)]="customerLogged.elderAddress"></gp-address-selector>
+
+      <!--Select Birthdate-->
+      <gp-birthdate-selector [(birthdate)]="customerLogged.elderBirthDate"></gp-birthdate-selector>
+
+      <ion-item>
+        <ion-input label="Cellulare" [maskito]="phoneMask" [maskitoElement]="maskPredicate"
+          placeholder="+39 xxx xxx xxxx" label-placement="floating" [(ngModel)]="customerLogged.elderPhoneNumber"
+          required></ion-input>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-list [inset]="true">
+      <ion-list-header>
+        <ion-label class="title-label">
+          Descrizione Assistito
+        </ion-label>
+      </ion-list-header>
+
+      <ion-item>
+        <ion-textarea label="Descrizione" label-placement="floating" placeholder="Inserisci necessità particolari"
+          type="text" [rows]="1" [autoGrow]="true" [(ngModel)]="customerLogged.elderDescription"
+          maxlength="200"></ion-textarea>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-list [inset]="true" *ngIf="!customerLogged.isElder">
+      <ion-list-header>
+        <ion-label class="title-label">
+          Info Tutore
+        </ion-label>
+      </ion-list-header>
+
+      <ion-item>
+        <ion-input label="Nome" label-placement="floating" type="text" [(ngModel)]="customerLogged.firstName"
+          required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Cognome" label-placement="floating" type="text" [(ngModel)]="customerLogged.lastName"
+          required></ion-input>
+      </ion-item>
+
+      <ion-item lines="inset">
+        <ion-input label="Cellulare" [maskito]="phoneMask" [maskitoElement]="maskPredicate"
+          placeholder="+39 xxx xxx xxxx" label-placement="floating" [(ngModel)]="customerLogged.phoneNumber"
+          required></ion-input>
+      </ion-item>
+    </ion-list>
+
+  </ion-content>
+</ng-template>

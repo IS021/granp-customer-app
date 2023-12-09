@@ -22,6 +22,8 @@ import {
     ModalController,
     IonCheckbox,
     IonText,
+    IonSelect,
+    IonSelectOption,
     AlertController,
 } from '@ionic/angular/standalone';
 
@@ -61,6 +63,8 @@ import { Router } from '@angular/router';
         IonButtons,
         IonCheckbox,
         IonText,
+        IonSelect,
+        IonSelectOption,
         ImageSelectorComponent,
         AddressSelectorComponent,
         BirthdateSelectorComponent
