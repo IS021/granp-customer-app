@@ -19,7 +19,7 @@ import {
   IonToolbar, 
   IonButton
 } from '@ionic/angular/standalone';
-import { ReservationResponse, ProfessionalPublicResponse, Gender, Profession, CustomerPublicResponse, ReservationStatus } from 'granp-lib'
+import { ReservationResponse, ProfessionalPublicResponse, Gender, Profession, CustomerPublicResponse, ReservationStatus, Address } from 'granp-lib'
 import { addIcons } from 'ionicons';
 
 @Component({
@@ -71,10 +71,9 @@ export class InfoReservationPage implements OnInit {
       profilePicture: 'd',
       elderFirstName: 'c',
       elderLastName: 'df',
-      elderAddress: 'd',
+      elderAddress: new Address(),
       elderBirthDate: 'sd',
       elderAge: 23,
-      elderGender: Gender.Other,
       elderTelephoneNumber: 'dv',
       elderDescription: 'sd',
       firstName: 'sdc',

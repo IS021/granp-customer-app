@@ -27,6 +27,11 @@ export const routes: Routes = [
                     import('granp-lib').then((m) => m.CalendarPage),
             },
             {
+                path: 'profile',
+                loadComponent: () =>
+                    import('../modify-profile/modify-profile.page').then((m) => m.ModifyProfilePage),
+            },
+            {
                 path: '',
                 redirectTo: '/tabs/search',
                 pathMatch: 'full',

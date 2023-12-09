@@ -11,6 +11,7 @@ import { asyncScheduler, BehaviorSubject } from 'rxjs';
 import { NgIf, AsyncPipe } from '@angular/common';
 
 import { ChatService, ProfileService } from 'granp-lib';
+import { ShellService } from './shell.service';
 
 
 @Component({
@@ -26,12 +27,9 @@ export class AppComponent {
     router = inject(Router);
     chatService = inject(ChatService);
     profileService = inject(ProfileService);
+    shell = inject(ShellService);
 
     loggedIn$ = this.auth.isAuthenticated$;
-
-    // handle this manually as the loader should be displayed immediately once the app
-    // is opened via the auth0 redirect uri
-    isLoading$ = new BehaviorSubject<boolean>(false);
 
     ngOnInit(): void {
 
@@ -40,15 +38,15 @@ export class AppComponent {
             if (!loggedIn) {
                 this.router.navigate(['/login']);
             } else {
-                this.isLoading$.next(true);
+                this.shell.showLoader();
                 this.profileService.isComplete().then((isComplete) => {
                     if (!isComplete) {
                         this.router.navigate(['/registration']);
-                        this.isLoading$.next(false);
+                        this.shell.hideLoader();
                     } else {
                         this.router.navigate(['/tabs']);
                         this.chatService.connect();
-                        this.isLoading$.next(false);
+                        this.shell.hideLoader();
                     }
                 });
             }
@@ -60,7 +58,7 @@ export class AppComponent {
             // https://capacitorjs.com/docs/guides/angular
             this.ngZone.run(() => {
                 if (url?.startsWith(environment.auth0.authorizationParams.redirect_uri)) {
-                    this.isLoading$.next(true);
+                    this.shell.showLoader();
                     // If the URL is an authentication callback URL.
                     if (
                         url.includes('state=') &&
@@ -88,7 +86,7 @@ export class AppComponent {
                                     // Check if the user registration is complete
                                     // If not redirect to registration page
                                     // this.router.navigate(['/tabs']);
-                                    this.isLoading$.next(false);
+                                    this.shell.hideLoader();
                                 })
                             });
                     } else {
@@ -101,10 +99,10 @@ export class AppComponent {
                         }
                         // redirect to home when logging out
                         this.router.navigate(['/login']);                                    // TODO
-                        this.isLoading$.next(false);
+                        this.shell.hideLoader();
                     }
                 } else {
-                    this.isLoading$.next(false);
+                    this.shell.hideLoader();
                 }
             });
         });
