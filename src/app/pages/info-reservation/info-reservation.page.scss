@@ -1,3 +1,22 @@
 .title-label h2 {
-    font-size: 1.5em; /* Adjust the font size as needed */
-  }
+  font-size: 1.5em; /* Adjust the font size as needed */
+}
+
+.title-label h3 {
+  font-size: 1.2em; /* Adjust the font size as needed */
+}
+
+.subtitle-col {
+  padding-top: 0px;
+}
+
+.custom-button {
+  /* Add individual button styles here */
+  width: 100px; /* Adjust the spacing between buttons if needed */
+}
+
+.custom-button-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

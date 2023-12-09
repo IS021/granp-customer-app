@@ -68,7 +68,7 @@ export class ProfessionalDetailsPage implements OnInit {
 
     profession: Profession.Other,
     address: 'Via delle Vie, 69, Sannicandro, 70028',
-    isVerified: true,
+    isVerified: false,
     hourlyRate: 200,
     longTimeJob: false,
     shortTimeJob: true,
