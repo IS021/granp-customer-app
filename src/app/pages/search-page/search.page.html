@@ -7,6 +7,7 @@
 </ion-header>
 
 <ion-content color="light">
+
     <ion-list [inset]="true">
 
 
@@ -111,7 +112,7 @@
 
 
     <ion-button [style.display]="'flex'" [style.align-items]="'center'" [style.padding]="'1rem'"
-        color="primary">Cerca</ion-button>
+        color="primary" (click)="search()">Cerca</ion-button>
 
 
 

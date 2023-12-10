@@ -6,19 +6,19 @@
 
           <ion-col size="2.5" class="container">
             <div class="ion-text-wrap">
-              <gp-avatar height="70px" width="70px" [verified]="professionalSelected.isVerified" [profilePicture]="professionalSelected.profilePicture" iconRatio="30%"></gp-avatar>
+              <gp-avatar height="70px" width="70px" [verified]="professional?.isVerified" [profilePicture]="professional?.profilePicture" iconRatio="30%"></gp-avatar>
             </div>
           </ion-col>
 
           <ion-col size="9.5">
-            <ion-card-title class="title">{{professionalSelected.firstName}} {{professionalSelected.lastName}}</ion-card-title>
-            <ion-card-subtitle class="subtitle">{{professionalSelected.profession}}</ion-card-subtitle>
+            <ion-card-title class="title">{{professional?.firstName}} {{professional?.lastName}}</ion-card-title>
+            <ion-card-subtitle class="subtitle">{{professional?.profession}}</ion-card-subtitle>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card-header>
 
-    <div class="description">{{professionalSelected.description}}</div>
+    <div class="description">{{professional?.description}}</div>
 
   </ion-card-content>
 </ion-card>

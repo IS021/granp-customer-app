@@ -1,0 +1,14 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=" " defaultHref="/search"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Professionisti</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  
+    <app-professional-card *ngFor="let professional of results" [professional]="professional"></app-professional-card>
+  
+</ion-content>

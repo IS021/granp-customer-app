@@ -31,6 +31,7 @@ import {
     AddressSelectorComponent,
     BirthdateSelectorComponent,
     ProfileService,
+    LogoutButtonComponent
 } from 'granp-lib';
 
 import { addIcons } from 'ionicons';
@@ -83,7 +84,8 @@ import { ShellService } from 'src/app/shell.service';
         IonSelectOption,
         ImageSelectorComponent,
         AddressSelectorComponent,
-        BirthdateSelectorComponent
+        BirthdateSelectorComponent,
+        LogoutButtonComponent
     ],
 })
 export class ModifyProfilePage {
