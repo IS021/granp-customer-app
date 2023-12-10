@@ -61,7 +61,7 @@ export class InfoReservationPage implements OnInit {
       phoneNumber: '3334445566',
       description: 'Mi piacciono i droni',
       profession: Profession.Other,
-      address: 'Via dei Droni, 3',
+      address: new Address(), //'Via dei Droni, 3',
       isVerified: true,
       hourlyRate: 22,
       longTimeJob: false,

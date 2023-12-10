@@ -45,7 +45,8 @@ export class SearchResultPage {
 
         let navigationExtras: NavigationExtras = {
             queryParams: {
-                professional: JSON.stringify(professional)
+                professional: JSON.stringify(professional),
+                showButtons: true
             }
         };
 
