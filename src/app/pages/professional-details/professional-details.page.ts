@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -26,6 +26,7 @@ import { call, home, personCircleOutline, mailOpenOutline, calendarOutline, medi
 import { Gender, Profession, ProfessionalPublicResponse } from 'granp-lib';
 
 import { AvatarComponent } from 'granp-lib';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-professional-details',
@@ -52,35 +53,22 @@ import { AvatarComponent } from 'granp-lib';
     AvatarComponent
   ]
 })
-export class ProfessionalDetailsPage implements OnInit {
+export class ProfessionalDetailsPage {
 
-  professionalSelected: ProfessionalPublicResponse = {
-    profilePicture: '',
-    firstName: 'Alessandro',
-    lastName: 'Perna',
-    birthDate: '03/02/2000',
-    age: 23,
-    gender: Gender.Male,
-    email: 'pernalex@hotmail.it',
-    phoneNumber: '3342666590',
+  activatedRoute = inject(ActivatedRoute);
 
-    description: "Studente ingegneria fuoricorso, podcaster e appassionato di sushi, psicologia e d'i femmn",
-
-    profession: Profession.Other,
-    address: 'Via delle Vie, 69, Sannicandro, 70028',
-    isVerified: false,
-    hourlyRate: 200,
-    longTimeJob: false,
-    shortTimeJob: true,
-
-  };
+  professional?: ProfessionalPublicResponse;
 
   constructor() {
     addIcons({ call, home, personCircleOutline, mailOpenOutline, calendarOutline, medicalOutline, locationOutline, walletOutline, checkmarkOutline, closeOutline, checkmarkDoneCircle, alertCircle,  maleOutline, femaleOutline, helpOutline });
+
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.professional = JSON.parse(params["professional"]) as ProfessionalPublicResponse;
+    });
   }
 
   checkGender(): string {
-    switch (this.professionalSelected.gender) {
+    switch (this.professional?.gender) {
       case Gender.Male:
         return 'Uomo';
       case Gender.Female:
@@ -91,7 +79,7 @@ export class ProfessionalDetailsPage implements OnInit {
   }
 
   checkGenderIcon(): string {
-    switch (this.professionalSelected.gender) {
+    switch (this.professional?.gender) {
       case Gender.Male:
         return 'male-outline';
       case Gender.Female:
@@ -99,9 +87,6 @@ export class ProfessionalDetailsPage implements OnInit {
       default:
         return 'help-outline';
     }
-  }
-
-  ngOnInit() {
   }
 
 }

@@ -9,6 +9,7 @@
 
 <ion-content [fullscreen]="true">
   
-    <app-professional-card *ngFor="let professional of results" [professional]="professional"></app-professional-card>
+    <app-professional-card *ngFor="let professional of results" [professional]="professional"
+        (click)="openDetailPage(professional)"></app-professional-card>
   
 </ion-content>
