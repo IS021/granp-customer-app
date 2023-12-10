@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { Gender, Profession, Availability, ProfessionalPublicResponse, SearchFilter } from 'granp-lib';
+import { Gender, Profession, Availability, ProfessionalPublicResponse, SearchFilter, AvailabilitySelectorComponent } from 'granp-lib';
 
 import { addIcons } from 'ionicons';
 import { star } from 'ionicons/icons';
@@ -66,7 +66,8 @@ import {
         IonDatetime,
         IonRange,
         IonDatetimeButton,
-        IonModal
+        IonModal,
+        AvailabilitySelectorComponent
     ],
 })
 export class SearchPage {
@@ -77,13 +78,14 @@ export class SearchPage {
     desiredProfession!: Profession;
     longTimeJob: boolean = false;
     shortTimeJob: boolean = false;
-    desiredAvailability!: Availability;
+    desiredAvailabilities!: Availability[];
     rate!: number;
     desiredGender!: Gender;
     desiredDate!: string;
 
     startHour!: string;
     endHour!: string;
+
 
     desiredAge = { lower: 25, upper: 65 }  // [minAge, maxAge]
 

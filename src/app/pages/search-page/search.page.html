@@ -41,37 +41,12 @@
     </ion-list>
 
     <ion-list [inset]="true">
-        <ion-item>
+        <ion-item lines=" none">
             <ion-label>
                 <strong>Disponibilità</strong>
             </ion-label>
         </ion-item>
-        <ion-item>
-            <ion-datetime display="fixed" presentation="date" [style.max-width]="'100%'" locale="it-IT"
-                [ngModel]="desiredDate" [style.background-color]="'transparent'"></ion-datetime>
-        </ion-item>
-
-        <ion-item>
-            <ion-label>Ora di inizio</ion-label>
-            <ion-datetime-button datetime="startHour" locale="it-IT"></ion-datetime-button>
-            <ion-modal [keepContentsMounted]="true">
-                <ng-template>
-                    <ion-datetime id="startHour" locale="it-IT" presentation="time" [showDefaultButtons]="true"
-                        [value]="startHour" (ionChange)="setStartHour($event)"></ion-datetime>
-                </ng-template>
-            </ion-modal>
-        </ion-item>
-
-        <ion-item>
-            <ion-label>Ora di fine</ion-label>
-            <ion-datetime-button datetime="endHour" locale="it-IT">Data di fine</ion-datetime-button>
-            <ion-modal [keepContentsMounted]="true">
-                <ng-template>
-                    <ion-datetime id="endHour" locale="it-IT" presentation="time" [showDefaultButtons]="true"
-                        [value]="endHour" (ionChange)="setEndHour($event)"></ion-datetime>
-                </ng-template>
-            </ion-modal>
-        </ion-item>
+        <gp-availability-selector [(ngModel)]="desiredAvailabilities"></gp-availability-selector>
     </ion-list>
 
     <ion-list [inset]="true">
