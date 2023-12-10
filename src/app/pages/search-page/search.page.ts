@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { Gender, Profession, Availability, ProfessionalPublicResponse, SearchFilter, AvailabilitySelectorComponent } from 'granp-lib';
+import { Gender, Profession, Availability, ProfessionalPublicResponse, SearchFilter, AvailabilitySelectorComponent, TimeSlotRequest } from 'granp-lib';
 
 import { addIcons } from 'ionicons';
 import { star } from 'ionicons/icons';
@@ -78,7 +78,7 @@ export class SearchPage {
     desiredProfession!: Profession;
     longTimeJob: boolean = false;
     shortTimeJob: boolean = false;
-    desiredAvailabilities!: Availability[];
+    timeSlots: TimeSlotRequest[] = [];
     rate!: number;
     desiredGender!: Gender;
     desiredDate!: string;

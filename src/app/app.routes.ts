@@ -24,9 +24,10 @@ export const routes: Routes = [
     {
         path: 'search-result',
         loadComponent: () => import('./pages/search-result/search-result.page').then(m => m.SearchResultPage)
-    },  {
-    path: 'reservation',
-    loadComponent: () => import('./pages/reservation/reservation.page').then( m => m.ReservationPage)
-  },
+    },
+    {
+        path: 'reservation',
+        loadComponent: () => import('./pages/reservation/reservation.page').then(m => m.ReservationPage)
+    },
 
 ];
