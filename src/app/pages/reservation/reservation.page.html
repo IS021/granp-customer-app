@@ -1,13 +1,21 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>reservation</ion-title>
+    <ion-title>
+      Prenotazione
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">reservation</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content color="light">
+  
+  <ion-list [inset]="true">
+
+    
+      <div class="calendar-container">
+        <ion-datetime locale="it-IT" presentation="date"></ion-datetime>
+      </div>
+  
+
+  </ion-list>
+ 
 </ion-content>

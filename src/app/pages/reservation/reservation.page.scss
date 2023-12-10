@@ -1,0 +1,22 @@
+.calendar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+ion-datetime {
+    --background: transparent;
+    max-width: 100%;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+ion-content {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+  
