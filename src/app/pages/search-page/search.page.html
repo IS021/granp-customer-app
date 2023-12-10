@@ -10,7 +10,6 @@
 
     <ion-list [inset]="true">
 
-
         <ion-item fill="outline" shape="round">
             <p [style.margin-bottom]="'0px'"><strong>Professione</strong></p>
             <ion-label position="floating" [style.margin-top]="'0px'">
@@ -41,12 +40,12 @@
     </ion-list>
 
     <ion-list [inset]="true">
-        <ion-item lines=" none">
+        <ion-item lines="none">
             <ion-label>
                 <strong>Disponibilità</strong>
             </ion-label>
         </ion-item>
-        <gp-availability-selector [(ngModel)]="desiredAvailabilities"></gp-availability-selector>
+        <gp-availability-selector (timeSlotsChange)="timeSlots = $event"></gp-availability-selector>
     </ion-list>
 
     <ion-list [inset]="true">
@@ -88,7 +87,5 @@
 
     <ion-button [style.display]="'flex'" [style.align-items]="'center'" [style.padding]="'1rem'"
         color="primary" (click)="search()">Cerca</ion-button>
-
-
 
 </ion-content>
