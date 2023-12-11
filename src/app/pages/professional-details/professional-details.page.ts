@@ -16,14 +16,15 @@ import {
     IonTitle,
     IonGrid,
     IonButton,
-    IonIcon
+    IonIcon,
+    NavController
 }
     from '@ionic/angular/standalone'
 
 import { addIcons } from 'ionicons';
 import { call, home, personCircleOutline, mailOpenOutline, calendarOutline, medicalOutline, locationOutline, walletOutline, checkmarkOutline, closeOutline, checkmarkDoneCircle, alertCircle, maleOutline, femaleOutline, helpOutline } from 'ionicons/icons';
 
-import { Gender, Profession, ProfessionalPublicResponse } from 'granp-lib';
+import { ChatService, Gender, Profession, ProfessionalPublicResponse } from 'granp-lib';
 
 import { AvatarComponent } from 'granp-lib';
 import { ActivatedRoute } from '@angular/router';
@@ -56,6 +57,8 @@ import { ActivatedRoute } from '@angular/router';
 export class ProfessionalDetailsPage {
 
     activatedRoute = inject(ActivatedRoute);
+    chatService = inject(ChatService);
+    navCtrl = inject(NavController);
 
     professional?: ProfessionalPublicResponse;
 
@@ -68,6 +71,17 @@ export class ProfessionalDetailsPage {
             this.professional = JSON.parse(params["professional"]) as ProfessionalPublicResponse;
             this.showButtons = params["showButtons"] == "true";
         });
+    }
+
+    startChat() {
+        if (this.professional && this.professional.id) {
+            console.log("Creating chat with professional " + this.professional.id);
+            this.chatService.createChat(this.professional.id).then((chatId) => {
+                this.navCtrl.navigateForward(['chat', chatId]);
+            });
+        } else {
+            console.log("Professional not found");
+        }
     }
 
     getProfession(profession?: Profession) {

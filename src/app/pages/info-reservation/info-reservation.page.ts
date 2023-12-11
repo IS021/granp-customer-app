@@ -51,6 +51,7 @@ export class InfoReservationPage implements OnInit {
   reservationResponse: ReservationResponse={
     id: 'SignorPiomaggio',
     professional: {
+        id: "",
       profilePicture: 'lollo',
       firstName: 'Antonio',
       lastName: 'Piomaggio',

@@ -34,6 +34,7 @@ export class SearchResultPage {
                 this.results = result;
                 this.shell.hideLoader();
             });
+
         });
     }
 
