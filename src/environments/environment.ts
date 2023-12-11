@@ -23,6 +23,7 @@ export const environment = {
       logoutRedirectUri: 'http://localhost:4200',
       role: 'customer',
       mapboxAccessToken: 'pk.eyJ1IjoiYW50b3BpbzI2IiwiYSI6ImNscHI2YXJrMDA3NGwyaW41NzZubXcwamQifQ.y93LdBmsaZAYGLeveWMNIg',
+      profileRedirectPath: '/professional-details',
     },
   };
   
