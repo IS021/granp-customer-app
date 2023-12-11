@@ -10,12 +10,32 @@
   
   <ion-list [inset]="true">
 
-    
-      <div class="calendar-container">
-        <ion-datetime locale="it-IT" presentation="date"></ion-datetime>
-      </div>
+      <ion-item>
+        <ion-datetime [isDateEnabled]="isAvailable" [min]="minDate" [max]="maxDate" display="fixed" presentation="date" [style.width]="'100%'" locale="it-IT"
+          [style.background-color]="'white'" [ngModel]="desiredDate"></ion-datetime>
+      </ion-item>
   
-
+      <ion-item>
+        <ion-label>Ora di inizio</ion-label>
+        <ion-datetime-button datetime="startHour" locale="it-IT" ></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime id="startHour" (ionChange)="validateTime($event)" (ionBlur)="validateTime($event)" locale="it-IT" presentation="time" [showDefaultButtons]="true" [value]="start"></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Ora di fine</ion-label>
+        <ion-datetime-button datetime="endHour" locale="it-IT">Data di fine</ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime id="endHour" locale="it-IT" presentation="time" [showDefaultButtons]="true" [value]="end"></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-item>
   </ion-list>
+
+  <ion-button expand="block" (click)="confirmReservation()">Prova</ion-button>
  
 </ion-content>
