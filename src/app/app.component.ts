@@ -12,6 +12,7 @@ import { NgIf, AsyncPipe } from '@angular/common';
 
 import { ChatService, ProfileService } from 'granp-lib';
 import { ShellService } from './shell.service';
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -28,6 +29,7 @@ export class AppComponent {
     chatService = inject(ChatService);
     profileService = inject(ProfileService);
     shell = inject(ShellService);
+    toastController = inject(ToastController);
 
     loggedIn$ = this.auth.isAuthenticated$;
 
@@ -48,6 +50,19 @@ export class AppComponent {
                         this.chatService.connect();
                         this.shell.hideLoader();
                     }
+                });
+            }
+        });
+
+        this.auth.error$.subscribe((error) => {
+            if (error) {
+                this.toastController.create({
+                    message: error.message,
+                    duration: 3000,
+                    position: 'top',
+                    color: 'danger'
+                }).then((toast) => {
+                    toast.present();
                 });
             }
         });
