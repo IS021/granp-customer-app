@@ -48,7 +48,7 @@ export class ProfessionalCardComponent {
             case Profession.Physiotherapist:
                 return "Fisioterapista";
             case Profession.Caregiver:
-                return "Assistente";
+                return "Badante";
             case Profession.Other:
                 return "Altro";
             default:
