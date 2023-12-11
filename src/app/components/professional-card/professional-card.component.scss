@@ -4,6 +4,11 @@
   text-overflow: ellipsis;
 }
 
+.title-container {
+    position: relative;
+    overflow: hidden;
+}
+
 .header {
   padding-inline: 0;
   padding-top: 0;
@@ -29,19 +34,16 @@ ion-grid {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%; /* Set a maximum width to allow the title to adapt */
+  color: var(--ion-color-light-contrast);
 }
-
-.subtitle {
-  padding-left: 10px;
-}
-
-.md .title {
+.title {
   font-size: 1.75rem;
   font-weight: 700;
 }
 
-.md .subtitle {
-  font-size: 0.75rem;
+.subtitle { 
+  padding-left: 10px;
+  font-size: 0.8rem;
   font-weight: 700;
 }
 
@@ -55,6 +57,9 @@ ion-grid {
 }
 
 .container {
-  padding-left: 0;
-  padding-right: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 100%;
+  overflow: hidden;
 }
