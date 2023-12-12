@@ -16,11 +16,11 @@
                 <ion-text>Seleziona una professione</ion-text>
             </ion-label>
             <ion-select [(ngModel)]="desiredProfession">
-                <ion-select-option value="Medico">Medico</ion-select-option>
-                <ion-select-option value="Infermiere">Infermiere</ion-select-option>
-                <ion-select-option value="Fisioterapista">Fisioterapista</ion-select-option>
-                <ion-select-option value="Badante">Badante</ion-select-option>
-                <ion-select-option value="Altro">Altro</ion-select-option>
+                <ion-select-option [value]="0">Medico</ion-select-option>
+                <ion-select-option [value]="1">Infermiere</ion-select-option>
+                <ion-select-option [value]="2">Fisioterapista</ion-select-option>
+                <ion-select-option [value]="3">Badante</ion-select-option>
+                <ion-select-option [value]="4">Altro</ion-select-option>
             </ion-select>
         </ion-item>
     </ion-list>
@@ -32,10 +32,10 @@
             </ion-label>
         </ion-item>
         <ion-item>
-            <ion-checkbox justify="space-between" (ionChange)="shortTimeJob">Saltuario</ion-checkbox>
+            <ion-checkbox justify="space-between" [(ngModel)]="shortTimeJob">Saltuario</ion-checkbox>
         </ion-item>
         <ion-item>
-            <ion-checkbox justify="space-between" (ionChange)="longTimeJob">Lungo Termine</ion-checkbox>
+            <ion-checkbox justify="space-between" [(ngModel)]="longTimeJob">Lungo Termine</ion-checkbox>
         </ion-item>
     </ion-list>
 
@@ -69,10 +69,10 @@
             <ion-label>
                 <strong>Sesso</strong>
             </ion-label>
-            <ion-select [multiple]="true" [(ngModel)]="desiredProfession">
-                <ion-select-option value="Uomo">Uomo</ion-select-option>
-                <ion-select-option value="Donna">Donna</ion-select-option>
-                <ion-select-option value="Altro">Altro</ion-select-option>
+            <ion-select [multiple]="true" [(ngModel)]="desiredGender">
+                <ion-select-option [value]="0">Uomo</ion-select-option>
+                <ion-select-option [value]="1">Donna</ion-select-option>
+                <ion-select-option [value]="2">Altro</ion-select-option>
             </ion-select>
         </ion-item>
         <ion-item>

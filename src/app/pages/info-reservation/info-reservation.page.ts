@@ -80,7 +80,7 @@ export class InfoReservationPage implements OnInit {
       firstName: 'sdc',
       lastName: 'sd',
       phoneNumber: 'wd',
-      isElder: true 
+      isElder: true
     },
     date: '07/12/2023',
     start: '18:08',

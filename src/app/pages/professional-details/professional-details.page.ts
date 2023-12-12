@@ -24,10 +24,11 @@ import {
 import { addIcons } from 'ionicons';
 import { call, home, personCircleOutline, mailOpenOutline, calendarOutline, medicalOutline, locationOutline, walletOutline, checkmarkOutline, closeOutline, checkmarkDoneCircle, alertCircle, maleOutline, femaleOutline, helpOutline } from 'ionicons/icons';
 
-import { ChatService, Gender, Profession, ProfessionalPublicResponse } from 'granp-lib';
+import { ChatService, Gender, Profession, ProfessionalPublicResponse, SearchService } from 'granp-lib';
 
 import { AvatarComponent } from 'granp-lib';
 import { ActivatedRoute } from '@angular/router';
+import { ShellService } from 'src/app/shell.service';
 
 @Component({
     selector: 'app-professional-details',
@@ -59,6 +60,8 @@ export class ProfessionalDetailsPage {
     activatedRoute = inject(ActivatedRoute);
     chatService = inject(ChatService);
     navCtrl = inject(NavController);
+    searchService = inject(SearchService);
+    shell = inject(ShellService);
 
     professional?: ProfessionalPublicResponse;
 
@@ -66,11 +69,27 @@ export class ProfessionalDetailsPage {
 
     constructor() {
         addIcons({ call, home, personCircleOutline, mailOpenOutline, calendarOutline, medicalOutline, locationOutline, walletOutline, checkmarkOutline, closeOutline, checkmarkDoneCircle, alertCircle, maleOutline, femaleOutline, helpOutline });
+    }
 
+    ngOnInit() {
         this.activatedRoute.queryParams.subscribe(params => {
-            this.professional = JSON.parse(params["professional"]) as ProfessionalPublicResponse;
+            // this.professional = JSON.parse(params["professional"]) as ProfessionalPublicResponse;
+            const professionalId = params["id"];
+            if (professionalId) {
+                this.searchService.professionalInfo(professionalId).then((professional) => {
+                    this.professional = professional;
+                    this.shell.hideLoader();
+                });
+            }
+
             this.showButtons = params["showButtons"] == "true";
         });
+    }
+
+    ionViewWillEnter() {
+        if(this.professional === undefined) {
+            this.shell.showLoader();
+        }
     }
 
     startChat() {
