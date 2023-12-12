@@ -13,7 +13,7 @@ import {
 }
     from '@ionic/angular/standalone'
 
-import { Gender, Profession, ProfessionalPublicResponse } from 'granp-lib';
+import { Gender, Profession, ProfessionalPreviewResponse, ProfessionalPublicResponse } from 'granp-lib';
 
 import { AvatarComponent } from 'granp-lib';
 
@@ -37,7 +37,7 @@ import { AvatarComponent } from 'granp-lib';
 })
 export class ProfessionalCardComponent {
 
-    @Input() professional?: ProfessionalPublicResponse;
+    @Input() professional?: ProfessionalPreviewResponse;
 
     getProfession(profession?: Profession) {
         switch(profession) {

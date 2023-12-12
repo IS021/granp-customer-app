@@ -75,17 +75,12 @@ export class SearchPage {
 
     professionalList: ProfessionalPublicResponse[] = [];
 
-    desiredProfession!: Profession;
-    longTimeJob: boolean = false;
-    shortTimeJob: boolean = false;
-    timeSlots: TimeSlotRequest[] = [];
-    rate!: number;
-    desiredGender!: Gender;
-    desiredDate!: string;
-
-    startHour!: string;
-    endHour!: string;
-
+    desiredProfession?: Profession;
+    longTimeJob: boolean = true;
+    shortTimeJob: boolean = true;
+    timeSlots?: TimeSlotRequest[];
+    rate?: number;
+    desiredGender?: Gender[];
 
     desiredAge = { lower: 25, upper: 65 }  // [minAge, maxAge]
 
@@ -124,22 +119,26 @@ export class SearchPage {
         }
     }
 
-    setStartHour(event: any) {
-        this.startHour = event.detail.value;
-    }
-
-    setEndHour(event: any) {
-        this.endHour = event.detail.value;
-    }
-
     search() {
         var filter = new SearchFilter();
+
+        filter.profession = this.desiredProfession; 
+        filter.longTimeJob = this.longTimeJob;
+        filter.shortTimeJob = this.shortTimeJob;
+        filter.timeSlots = this.timeSlots;
+        filter.maxHourlyRate = this.rate;
+        filter.genders = this.desiredGender;
+        filter.minRating = this.desiredRating;
+        filter.minAge = this.desiredAge.lower;
+        filter.maxAge = this.desiredAge.upper;
 
         var navigationExtras: NavigationExtras = {
             queryParams: {
                 filter: JSON.stringify(filter)
             }
         };
+
+        // console.log(filter);
 
         this.navCtrl.navigateForward('/search-result', navigationExtras);
     }
