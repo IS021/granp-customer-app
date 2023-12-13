@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'granp.app.customer',
-  appName: 'granp-customer-app',
+  appName: 'GranP',
   webDir: 'www',
   server: {
     androidScheme: 'https'

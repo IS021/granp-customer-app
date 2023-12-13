@@ -1,5 +1,5 @@
 import { Component, OnInit, NgZone, inject } from '@angular/core';
-import { IonApp, IonContent, IonRouterOutlet, IonSpinner } from '@ionic/angular/standalone';
+import { IonApp, IonContent, IonRouterOutlet, IonSpinner, NavController } from '@ionic/angular/standalone';
 import { AuthService } from '@auth0/auth0-angular';
 import { mergeMap } from 'rxjs/operators';
 import { Browser } from '@capacitor/browser';
@@ -14,7 +14,6 @@ import { ChatService, ProfileService } from 'granp-lib';
 import { ShellService } from './shell.service';
 import { ToastController } from '@ionic/angular';
 
-
 @Component({
     selector: 'app-root',
     templateUrl: 'app.component.html',
@@ -25,34 +24,41 @@ import { ToastController } from '@ionic/angular';
 export class AppComponent {
     auth = inject(AuthService);
     ngZone = inject(NgZone);
-    router = inject(Router);
+    navCrtl = inject(NavController);
     chatService = inject(ChatService);
     profileService = inject(ProfileService);
     shell = inject(ShellService);
     toastController = inject(ToastController);
 
-    /* loggedIn$ = this.auth.isAuthenticated$; */
+    loggedIn$ = this.auth.isAuthenticated$;
+
+    checkComplete() {
+        this.shell.showLoader();
+        this.profileService.isComplete().then((isComplete) => {
+            console.log('isComplete', isComplete);
+            if (!isComplete) {
+                this.navCrtl.navigateRoot(['/registration'], { animated: false});
+                this.shell.hideLoader();
+            } else {
+                this.navCrtl.navigateRoot(['/tabs'], { animated: false});
+                this.chatService.connect();
+                this.shell.hideLoader();
+            }
+        });
+    }
 
     ngOnInit(): void {
 
         // If not logged in redirect to login page
-        /* this.loggedIn$.subscribe((loggedIn) => {
+        this.loggedIn$.subscribe((loggedIn) => {
             if (!loggedIn) {
-                this.router.navigate(['/login']);
+                this.navCrtl.navigateRoot(['/login']);
             } else {
-                this.shell.showLoader();
-                this.profileService.isComplete().then((isComplete) => {
-                    if (!isComplete) {
-                        this.router.navigate(['/registration']);
-                        this.shell.hideLoader();
-                    } else {
-                        this.router.navigate(['/tabs']);
-                        this.chatService.connect();
-                        this.shell.hideLoader();
-                    }
-                });
+                if (!environment.production) {
+                    this.checkComplete();
+                }
             }
-        }); */
+        });
 
         this.auth.error$.subscribe((error) => {
             if (error) {
@@ -79,6 +85,7 @@ export class AppComponent {
                         url.includes('state=') &&
                         (url.includes('error=') || url.includes('code='))
                     ) {
+                        this.shell.showLoader();
                         // Call handleRedirectCallback and close the browser
                         this.auth
                             .handleRedirectCallback(url)
@@ -100,8 +107,7 @@ export class AppComponent {
                                     // redirect to profile when logging in              // TODO
                                     // Check if the user registration is complete
                                     // If not redirect to registration page
-                                    // this.router.navigate(['/tabs']);
-                                    this.shell.hideLoader();
+                                    this.checkComplete();
                                 })
                             });
                     } else {
@@ -113,7 +119,7 @@ export class AppComponent {
                             })
                         }
                         // redirect to home when logging out
-                        this.router.navigate(['/login']);                                    // TODO
+                        this.navCrtl.navigateRoot(['/login']);                                    // TODO
                         this.shell.hideLoader();
                     }
                 } else {
@@ -121,6 +127,10 @@ export class AppComponent {
                 }
             });
         });
+    }
+
+    ngOnDestroy() {
+        this.chatService.disconnect();
     }
 }
 
