@@ -19,7 +19,7 @@ import {
   IonToolbar, 
   IonButton
 } from '@ionic/angular/standalone';
-import { ReservationResponse, ProfessionalPublicResponse, Gender, Profession, CustomerPublicResponse, ReservationStatus, Address } from 'granp-lib'
+import { ReservationResponse, Gender, Profession, ReservationStatus, Address } from 'granp-lib'
 import { addIcons } from 'ionicons';
 
 @Component({

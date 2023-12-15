@@ -26,7 +26,7 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/search-result/search-result.page').then(m => m.SearchResultPage)
     },
     {
-        path: 'reservation',
+        path: 'reservation/:id',
         loadComponent: () => import('./pages/reservation/reservation.page').then(m => m.ReservationPage)
     },
 

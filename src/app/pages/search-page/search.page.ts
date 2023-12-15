@@ -82,14 +82,14 @@ export class SearchPage {
     rate?: number;
     desiredGender?: Gender[];
 
-    desiredAge = { lower: 25, upper: 65 }  // [minAge, maxAge]
+    desiredAge = { lower: 20, upper: 80 }  // [minAge, maxAge]
 
     updateRange(event: any) {
-        if (event.detail.value.lower < 21) {
-            this.desiredAge.lower = 21;
+        if (event.detail.value.lower < 20) {
+            this.desiredAge.lower = 20;
         }
-        if (event.detail.value.upper > 65) {
-            this.desiredAge.upper = 65;
+        if (event.detail.value.upper > 80) {
+            this.desiredAge.upper = 80;
         }
     }
 

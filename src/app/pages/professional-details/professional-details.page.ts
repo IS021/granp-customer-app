@@ -17,7 +17,8 @@ import {
     IonGrid,
     IonButton,
     IonIcon,
-    NavController
+    NavController,
+    LoadingController
 }
     from '@ionic/angular/standalone'
 
@@ -62,6 +63,7 @@ export class ProfessionalDetailsPage {
     navCtrl = inject(NavController);
     searchService = inject(SearchService);
     shell = inject(ShellService);
+    loading = inject(LoadingController);
 
     professional?: ProfessionalPublicResponse;
 
@@ -95,9 +97,23 @@ export class ProfessionalDetailsPage {
     startChat() {
         if (this.professional && this.professional.id) {
             console.log("Creating chat with professional " + this.professional.id);
-            this.chatService.createChat(this.professional.id).then((chatId) => {
-                this.navCtrl.navigateForward(['chat', chatId]);
+            this.loading.create({
+                message: "Creazione chat in corso..."
+            }).then((loading) => {
+                loading.present();
+                this.chatService.createChat(this.professional!.id).then((chatId) => {
+                    loading.dismiss();
+                    this.navCtrl.navigateForward(['chat', chatId]);
+                });
             });
+        } else {
+            console.log("Professional not found");
+        }
+    }
+
+    makeReservation() {
+        if (this.professional && this.professional.id) {
+            this.navCtrl.navigateForward(['reservation', this.professional.id]);
         } else {
             console.log("Professional not found");
         }

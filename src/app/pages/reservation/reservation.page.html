@@ -16,7 +16,7 @@
   <ion-list [inset]="true">
     <ion-item>
       <ion-datetime [isDateEnabled]="isAvailable" [min]="minDate" [max]="maxDate" display="fixed" presentation="date"
-        [style.width]="'100%'" locale="it-IT" [style.background-color]="'white'" [(ngModel)]="desiredDate"
+        [style.width]="'100%'" locale="it-IT" [(ngModel)]="desiredDate"
         (ionChange)="onDateChange($event)"></ion-datetime>
     </ion-item>
 
