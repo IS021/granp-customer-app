@@ -22,46 +22,42 @@
 
     <ion-item>
       <ion-label>Ora di inizio</ion-label>
-      <ion-datetime-button datetime="startHour" locale="it-IT" [disabled]="!desiredDate"></ion-datetime-button>
-      <ion-modal [keepContentsMounted]="true">
+      <ion-button  color="#edeef0" style="margin-right: -2px;" slot="end" id="startHour" locale="it-IT" [disabled]="!desiredDate">{{ start.split(':')[0] + ':' }}</ion-button>
+      <ion-modal [keepContentsMounted]="true" trigger="startHour">
         <ng-template>
-          <ion-datetime id="startHour" [hourValues]="selectableStartHours()" [minuteValues]="[]"
+          <ion-datetime [hourValues]="selectableStartHours()" [minuteValues]="[]"
+            locale="it-IT" presentation="time" [showDefaultButtons]="true" [(ngModel)]="start" (ionChange)="onStartSetChange($event)"></ion-datetime>
+        </ng-template>
+      </ion-modal>
+  
+      <ion-button color="#edeef0" style="margin-left: -5px;" slot="end" id="start" locale="it-IT" [disabled]="startNotSet">{{ start.split(':')[1] }}</ion-button>
+      <ion-modal [keepContentsMounted]="true" trigger="start">
+        <ng-template>
+          <ion-datetime [hourValues]="[]" [minuteValues]="selectableStartMinutes()"
             locale="it-IT" presentation="time" [showDefaultButtons]="true" [(ngModel)]="start" (ionChange)="onTimeStartChange($event)"></ion-datetime>
         </ng-template>
       </ion-modal>
     </ion-item>
 
     <ion-item>
-      <ion-datetime-button slot="end" datetime="start" locale="it-IT" [disabled]="!desiredDate"></ion-datetime-button>
-      <ion-modal [keepContentsMounted]="true">
-        <ng-template>
-          <ion-datetime id="start" [hourValues]="[]" [minuteValues]="selectableStartMinutes()"
-            locale="it-IT" presentation="time" [showDefaultButtons]="true" [(ngModel)]="start"></ion-datetime>
-        </ng-template>
-      </ion-modal>
-    </ion-item>
-
-    <ion-item>
       <ion-label>Ora di fine</ion-label>
-      <ion-datetime-button datetime="endHour" locale="it-IT" [disabled]="isNotAvailable">Data di
-        fine</ion-datetime-button>
-      <ion-modal [keepContentsMounted]="true">
+      <ion-button color="#edeef0" style="margin-right: -2px;" slot="end" id="endHour" locale="it-IT" [disabled]="isNotAvailable">{{ end.split(':')[0] + ':'}}</ion-button>
+      <ion-modal [keepContentsMounted]="true" trigger="endHour">
         <ng-template>
-          <ion-datetime id="endHour" [hourValues]="selectableEndHours()" [minuteValues]="0" locale="it-IT"
-            presentation="time" [showDefaultButtons]="true" [(ngModel)]="end"></ion-datetime>
+          <ion-datetime [hourValues]="selectableEndHours()" [minuteValues]="[]" locale="it-IT"
+            presentation="time" [showDefaultButtons]="true" [(ngModel)]="end" (ionChange)="onEndSetChange($event)"></ion-datetime>
         </ng-template>
       </ion-modal>
-    </ion-item>
-
-    <ion-item>
-      <ion-datetime-button slot="end" datetime="end" locale="it-IT" [disabled]="isNotAvailable"></ion-datetime-button>
-      <ion-modal [keepContentsMounted]="true">
+    
+      <ion-button color="#edeef0" style="margin-left: -5px;" slot="end" id="end" locale="it-IT" [disabled]="endNotSet">{{ end.split(':')[1] }}</ion-button>
+      <ion-modal [keepContentsMounted]="true" trigger="end">
         <ng-template>
-          <ion-datetime id="end" [hourValues]="end.split(':')[0]" [minuteValues]="selectableEndMinutes()"
+          <ion-datetime [hourValues]="[]" [minuteValues]="selectableEndMinutes()"
             locale="it-IT" presentation="time" [showDefaultButtons]="true" [(ngModel)]="end"></ion-datetime>
         </ng-template>
       </ion-modal>
     </ion-item>
+
   </ion-list>
 
   <div class="buttons-container">

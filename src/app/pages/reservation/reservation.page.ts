@@ -66,6 +66,9 @@ export class ReservationPage implements OnInit {
   start: string = '08:00';
   end: string = '09:00';
 
+  startNotSet: boolean = true;
+  endNotSet: boolean = true;
+
   //Reservation responses provided by the professional
   reservationResponses: ReservationResponse[] = [];
 
@@ -276,15 +279,28 @@ export class ReservationPage implements OnInit {
       const endAvailable = parseInt(timeSlots[index].endTime.split(':')[0]);
 
       for (let i = startAvailable; i <= endAvailable; i++) {
-        const isReserved = this.allReservations.some(
+        const indexReserved = this.allReservations.findIndex(
           (reservation) =>
             reservation.date === this.desiredDate.split('T')[0] &&
-            i > parseInt(reservation.start.split(':')[0]) &&
-            i < parseInt(reservation.end.split(':')[0]) &&
+            start < parseInt(reservation.start.split(':')[0]) &&
             reservation.status === ReservationStatus.Accepted
         );
-        if (!isReserved && i >= start) {
+        if (indexReserved === -1 && i >= start) {
           hours.push(i);
+        } else if (indexReserved !== -1) {
+          if (
+            start <
+            parseInt(this.allReservations[indexReserved].start.split(':')[0])
+          ) {
+            const endReserved = parseInt(
+              this.allReservations[indexReserved].end.split(':')[0]
+            );
+            if (i < endReserved) {
+              for (let j = i; j < endReserved; j++) {
+                hours.push(j);
+              }
+            }
+          }
         }
       }
     }
@@ -302,9 +318,15 @@ export class ReservationPage implements OnInit {
     );
     const minutes: number[] = [];
 
-    timeSlots.forEach((timeSlot) => {
-      const startAvailable = parseInt(timeSlot.startTime.split(':')[1]);
-      const endAvailable = parseInt(timeSlot.endTime.split(':')[1]);
+    
+    const index = timeSlots.findIndex(
+      (timeSlot) =>
+        startHour >= parseInt(timeSlot.startTime.split(':')[0]) &&
+        startHour < parseInt(timeSlot.endTime.split(':')[0])
+    );
+
+      if (index !== -1) {
+      const endAvailable = parseInt(timeSlots[index].endTime.split(':')[1]);
 
       if (startHour === endHour) {
         for (let i = startMinute; i < 60; i++) {
@@ -331,11 +353,11 @@ export class ReservationPage implements OnInit {
             minutes.push(i);
           }
         }
-      } else if (endHour === parseInt(timeSlot.endTime.split(':')[0])) {
-        for (let i = 0; i < endAvailable; i++) {
+      } else if (endHour === parseInt(timeSlots[index].endTime.split(':')[0])) {
+        for (let i = 0; i <= endAvailable; i++) {
           minutes.push(i);
         }
-      } else if (endHour < parseInt(timeSlot.endTime.split(':')[0])) {
+      } else if (endHour < parseInt(timeSlots[index].endTime.split(':')[0])) {
         for (let i = 0; i < 60; i++) {
           const indexReserved = this.allReservations.findIndex(
             (reservation) =>
@@ -361,7 +383,7 @@ export class ReservationPage implements OnInit {
           }
         }
       }
-    });
+    };
     return minutes;
   }
 
@@ -381,6 +403,16 @@ export class ReservationPage implements OnInit {
     );
   }
 
+  onStartSetChange(event: any) {
+    this.start = event.detail.value;
+    this.startNotSet = false;
+  }
+
+  onEndSetChange(event: any) {
+    this.end = event.detail.value;
+    this.endNotSet = false;
+  }
+
   confirmReservation() {
     const date = this.desiredDate.split('T')[0];
     const reservationRequest: ReservationRequest = {
@@ -390,14 +422,7 @@ export class ReservationPage implements OnInit {
     };
     this.reservationRequest = reservationRequest;
     console.log(this.reservationRequest);
-  }
-
-  selectableStartMinutes2(): number[] {
-    if (this.start.split(':')[0] === '08') {
-      return [0, 15, 30, 45];
-    } else {
-      return Array.from({ length: 60 }, (_, i) => i);
-    }
+    
   }
 
   constructor() {

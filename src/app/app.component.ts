@@ -36,7 +36,7 @@ export class AppComponent {
   shell = inject(ShellService);
   toastController = inject(ToastController);
 
-  loggedIn$ = this.auth.isAuthenticated$;
+ /*  loggedIn$ = this.auth.isAuthenticated$; */
 
   checkComplete() {
         this.shell.showLoader();
@@ -55,7 +55,7 @@ export class AppComponent {
 
   ngOnInit(): void {
     // If not logged in redirect to login page
-     this.loggedIn$.subscribe((loggedIn) => {
+     /* this.loggedIn$.subscribe((loggedIn) => {
             if (!loggedIn) {
                 this.navCrtl.navigateRoot(['/login']);
             } else {
@@ -64,7 +64,7 @@ export class AppComponent {
                 }
             }
         });
-
+ */
     this.auth.error$.subscribe((error) => {
       if (error) {
         this.toastController
