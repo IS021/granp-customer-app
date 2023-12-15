@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -27,6 +27,7 @@ import {
   TimeSlotResponse,
   TimeTableResponse,
 } from 'granp-lib';
+import { fromEvent, min } from 'rxjs';
 
 @Component({
   selector: 'app-reservation',
@@ -60,6 +61,8 @@ export class ReservationPage implements OnInit {
 
   desiredDate!: string;
 
+  prova: string = '08:00';
+
   start: string = '08:00';
   end: string = '09:00';
 
@@ -72,8 +75,8 @@ export class ReservationPage implements OnInit {
     timeSlots: [
       {
         weekDay: 1,
-        startTime: '08:00',
-        endTime: '12:00',
+        startTime: '08:15',
+        endTime: '12:30',
         isAvailable: true,
       },
       {
@@ -116,9 +119,8 @@ export class ReservationPage implements OnInit {
       elderFirstName: 'c',
       elderLastName: 'df',
       elderAddress: new Address(),
-      elderBirthDate: 'sd',
       elderAge: 23,
-      elderTelephoneNumber: 'dv',
+      elderPhoneNumber: 'dv',
       elderDescription: 'sd',
       firstName: 'sdc',
       lastName: 'sd',
@@ -126,8 +128,8 @@ export class ReservationPage implements OnInit {
       isElder: true,
     },
     date: '2023-12-18',
-    start: '08:15',
-    end: '10:45',
+    start: '09:00',
+    end: '10:00',
     status: ReservationStatus.Accepted,
   };
 
@@ -156,9 +158,8 @@ export class ReservationPage implements OnInit {
       elderFirstName: 'c',
       elderLastName: 'df',
       elderAddress: new Address(),
-      elderBirthDate: 'sd',
       elderAge: 23,
-      elderTelephoneNumber: 'dv',
+      elderPhoneNumber: 'dv',
       elderDescription: 'sd',
       firstName: 'sdc',
       lastName: 'sd',
@@ -217,7 +218,6 @@ export class ReservationPage implements OnInit {
 
   selectableStartMinutes(): number[] {
     const startHour = parseInt(this.start.split(':')[0]);
-    const startMinute = parseInt(this.start.split(':')[1]);
     const desiredDay = new Date(this.desiredDate).getUTCDay();
     const timeSlots = this.timeTable.timeSlots.filter(
       (timeSlot) => timeSlot.weekDay === desiredDay && timeSlot.isAvailable
@@ -228,17 +228,25 @@ export class ReservationPage implements OnInit {
       const startAvailable = parseInt(timeSlot.startTime.split(':')[1]);
 
       if (startHour === parseInt(timeSlot.startTime.split(':')[0])) {
-        for (let i = startMinute; i < 60; i++) {
-          if (i >= startAvailable) {
-            const isReserved = this.allReservations.some(
-              (reservation) =>
-                reservation.date === this.desiredDate.split('T')[0] &&
-                startHour === parseInt(reservation.start.split(':')[0]) &&
-                i >= parseInt(reservation.start.split(':')[1]) &&
-                i < parseInt(reservation.end.split(':')[1]) &&
-                reservation.status === ReservationStatus.Accepted
+        for (let i = startAvailable; i < 60; i++) {
+          minutes.push(i);
+        }
+      } else if (startHour > parseInt(timeSlot.startTime.split(':')[0])) {
+        const indexReserved = this.allReservations.findIndex(
+          (reservation) =>
+            reservation.date === this.desiredDate.split('T')[0] &&
+            startHour === parseInt(reservation.end.split(':')[0]) &&
+            reservation.status === ReservationStatus.Accepted
+        );
+        if (indexReserved !== -1) {
+          if (
+            startHour ===
+            parseInt(this.allReservations[indexReserved].end.split(':')[0])
+          ) {
+            const endReserved = parseInt(
+              this.allReservations[indexReserved].end.split(':')[1]
             );
-            if (!isReserved) {
+            for (let i = endReserved; i < 60; i++) {
               minutes.push(i);
             }
           }
@@ -283,6 +291,80 @@ export class ReservationPage implements OnInit {
     return hours;
   }
 
+  selectableEndMinutes(): number[] {
+    const startHour = parseInt(this.start.split(':')[0]);
+    const startMinute = parseInt(this.start.split(':')[1]);
+    const endHour = parseInt(this.end.split(':')[0]);
+
+    const desiredDay = new Date(this.desiredDate).getUTCDay();
+    const timeSlots = this.timeTable.timeSlots.filter(
+      (timeSlot) => timeSlot.weekDay === desiredDay && timeSlot.isAvailable
+    );
+    const minutes: number[] = [];
+
+    timeSlots.forEach((timeSlot) => {
+      const startAvailable = parseInt(timeSlot.startTime.split(':')[1]);
+      const endAvailable = parseInt(timeSlot.endTime.split(':')[1]);
+
+      if (startHour === endHour) {
+        for (let i = startMinute; i < 60; i++) {
+          const indexReserved = this.allReservations.findIndex(
+            (reservation) =>
+              reservation.date === this.desiredDate.split('T')[0] &&
+              endHour === parseInt(reservation.start.split(':')[0]) &&
+              i >= parseInt(reservation.start.split(':')[1]) &&
+              reservation.status === ReservationStatus.Accepted
+          );
+          if (indexReserved !== -1) {
+            if (
+              endHour ===
+              parseInt(this.allReservations[indexReserved].start.split(':')[0])
+            ) {
+              const startReserved = parseInt(
+                this.allReservations[indexReserved].start.split(':')[1]
+              );
+              for (let j = startMinute; j < startReserved; j++) {
+                minutes.push(j);
+              }
+            }
+          } else {
+            minutes.push(i);
+          }
+        }
+      } else if (endHour === parseInt(timeSlot.endTime.split(':')[0])) {
+        for (let i = 0; i < endAvailable; i++) {
+          minutes.push(i);
+        }
+      } else if (endHour < parseInt(timeSlot.endTime.split(':')[0])) {
+        for (let i = 0; i < 60; i++) {
+          const indexReserved = this.allReservations.findIndex(
+            (reservation) =>
+              reservation.date === this.desiredDate.split('T')[0] &&
+              endHour === parseInt(reservation.start.split(':')[0]) &&
+              i >= parseInt(reservation.start.split(':')[1]) &&
+              reservation.status === ReservationStatus.Accepted
+          );
+          if (indexReserved !== -1) {
+            if (
+              endHour ===
+              parseInt(this.allReservations[indexReserved].start.split(':')[0])
+            ) {
+              const startReserved = parseInt(
+                this.allReservations[indexReserved].start.split(':')[1]
+              );
+              for (let j = 0; j < startReserved; j++) {
+                minutes.push(j);
+              }
+            }
+          } else {
+            minutes.push(i);
+          }
+        }
+      }
+    });
+    return minutes;
+  }
+
   isNotAvailable: boolean = true;
   onDateChange(event: any) {
     this.desiredDate = event.detail.value;
@@ -308,6 +390,14 @@ export class ReservationPage implements OnInit {
     };
     this.reservationRequest = reservationRequest;
     console.log(this.reservationRequest);
+  }
+
+  selectableStartMinutes2(): number[] {
+    if (this.start.split(':')[0] === '08') {
+      return [0, 15, 30, 45];
+    } else {
+      return Array.from({ length: 60 }, (_, i) => i);
+    }
   }
 
   constructor() {

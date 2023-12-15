@@ -8,41 +8,66 @@
 
 <ion-content color="light">
 
- 
+
   <h1>
-   Effettua una prenotazione
+    Effettua una prenotazione
   </h1>
-  
+
   <ion-list [inset]="true">
-      <ion-item>
-        <ion-datetime [isDateEnabled]="isAvailable" [min]="minDate" [max]="maxDate" display="fixed" presentation="date" [style.width]="'100%'" locale="it-IT"
-          [style.background-color]="'white'" [(ngModel)]="desiredDate" (ionChange)="onDateChange($event)"></ion-datetime>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label>Ora di inizio</ion-label>
-        <ion-datetime-button datetime="startHour" locale="it-IT" [disabled]="!desiredDate" ></ion-datetime-button>
-        <ion-modal [keepContentsMounted]="true">
-          <ng-template>
-            <ion-datetime id="startHour" [hourValues]="selectableStartHours()" [minuteValues]="0" locale="it-IT" presentation="time" [showDefaultButtons]="true" [(ngModel)]="start" (ionChange)="onTimeStartChange($event)"></ion-datetime>
-          </ng-template>
-        </ion-modal>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label>Ora di fine</ion-label>
-        <ion-datetime-button datetime="endHour" locale="it-IT" [disabled]="isNotAvailable">Data di fine</ion-datetime-button>
-        <ion-modal [keepContentsMounted]="true">
-          <ng-template>
-            <ion-datetime id="endHour" [hourValues]="selectableEndHours()" [minuteValues]="0" locale="it-IT" presentation="time" [showDefaultButtons]="true" [(ngModel)]="end"></ion-datetime>
-          </ng-template>
-        </ion-modal>
-      </ion-item>
+    <ion-item>
+      <ion-datetime [isDateEnabled]="isAvailable" [min]="minDate" [max]="maxDate" display="fixed" presentation="date"
+        [style.width]="'100%'" locale="it-IT" [style.background-color]="'white'" [(ngModel)]="desiredDate"
+        (ionChange)="onDateChange($event)"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Ora di inizio</ion-label>
+      <ion-datetime-button datetime="startHour" locale="it-IT" [disabled]="!desiredDate"></ion-datetime-button>
+      <ion-modal [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime id="startHour" [hourValues]="selectableStartHours()" [minuteValues]="[]"
+            locale="it-IT" presentation="time" [showDefaultButtons]="true" [(ngModel)]="start" (ionChange)="onTimeStartChange($event)"></ion-datetime>
+        </ng-template>
+      </ion-modal>
+    </ion-item>
+
+    <ion-item>
+      <ion-datetime-button slot="end" datetime="start" locale="it-IT" [disabled]="!desiredDate"></ion-datetime-button>
+      <ion-modal [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime id="start" [hourValues]="[]" [minuteValues]="selectableStartMinutes()"
+            locale="it-IT" presentation="time" [showDefaultButtons]="true" [(ngModel)]="start"></ion-datetime>
+        </ng-template>
+      </ion-modal>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Ora di fine</ion-label>
+      <ion-datetime-button datetime="endHour" locale="it-IT" [disabled]="isNotAvailable">Data di
+        fine</ion-datetime-button>
+      <ion-modal [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime id="endHour" [hourValues]="selectableEndHours()" [minuteValues]="0" locale="it-IT"
+            presentation="time" [showDefaultButtons]="true" [(ngModel)]="end"></ion-datetime>
+        </ng-template>
+      </ion-modal>
+    </ion-item>
+
+    <ion-item>
+      <ion-datetime-button slot="end" datetime="end" locale="it-IT" [disabled]="isNotAvailable"></ion-datetime-button>
+      <ion-modal [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime id="end" [hourValues]="end.split(':')[0]" [minuteValues]="selectableEndMinutes()"
+            locale="it-IT" presentation="time" [showDefaultButtons]="true" [(ngModel)]="end"></ion-datetime>
+        </ng-template>
+      </ion-modal>
+    </ion-item>
   </ion-list>
 
-<div class="buttons-container">
-  <ion-button [style.padding]="'1rem'" fill="outline" >Annulla</ion-button>
-  <ion-button [style.padding]="'1rem'" color="primary" (click)="confirmReservation()">Conferma</ion-button>
-</div>
+  <div class="buttons-container">
+    <ion-button [style.padding]="'1rem'" fill="outline">Annulla</ion-button>
+    <ion-button [style.padding]="'1rem'" color="primary" (click)="confirmReservation()">Conferma</ion-button>
+  </div>
+
 
 </ion-content>
