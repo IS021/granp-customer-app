@@ -22,8 +22,8 @@
 
     <ion-item>
       <ion-label>Ora di inizio</ion-label>
-      <ion-button  color="#edeef0" style="margin-right: -2px;" slot="end" id="startHour" locale="it-IT" [disabled]="!desiredDate">{{ start.split(':')[0] + ':' }}</ion-button>
-      <ion-modal [keepContentsMounted]="true" trigger="startHour">
+      <ion-button  color="#edeef0" style="margin-right: -2px;" slot="end" id="start-hour" locale="it-IT" [disabled]="!desiredDate" >{{ start.split(':')[0] + ':' }}</ion-button>
+      <ion-modal [keepContentsMounted]="true" trigger="start-hour">
         <ng-template>
           <ion-datetime [hourValues]="selectableStartHours()" [minuteValues]="[]"
             locale="it-IT" presentation="time" [showDefaultButtons]="true" [(ngModel)]="start" (ionChange)="onStartSetChange($event)"></ion-datetime>
@@ -41,8 +41,8 @@
 
     <ion-item>
       <ion-label>Ora di fine</ion-label>
-      <ion-button color="#edeef0" style="margin-right: -2px;" slot="end" id="endHour" locale="it-IT" [disabled]="isNotAvailable">{{ end.split(':')[0] + ':'}}</ion-button>
-      <ion-modal [keepContentsMounted]="true" trigger="endHour">
+      <ion-button color="#edeef0" style="margin-right: -2px;" slot="end" id="end-hour" locale="it-IT" [disabled]="isNotAvailable">{{ end.split(':')[0] + ':'}}</ion-button>
+      <ion-modal [keepContentsMounted]="true" trigger="end-hour">
         <ng-template>
           <ion-datetime [hourValues]="selectableEndHours()" [minuteValues]="[]" locale="it-IT"
             presentation="time" [showDefaultButtons]="true" [(ngModel)]="end" (ionChange)="onEndSetChange($event)"></ion-datetime>
