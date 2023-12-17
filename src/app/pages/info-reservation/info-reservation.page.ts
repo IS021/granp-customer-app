@@ -81,9 +81,8 @@ export class InfoReservationPage implements OnInit {
       phoneNumber: 'wd',
       isElder: true
     },
-    date: '07/12/2023',
-    start: '18:08',
-    end: '18:38',
+    start: '2023-12-18T14:10:00Z',
+    end: '2023-12-18T14:40:00Z',
     status: ReservationStatus.Accepted
   }
 
