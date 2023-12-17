@@ -17,11 +17,6 @@ export const routes: Routes = [
                     import('../search-page/search.page').then((m) => m.SearchPage),
             },
             {
-                path: 'tab2',
-                loadComponent: () =>
-                    import('../tab2/tab2.page').then((m) => m.Tab2Page),
-            },
-            {
                 path: 'calendar',
                 loadComponent: () =>
                     import('granp-lib').then((m) => m.CalendarPage),

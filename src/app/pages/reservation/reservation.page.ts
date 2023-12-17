@@ -69,9 +69,6 @@ export class ReservationPage implements OnInit {
   startNotSet: boolean = true;
   endNotSet: boolean = true;
 
-  //Reservation responses provided by the professional
-  reservationResponses: ReservationResponse[] = [];
-
   //Professional availabilities
   timeTable: TimeTableResponse = {
     weeksInAdvance: 5,
