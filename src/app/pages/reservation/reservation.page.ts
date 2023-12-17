@@ -436,7 +436,18 @@ export class ReservationPage implements OnInit {
               reservations[index].end.split('T')[1].split(':')[1]
             );
             if (startMinute <= startReserved) {
-              hours.push(startHour);
+              const index1 = reservations.findIndex(
+                (reservation) =>
+                  parseInt(reservation.start.split('T')[1].split(':')[0]) >= startHour
+              );
+              if (index1 === -1) {
+                hours.push(startHour);
+              } else {
+                const end = parseInt(reservations[index1].start.split('T')[1].split(':')[0]);
+                for (let i = startHour; i <= end; i++) {
+                  hours.push(i);
+                }
+              }
             } else if (startMinute >= endReserved) {
               let max = endAvailable;
               //verify if the end time is equal to the start time of another reservation
