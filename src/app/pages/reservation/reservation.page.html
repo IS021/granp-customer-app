@@ -26,7 +26,7 @@
       <ion-modal [keepContentsMounted]="true" trigger="start-hour">
         <ng-template>
           <ion-datetime [hourValues]="selectableStartHours()" [minuteValues]="[]"
-            locale="it-IT" presentation="time" [showDefaultButtons]="true" [(ngModel)]="start" (ionChange)="onStartSetChange($event)"></ion-datetime>
+            locale="it-IT" presentation="time" [showDefaultButtons]="true" [(ngModel)]="start" (ionChange)="onStartHourSetChange($event)"></ion-datetime>
         </ng-template>
       </ion-modal>
   
@@ -45,7 +45,7 @@
       <ion-modal [keepContentsMounted]="true" trigger="end-hour">
         <ng-template>
           <ion-datetime [hourValues]="selectableEndHours()" [minuteValues]="[]" locale="it-IT"
-            presentation="time" [showDefaultButtons]="true" [(ngModel)]="end" (ionChange)="onEndSetChange($event)"></ion-datetime>
+            presentation="time" [showDefaultButtons]="true" [(ngModel)]="end" (ionChange)="onEndHourSetChange($event)"></ion-datetime>
         </ng-template>
       </ion-modal>
     
