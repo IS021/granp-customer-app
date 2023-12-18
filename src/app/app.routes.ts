@@ -18,10 +18,6 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/professional-details/professional-details.page').then(m => m.ProfessionalDetailsPage)
     },
     {
-        path: 'info-reservation',
-        loadComponent: () => import('./pages/info-reservation/info-reservation.page').then(m => m.InfoReservationPage)
-    },
-    {
         path: 'search-result',
         loadComponent: () => import('./pages/search-result/search-result.page').then(m => m.SearchResultPage)
     },

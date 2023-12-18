@@ -31,9 +31,7 @@ import {
     TimeSlotResponse,
     TimeTableResponse,
 } from 'granp-lib';
-import { h } from 'ionicons/dist/types/stencil-public-runtime';
 import { ActivatedRoute } from '@angular/router';
-import { time } from 'console';
 
 @Component({
     selector: 'app-reservation',
@@ -174,7 +172,6 @@ export class ReservationPage implements OnInit {
         ];
 
 
-
         /*this.searchService.professionalInfo(this.professionalId).then((response) => {
             this.timeTable = response.timeTable;
             this.allReservations = response.reservations;
@@ -192,6 +189,7 @@ export class ReservationPage implements OnInit {
             this.maxDate = date.toISOString();
         });*/
     }
+/*
 
     isAvailable = (dateString: string) => {
         const date = new Date(dateString);
@@ -527,5 +525,5 @@ export class ReservationPage implements OnInit {
     navigateBack() {
         this.navCtrl.back();
     }
-
+*/
 }
