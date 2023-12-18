@@ -621,7 +621,7 @@ export class ReservationPage implements OnInit {
   confirmReservation() {
     const date = this.desiredDate.split('T')[0];
     const reservationRequest: ReservationRequest = {
-      professionalId: 'SignorPiomaggio',
+      professionalId: this.professionalId,
       //when JSON.stringify is used, the date is 1 hour before the selected date
       start: new Date(date + 'T' + this.start + ':00Z'),
       end: new Date(date + 'T' + this.end + ':00Z'),
