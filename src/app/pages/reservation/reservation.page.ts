@@ -67,9 +67,6 @@ export class ReservationPage implements OnInit {
   minDate!: string;
   maxDate!: string;
 
-  //Reservation request from the current customer
-  reservationRequest!: ReservationRequest;
-
   desiredDate!: string;
 
   start: string = '08:00';
@@ -86,6 +83,7 @@ export class ReservationPage implements OnInit {
   constructor() {
     this.professionalId = this.activatedRoute.snapshot.params['id'];
 
+    /*
     this.timeTable = {
       weeksInAdvance: 4,
       timeSlots: [
@@ -165,7 +163,7 @@ export class ReservationPage implements OnInit {
                 start: '2023-12-18T18:10:00Z',
                 end: '2023-12-18T18:40:00Z',
                 status: ReservationStatus.Accepted,
-            }, */
+            },
       {
         id: '6',
         start: '2023-12-18T08:15:00Z',
@@ -184,9 +182,9 @@ export class ReservationPage implements OnInit {
         end: '2023-12-18T12:30:00Z',
         status: ReservationStatus.Accepted,
       },
-    ];
+    ];*/
 
-    /*this.searchService.professionalInfo(this.professionalId).then((response) => {
+    this.searchService.professionalInfo(this.professionalId).then((response) => {
             this.timeTable = response.timeTable;
             this.allReservations = response.reservations;
 
@@ -201,12 +199,7 @@ export class ReservationPage implements OnInit {
             date.setDate(date.getDate() + this.timeTable.weeksInAdvance * 7);
             
             this.maxDate = date.toISOString();
-        });*/
-    
-        this.minDate = new Date().toISOString();
-        const date = new Date();
-        date.setDate(date.getDate() + this.timeTable!.weeksInAdvance * 7);
-        this.maxDate = date.toISOString();
+        });
   }
 
   isAvailable = (dateString: string) => {
@@ -633,8 +626,7 @@ export class ReservationPage implements OnInit {
       start: new Date(date + 'T' + this.start + ':00Z'),
       end: new Date(date + 'T' + this.end + ':00Z'),
     };
-    this.reservationRequest = reservationRequest;
-    console.log(this.reservationRequest);
+    console.log(reservationRequest);
   }
 
   navigateBack() {
