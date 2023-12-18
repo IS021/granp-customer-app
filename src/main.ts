@@ -22,7 +22,7 @@ bootstrapApplication(AppComponent, {
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         provideIonicAngular(),
         provideRouter(routes),
-        importProvidersFrom(AuthModule.forRoot(environment.auth0)),
+        importProvidersFrom(AuthModule.forRoot(environment.auth0 as any)),
         importProvidersFrom(GranpLibModule.forRoot(environment.granp)),
     ],
 });

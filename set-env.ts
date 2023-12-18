@@ -14,6 +14,7 @@ const prodEnvConfigFile = `export const environment = {
     auth0: {
       domain: '${process.env['AUTH0_DOMAIN']}',
       clientId: '${process.env['AUTH0_CLIENT_ID']}',
+      cacheLocation: 'localstorage',
       authorizationParams: {
           redirect_uri: '${process.env['AUTH0_CALLBACK_URL']}',
           audience: '${process.env['AUTH0_AUDIENCE']}',
@@ -44,6 +45,7 @@ const prodEnvConfigFile = `export const environment = {
     auth0: {
       domain: '${process.env['AUTH0_DOMAIN']}',
       clientId: '${process.env['AUTH0_CLIENT_ID']}',
+      cacheLocation: 'localstorage',
       authorizationParams: {
           redirect_uri: '${process.env['AUTH0_DEV_CALLBACK_URL']}',
           audience: '${process.env['AUTH0_AUDIENCE']}',
