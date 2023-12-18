@@ -196,7 +196,7 @@ export class ReservationPage implements OnInit {
             this.minDate = new Date().toISOString();
             const date = new Date();
             
-            date.setDate(date.getDate() + this.timeTable.weeksInAdvance * 7);
+            date.setDate(date.getDate() + this.timeTable.weeksInAdvance * 7 + 1);
             
             this.maxDate = date.toISOString();
         });
@@ -380,8 +380,8 @@ export class ReservationPage implements OnInit {
       (timeSlot) =>
         timeSlot.weekDay === desiredDay &&
         timeSlot.isAvailable &&
-        this.start >= timeSlot.startTime &&
-        this.start <= timeSlot.endTime
+        this.start >= timeSlot.startTime.split(':')[0] &&
+        this.start <= timeSlot.endTime.split(':')[0]
     );
 
     const hours: number[] = [];
