@@ -476,8 +476,8 @@ export class ReservationPage implements OnInit {
       (timeSlot) =>
         timeSlot.weekDay === desiredDay &&
         timeSlot.isAvailable &&
-        this.start >= timeSlot.startTime &&
-        this.start <= timeSlot.endTime
+        this.start >= timeSlot.startTime.split(':')[0] &&
+        this.start <= timeSlot.endTime.split(':')[0]
     );
 
     const minutes: number[] = [];
@@ -626,8 +626,10 @@ export class ReservationPage implements OnInit {
       start: new Date(date + 'T' + this.start + ':00Z'),
       end: new Date(date + 'T' + this.end + ':00Z'),
     };
+
     console.log(reservationRequest);
-  }
+    this.reservationService.request(reservationRequest);
+}
 
   navigateBack() {
     this.navCtrl.back();

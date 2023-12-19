@@ -13,7 +13,7 @@ import { App } from '@capacitor/app';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { Capacitor } from '@capacitor/core';
-import { asyncScheduler, BehaviorSubject } from 'rxjs';
+import { asyncScheduler, BehaviorSubject, Subject } from 'rxjs';
 import { NgIf, AsyncPipe } from '@angular/common';
 
 import { ChatService, ProfileService } from 'granp-lib';
@@ -53,6 +53,8 @@ export class AppComponent {
         });
     }
 
+    showError$ = new Subject<string>();
+
     ngOnInit(): void {
         // If not logged in redirect to login page
         this.loggedIn$.subscribe((loggedIn) => {
@@ -67,18 +69,27 @@ export class AppComponent {
 
         this.auth.error$.subscribe((error) => {
             if (error) {
+                this.showError$.next(error.message);
+            }
+        });
+
+        this.showError$.subscribe((message) => {
+            console.log('Next error: ', message);
+
+            this.ngZone.run(() => {
                 this.toastController
                     .create({
-                        message: error.message,
+                        message: message,
                         duration: 3000,
                         position: 'top',
                         color: 'danger',
                     })
                     .then((toast) => {
+                        console.log("Presenting Toast Error: " + message);
                         toast.present();
                     });
-            }
-        });
+            });
+        })
 
         // Use Capacitor's App plugin to subscribe to the `appUrlOpen` event
         App.addListener('appUrlOpen', ({ url }) => {
@@ -88,13 +99,14 @@ export class AppComponent {
                 if (
                     url?.startsWith(environment.auth0.authorizationParams.redirect_uri)
                 ) {
-                    this.shell.showLoader();
+                    console.log(url);
                     // If the URL is an authentication callback URL.
                     if (
                         url.includes('state=') &&
                         (url.includes('error=') || url.includes('code='))
                     ) {
                         this.shell.showLoader();
+                        // Call handleRedirectCallback and close the browser
                         // Call handleRedirectCallback and close the browser
                         this.auth
                             .handleRedirectCallback(url)
@@ -110,14 +122,33 @@ export class AppComponent {
                                     return Promise.resolve();
                                 })
                             )
-                            .subscribe(() => {
-                                // wait for next tick
-                                asyncScheduler.schedule(() => {
-                                    // redirect to profile when logging in              // TODO
-                                    // Check if the user registration is complete
-                                    // If not redirect to registration page
-                                    /* this.checkComplete(); */
-                                });
+                            .subscribe({
+                                next: () => {
+                                    // wait for next tick
+                                    asyncScheduler.schedule(() => {
+                                        // redirect to profile when logging in              // TODO
+                                        // Check if the user registration is complete
+                                        // If not redirect to registration page
+                                        /* this.checkComplete(); */
+                                    });
+                                },
+                                error: (err) => {
+                                    // Handle the error here
+                                    // console.error("Error in handleRedirectCallback:", err);
+
+                                    // Close the in-app browser
+                                    if (Capacitor.getPlatform() === 'ios') {
+                                        Browser.close().then(() => {
+                                            this.shell.hideLoader();
+
+                                            asyncScheduler.schedule(() => {
+                                                this.showError$.next(err.error_description);
+                                            });
+                                        }).catch(() => {
+                                            return Promise.resolve();
+                                        });
+                                    }
+                                }
                             });
                     } else {
                         // browser close only works on iOS right now
