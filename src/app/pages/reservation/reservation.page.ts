@@ -32,6 +32,7 @@ import {
   TimeTableResponse,
 } from 'granp-lib';
 import { ActivatedRoute } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-reservation',
@@ -61,6 +62,7 @@ export class ReservationPage implements OnInit {
   navCtrl = inject(NavController);
   reservationService = inject(ReservationService);
   searchService = inject(SearchService);
+  toastController = inject(ToastController);
 
   professionalId: string;
 
@@ -82,107 +84,6 @@ export class ReservationPage implements OnInit {
 
   constructor() {
     this.professionalId = this.activatedRoute.snapshot.params['id'];
-
-    /*
-    this.timeTable = {
-      weeksInAdvance: 4,
-      timeSlots: [
-        {
-          weekDay: 1,
-          startTime: '08:15',
-          endTime: '12:30',
-          isAvailable: true,
-        },
-        {
-          weekDay: 2,
-          startTime: '08:00',
-          endTime: '17:00',
-          isAvailable: true,
-        },
-        {
-          weekDay: 3,
-          startTime: '08:00',
-          endTime: '17:00',
-          isAvailable: true,
-        },
-        {
-          weekDay: 4,
-          startTime: '08:00',
-          endTime: '17:00',
-          isAvailable: true,
-        },
-        {
-          weekDay: 5,
-          startTime: '08:00',
-          endTime: '17:00',
-          isAvailable: true,
-        },
-        {
-          weekDay: 6,
-          startTime: '08:00',
-          endTime: '17:00',
-          isAvailable: false,
-        },
-        {
-          weekDay: 0,
-          startTime: '08:00',
-          endTime: '17:00',
-          isAvailable: false,
-        },
-      ],
-    };
-
-    // Test data
-    this.allReservations = [
-      /*  {
-                id: '1',
-                start: '2023-12-18T14:10:00Z',
-                end: '2023-12-18T14:40:00Z',
-                status: ReservationStatus.Accepted,
-            },
-            {
-                id: '2',
-                start: '2023-12-18T15:10:00Z',
-                end: '2023-12-18T15:40:00Z',
-                status: ReservationStatus.Accepted,
-            },
-            {
-                id: '3',
-                start: '2023-12-18T16:10:00Z',
-                end: '2023-12-18T16:40:00Z',
-                status: ReservationStatus.Accepted,
-            },
-            {
-                id: '4',
-                start: '2023-12-18T17:10:00Z',
-                end: '2023-12-18T17:40:00Z',
-                status: ReservationStatus.Accepted,
-            },
-            {
-                id: '5',
-                start: '2023-12-18T18:10:00Z',
-                end: '2023-12-18T18:40:00Z',
-                status: ReservationStatus.Accepted,
-            },
-      {
-        id: '6',
-        start: '2023-12-18T08:15:00Z',
-        end: '2023-12-18T09:00:00Z',
-        status: ReservationStatus.Accepted,
-      },
-      {
-        id: '7',
-        start: '2023-12-18T10:10:00Z',
-        end: '2023-12-18T10:30:00Z',
-        status: ReservationStatus.Accepted,
-      },
-      {
-        id: '8',
-        start: '2023-12-18T12:10:00Z',
-        end: '2023-12-18T12:30:00Z',
-        status: ReservationStatus.Accepted,
-      },
-    ];*/
 
     this.searchService.professionalInfo(this.professionalId).then((response) => {
             this.timeTable = response.timeTable;
@@ -628,7 +529,24 @@ export class ReservationPage implements OnInit {
     };
 
     console.log(reservationRequest);
-    this.reservationService.request(reservationRequest);
+    this.reservationService.request(reservationRequest).then((response) => {
+        this.navCtrl.back();
+        this.toastController.create({
+            message: 'La tua richiesta è stata inviata con successo!',
+            duration: 2000,
+            color: 'success',
+            }).then((toast) => {
+                toast.present();
+            });
+    }).catch((error) => {
+        this.toastController.create({
+            message: 'Si è verificato un errore, riprova più tardi',
+            duration: 2000,
+            color: 'danger',
+            }).then((toast) => {
+                toast.present();
+            });
+        });
 }
 
   navigateBack() {
